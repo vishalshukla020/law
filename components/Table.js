@@ -50,6 +50,7 @@ const myFilter = (array, court, setCourt, suite, setSuite, reduceValue) => {
 };
 
 export default function Table({ posts }) {
+ 
   const obj = (posts, courtname, suitename, court, suite) => {
     return {
       courtName: courtname,

@@ -24,6 +24,7 @@ export default function User({ token, data }) {
       .then((res) => {
         if (res.status == 200) {
           alert("request submitted");
+          location.reload();
         }
       })
       .catch((err) => {
