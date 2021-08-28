@@ -1,16 +1,18 @@
 import { Formik, Form, Field } from "formik";
-import { Typography, Paper, Button } from "@material-ui/core";
+import { Typography, Paper, Button, CircularProgress } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import axios from "axios";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import Image from "next/image";
 
 import { AuthContext } from "../context/auth";
 
 export default function LoginForm() {
   const context = useContext(AuthContext);
   const router = useRouter();
+  const [submitting, setSubmitting] = useState(false);
 
   return (
     <section className="container max-height flex">
@@ -22,6 +24,10 @@ export default function LoginForm() {
             password: Yup.string().required("Password can't be empty"),
           })}
           onSubmit={(values, actions) => {
+            setSubmitting(true);
+            setTimeout(() => {
+              setSubmitting(false);
+            }, 5000);
             axios
               .post("/api/users/login", { ...values })
               .then((res) => {
@@ -48,9 +54,18 @@ export default function LoginForm() {
           }}
         >
           <Form autoComplete="off">
-            <Typography variant="h3" className="form-heading">
-              Log in
-            </Typography>
+            <center>
+              <Image
+                src="/logo.png"
+                alt="logo"
+                height={65}
+                width={280}
+                layout="intrinsic"
+              />
+              <Typography variant="h3" className="form-heading">
+                Log in
+              </Typography>
+            </center>
             <div className="form-block">
               <Field
                 fullWidth
@@ -72,15 +87,19 @@ export default function LoginForm() {
             <Typography className="forgot-password">
               Forgot Password?
             </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              className="button"
-              fullWidth
-            >
-              Login
-            </Button>
+            {submitting ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                className="button"
+                fullWidth
+              >
+                Login
+              </Button>
+            )}
           </Form>
         </Formik>
       </Paper>

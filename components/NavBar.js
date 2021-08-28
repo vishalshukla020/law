@@ -1,5 +1,6 @@
 import { Button, Dialog } from "@material-ui/core";
 import axios from "axios";
+import Image from "next/image";
 import { useContext, useState } from "react";
 
 import { AuthContext } from "../context/auth";
@@ -41,7 +42,16 @@ export default function NavBar({ username, role }) {
       <header>
         <div className="container">
           <nav>
-            <div className="logo">{username}</div>
+            <div className="logo">
+              <Image
+                src="/logo.png"
+                alt="logo"
+                height={65}
+                width={280}
+                layout="intrinsic"
+              />
+              {username}
+            </div>
 
             <div>
               <Button

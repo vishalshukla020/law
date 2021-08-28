@@ -10,13 +10,15 @@ import {
 } from "@material-ui/core";
 import { TextField, Select } from "formik-material-ui";
 import * as Yup from "yup";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 
 import { AuthContext } from "../context/auth";
 
 export default function Prosecution() {
   const context = useContext(AuthContext);
+  const [submitting, setSubmitting] = useState(false);
+
   return (
     <section>
       <div className="container flex">
@@ -68,6 +70,10 @@ export default function Prosecution() {
                 .typeError("Should be a number"),
             })}
             onSubmit={(values, actions) => {
+               setSubmitting(true);
+               setTimeout(() => {
+                 setSubmitting(false);
+               }, 5000);
               axios
                 .post("/api/posts", { ...values })
                 .then((res) => {
@@ -75,6 +81,7 @@ export default function Prosecution() {
                   if (res.status == 202) {
                     window.alert("Form successfully submitted");
                     actions.resetForm();
+                    location.reload();
                   }
                 })
                 .catch((err) =>
@@ -204,7 +211,7 @@ Cases pending at the beginning of January"
                     variant="outlined"
                   />
                 </div>
-                {props.isSubmitting ? (
+                {submitting ? (
                   <CircularProgress />
                 ) : (
                   <Button
