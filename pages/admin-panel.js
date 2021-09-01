@@ -1,5 +1,5 @@
 import { parseCookies } from "../helper/parseCookies";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import jwt from "jsonwebtoken";
@@ -9,9 +9,35 @@ import baseUrl from "../helper/baseURL";
 import NavBar from "../components/NavBar";
 import Table from "../components/Table";
 
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+
+import Link from "next/link";
+import FormTwoTable from "../components/form-2-table";
+
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
   const router = useRouter();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const [state, setState] = useState({
+    prosecution: true,
+    budget: false,
+  });
+
+  const handleClick = (event) => {
+    
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = (formname) => {
+    console.log(state.models)
+    setState({ [formname]: true });
+    setAnchorEl(null);
+  };
+
 
   useEffect(() => {
     if (!context.user && token) {
@@ -33,12 +59,93 @@ export default function Admin({ token, posts, user }) {
       </div>
     );
   }
+  console.log(posts)
 
   return (
     <>
       <NavBar username={context.user?.name} role={context.user?.role} />
+      <div className="container" style={{ paddingBottom: "1em" }}>
+        <Button
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+          disableElevation
+          fullWidth
+          color="secondary"
+          variant="contained"
+        >
+          Select form
+        </Button>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          style={{
+            marginLeft: "55%",
+            transform: "translate(-50%,45px)",
+          }}
+        >
+          <MenuItem onClick={() => handleClose("prosecution")}>
+            (Form-1) प्रदेश में हुए अभियोजन कार्य
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("budget")}>
+            (Form-2) अतिरिक्त बजट मांगपत्र के सम्बन्ध में निर्धारित प्रारूप
+          </MenuItem>
+          <MenuItem>
+            <Link href="#">
+              <a href="">(Form-3)</a>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href="#">
+              <a href="">(Form-4)</a>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href="#">
+              <a href="">(Form-5)</a>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href="#">
+              <a href="">(Form-6)</a>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href="#">
+              <a href="">(Form-7)</a>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href="#">
+              <a href="">(Form-8)</a>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href="#">
+              <a href="">(Form-9)</a>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href="#">
+              <a href="">(Form-10)</a>
+            </Link>
+          </MenuItem>
+        </Menu>
+      </div>
       <div className="containerTable">
-        <Table posts={posts} />
+        {state.prosecution && (
+          <Table
+            posts={posts.filter((post) => post.formName == "prosecution")}
+          />
+        )}
+        {state.budget && (
+          <FormTwoTable
+            posts={posts.filter((post) => post.formName == "extraBudget")}
+          />
+        )}
       </div>
     </>
   );

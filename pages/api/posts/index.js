@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       });
   } else if (req.method === "GET") {
     try {
-      await Post.find({ approved: true })
+      await Post.find({ approved: true})
         .then((posts) => {
           return res.status(200).send(posts);
         })

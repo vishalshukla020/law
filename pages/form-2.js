@@ -3,28 +3,29 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import { AuthContext } from "../context/auth";
-import Prosecution from "../components/Prosecution";
 import NavBar from "../components/NavBar";
+import BudgetForm from "../components/budgetForm";
 
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import Link from "next/link"
+import Link from "next/link";
+
 
 export default function Home({ token }) {
   const context = useContext(AuthContext);
   const router = useRouter();
 
-  const [anchorEl, setAnchorEl] = useState(null);
+   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+   const handleClick = (event) => {
+     setAnchorEl(event.currentTarget);
+   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+   const handleClose = () => {
+     setAnchorEl(null);
+   };
 
   useEffect(() => {
     if (!context.user && token) {
@@ -37,7 +38,6 @@ export default function Home({ token }) {
   return (
     <>
       <NavBar username={context.user?.name} role={context.user?.role} />
-
       <div className="container" style={{ paddingBottom: "1em" }}>
         <Button
           aria-controls="simple-menu"
@@ -74,32 +74,32 @@ export default function Home({ token }) {
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-3)</a></Link>
+              <Link href="#"><a href="">(Form-3)</a></Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-4)</a></Link>
+              <Link href="#"><a href="">(Form-4)</a></Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-5)</a></Link>
+              <Link href="#"><a href="">(Form-5)</a></Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-6)</a></Link>
+              <Link href="#"><a href="">(Form-6)</a></Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-7)</a></Link>
+              <Link href="#"><a href="">(Form-7)</a></Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-8)</a></Link>
+              <Link href="#"><a href="">(Form-8)</a></Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-9)</a></Link>
+              <Link href="#"><a href="">(Form-9)</a></Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-10)</a></Link>
+              <Link href="#"><a href="">(Form-10)</a></Link>
           </MenuItem>
         </Menu>
       </div>
-      <Prosecution />
+      <BudgetForm />
     </>
   );
 }
