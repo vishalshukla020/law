@@ -6,6 +6,10 @@ dbConnect();
 export default async function handler(req, res) {
   if (req.method === "GET") {
     const id = req.query.user;
+    // if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+    //   // it's an ObjectID
+    //   return res.status(400).send('invalid id')
+    // } 
     const user = await User.findById(id);
 
     await Post.find({ username: user.username })

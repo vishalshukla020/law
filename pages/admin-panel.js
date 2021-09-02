@@ -33,7 +33,7 @@ export default function Admin({ token, posts, user }) {
   };
 
   const handleClose = (formname) => {
-    console.log(state.models)
+    
     setState({ [formname]: true });
     setAnchorEl(null);
   };

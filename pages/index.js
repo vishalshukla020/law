@@ -5,24 +5,31 @@ import { useRouter } from "next/router";
 import { AuthContext } from "../context/auth";
 import Prosecution from "../components/Prosecution";
 import NavBar from "../components/NavBar";
+import BudgetForm from "../components/budgetForm";
 
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import Link from "next/link"
+import Link from "next/link";
 
 export default function Home({ token }) {
   const context = useContext(AuthContext);
   const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const [state, setState] = useState({
+    prosecution: true,
+    budget: false,
+  });
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (formname) => {
+    setState({ [formname]: true });
+
     setAnchorEl(null);
   };
 
@@ -61,45 +68,56 @@ export default function Home({ token }) {
             transform: "translate(-50%,45px)",
           }}
         >
-          <MenuItem onClick={handleClose}>
-            <Link href="/">
-              <a>(Form-1) प्रदेश में हुए अभियोजन कार्य</a>
+          <MenuItem onClick={() => handleClose("prosecution")}>
+            (Form-1) प्रदेश में हुए अभियोजन कार्य
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("budget")}>
+            (Form-2) अतिरिक्त बजट मांगपत्र के सम्बन्ध में निर्धारित प्रारूप
+          </MenuItem>
+          <MenuItem>
+            <Link href="#">
+              <a href="">(Form-3)</a>
             </Link>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <Link href="/form-2">
-              <a>
-                (Form-2) अतिरिक्त बजट मांगपत्र के सम्बन्ध में निर्धारित प्रारूप
-              </a>
+          <MenuItem>
+            <Link href="#">
+              <a href="">(Form-4)</a>
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-3)</a></Link>
+            <Link href="#">
+              <a href="">(Form-5)</a>
+            </Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-4)</a></Link>
+            <Link href="#">
+              <a href="">(Form-6)</a>
+            </Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-5)</a></Link>
+            <Link href="#">
+              <a href="">(Form-7)</a>
+            </Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-6)</a></Link>
+            <Link href="#">
+              <a href="">(Form-8)</a>
+            </Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-7)</a></Link>
+            <Link href="#">
+              <a href="">(Form-9)</a>
+            </Link>
           </MenuItem>
           <MenuItem>
-            <Link href="#"><a href="">(Form-8)</a></Link>
-          </MenuItem>
-          <MenuItem>
-            <Link href="#"><a href="">(Form-9)</a></Link>
-          </MenuItem>
-          <MenuItem>
-            <Link href="#"><a href="">(Form-10)</a></Link>
+            <Link href="#">
+              <a href="">(Form-10)</a>
+            </Link>
           </MenuItem>
         </Menu>
       </div>
-      <Prosecution />
+      {state.prosecution && <Prosecution />}
+      {state.budget && <BudgetForm />}
     </>
   );
 }

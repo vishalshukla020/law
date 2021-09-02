@@ -165,7 +165,7 @@ const CardComponentTwo = ({ item }) => {
           <li>
             <div className="heading">Form : </div>
             <span>
-              {item.formName === "budgetForm"
+              {item.formName === "extraBudget"
                 ? "अतिरिक्त बजट मांगपत्र के सम्बन्ध में निर्धारित प्रारूप"
                 : item.formName}
             </span>
