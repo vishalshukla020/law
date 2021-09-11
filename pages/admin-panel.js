@@ -15,6 +15,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import Link from "next/link";
 import FormTwoTable from "../components/form-2-table";
+import PensionTable from "../components/tables/pension";
+import EmployementTable from "../components/tables/employement";
 
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
@@ -25,6 +27,8 @@ export default function Admin({ token, posts, user }) {
   const [state, setState] = useState({
     prosecution: true,
     budget: false,
+    pension: false,
+    employement: false,
   });
 
   const handleClick = (event) => {
@@ -93,11 +97,15 @@ export default function Admin({ token, posts, user }) {
           <MenuItem onClick={() => handleClose("budget")}>
             (Form-2) अतिरिक्त बजट मांगपत्र के सम्बन्ध में निर्धारित प्रारूप
           </MenuItem>
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-3)</a>
-            </Link>
+          <MenuItem onClick={() => handleClose("pension")}>
+            (Form-3) पेंशन पटल से मॉगी जाने वाली सूचना का प्रारूप-
           </MenuItem>
+          <MenuItem onClick={() => handleClose("employement")}>
+            (Form-4) वेतन समिति (2008) की संस्तुतियों पर लिये गये निर्णयानुसार
+            राज्य कर्मचारियों के लिये सुनिश्चित कैरियर प्रोन्नयन (ए0सी0पी0) की
+            व्यवस्था।
+          </MenuItem>
+
           <MenuItem>
             <Link href="#">
               <a href="">(Form-4)</a>
@@ -144,6 +152,16 @@ export default function Admin({ token, posts, user }) {
         {state.budget && (
           <FormTwoTable
             posts={posts.filter((post) => post.formName == "extraBudget")}
+          />
+        )}
+        {state.pension && (
+          <PensionTable
+            posts={posts.filter((post) => post.formName == "pension")}
+          />
+        )}
+        {state.employement && (
+          <EmployementTable
+            posts={posts.filter((post) => post.formName == "employement")}
           />
         )}
       </div>
