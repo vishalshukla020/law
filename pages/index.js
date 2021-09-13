@@ -14,6 +14,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Link from "next/link";
 import PensionForm from "../components/forms/pension";
 import EmployementForm from "../components/forms/employment";
+import PromotionForm from "../components/forms/promotion";
 
 export default function Home({ token }) {
   const context = useContext(AuthContext);
@@ -25,6 +26,7 @@ export default function Home({ token }) {
     budget: false,
     employement: false,
     pension: false,
+    promotion: false,
   });
 
   const handleClick = (event) => {
@@ -86,12 +88,12 @@ export default function Home({ token }) {
             राज्य कर्मचारियों के लिये सुनिश्चित कैरियर प्रोन्नयन (ए0सी0पी0) की
             व्यवस्था।
           </MenuItem>
-
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-5)</a>
-            </Link>
+          <MenuItem onClick={() => handleClose("promotion")}>
+            (Form-5) अभियोजन विभाग में समह–ग के पद पर प्रोन्नति के संबंध में
+            विवरण
           </MenuItem>
+
+         
           <MenuItem>
             <Link href="#">
               <a href="">(Form-6)</a>
@@ -123,6 +125,7 @@ export default function Home({ token }) {
       {state.budget && <BudgetForm />}
       {state.pension && <PensionForm />}
       {state.employement && <EmployementForm />}
+      {state.promotion && <PromotionForm />}
     </>
   );
 }

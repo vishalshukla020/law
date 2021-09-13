@@ -8,7 +8,7 @@ import { Button, Paper } from "@material-ui/core";
 
 export default function User({ token, data }) {
   const context = useContext(AuthContext);
-  console.log(data)
+  console.log(data);
 
   useEffect(() => {
     if (!context.user && token) {
@@ -17,7 +17,6 @@ export default function User({ token, data }) {
       router.push("/login");
     }
   });
-
 
   return (
     <>
@@ -35,27 +34,45 @@ export default function User({ token, data }) {
           .map((item) => (
             <CardComponentTwo item={item} key={item._id} />
           ))}
+        {data
+          .filter((post) => post.formName == "pension")
+          .reverse()
+          .map((item) => (
+            <PensionComponent item={item} key={item._id} />
+          ))}
+        {data
+          .filter((post) => post.formName == "employement")
+          .reverse()
+          .map((item) => (
+            <EmployementComponent item={item} key={item._id} />
+          ))}
+        {data
+          .filter((post) => post.formName == "promotion")
+          .reverse()
+          .map((item) => (
+            <PromotionComponent item={item} key={item._id} />
+          ))}
       </div>
     </>
   );
 }
 
 const CardComponent = ({ item }) => {
-    const approve = (type, id) => {
-      console.log(type, id);
-      axios
-        .post("api/users/approve", { type, id })
-        .then((res) => {
-          if (res.status == 200) {
-            alert("request submitted");
-            location.reload();
-          }
-        })
-        .catch((err) => {
-          alert(error.message);
-          console.error(err);
-        });
-    };
+  const approve = (type, id) => {
+    console.log(type, id);
+    axios
+      .post("api/users/approve", { type, id })
+      .then((res) => {
+        if (res.status == 200) {
+          alert("request submitted");
+          location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(error.message);
+        console.error(err);
+      });
+  };
   return (
     <Paper className="user-data">
       <div className="wrapper row">
@@ -143,21 +160,21 @@ const CardComponent = ({ item }) => {
 };
 
 const CardComponentTwo = ({ item }) => {
-    const approve = (type, id) => {
-      console.log(type, id);
-      axios
-        .post("api/users/approve", { type, id })
-        .then((res) => {
-          if (res.status == 200) {
-            alert("request submitted");
-            location.reload();
-          }
-        })
-        .catch((err) => {
-          alert(error.message);
-          console.error(err);
-        });
-    };
+  const approve = (type, id) => {
+    console.log(type, id);
+    axios
+      .post("api/users/approve", { type, id })
+      .then((res) => {
+        if (res.status == 200) {
+          alert("request submitted");
+          location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(error.message);
+        console.error(err);
+      });
+  };
   return (
     <Paper className="user-data">
       <div className="wrapper row">
@@ -201,6 +218,292 @@ const CardComponentTwo = ({ item }) => {
           <li>
             <div className="heading">अवशेष :</div>
             <span>{item.left}</span>
+          </li>
+        </ul>
+      </div>
+      <div className="btn-container">
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          disabled={item.approved}
+          onClick={() => approve("approve", item._id)}
+        >
+          Approve
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          color="secondary"
+          onClick={() => approve("delete", item._id)}
+        >
+          delete
+        </Button>
+      </div>
+    </Paper>
+  );
+};
+
+const PensionComponent = ({ item }) => {
+  const approve = (type, id) => {
+    console.log(type, id);
+    axios
+      .post("api/users/approve", { type, id })
+      .then((res) => {
+        if (res.status == 200) {
+          alert("request submitted");
+          location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(error.message);
+        console.error(err);
+      });
+  };
+  return (
+    <Paper className="user-data">
+      <div className="wrapper row">
+        <ul>
+          <li>
+            <div className="heading">Form : </div>
+            <span>
+              {item.formName === "pension"
+                ? "पेंशन पटल से मॉगी जाने वाली सूचना का प्रारूप-"
+                : item.formName}
+            </span>
+          </li>
+          <li>
+            <div className="heading">जनपद का नाम :</div>
+            <span>{item.district}</span>
+          </li>
+          <li>
+            <div className="heading">
+              सेवानिवृत्त होने वाले अधिकारी/कर्मचारी का नाम, जिन्हे पेंशन
+              प्राप्त नही हो रही है। :
+            </div>
+            <span>{item.retiredName}</span>
+          </li>
+          <li>
+            <div className="heading">
+              सेवानिवृत्त होने वाले अधिकारी/कर्मचारी का नाम, जिन्हे अदेयता
+              प्रमाण पत्र निर्गत नही किया। अगर नही किया गया, तो कारण सहित उल्लेख
+              :
+            </div>
+            <span>{item.dueCertificate}</span>
+          </li>
+          <li>
+            <div className="heading">
+              सेवानिवृत्त होने वाले अधिकारी/कर्मचारी, जिन्हे जी०पी०एफ0/अनन्तिम
+              पेंशन हेतु अनापत्ति प्रमाण पत्र निर्गत नही किया गया। :
+            </div>
+            <span>{item.gpf}</span>
+          </li>
+          <li>
+            <div className="heading">
+              सेवानिवृत्त होने वाले अधिकारी/कर्मचारी, जिनके कितन सेवानिवृत्ति
+              देयक लंबित है और भुगतान के लिये क्या कार्यवाही की गयी। :
+            </div>
+            <span>{item.processed}</span>
+          </li>
+          <li>
+            <div className="heading">मो0नंबर :</div>
+            <span>{item.mobile}</span>
+          </li>
+        </ul>
+      </div>
+      <div className="btn-container">
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          disabled={item.approved}
+          onClick={() => approve("approve", item._id)}
+        >
+          Approve
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          color="secondary"
+          onClick={() => approve("delete", item._id)}
+        >
+          delete
+        </Button>
+      </div>
+    </Paper>
+  );
+};
+
+const EmployementComponent = ({ item }) => {
+  const approve = (type, id) => {
+    console.log(type, id);
+    axios
+      .post("api/users/approve", { type, id })
+      .then((res) => {
+        if (res.status == 200) {
+          alert("request submitted");
+          location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(error.message);
+        console.error(err);
+      });
+  };
+  return (
+    <Paper className="user-data">
+      <div className="wrapper row">
+        <ul>
+          <li>
+            <div className="heading">Form : </div>
+            <span>
+              {item.formName === "employement"
+                ? "वेतन समिति (2008) की संस्तुतियों पर लिये गये निर्णयानुसार राज्य कर्मचारियों के लिये सुनिश्चित कैरियर प्रोन्नयन (ए0सी0पी0) की व्यवस्था।"
+                : item.formName}
+            </span>
+          </li>
+          <li>
+            <div className="heading">अधिकारी का नाम :</div>
+            <span>{item.officerName}</span>
+          </li>
+          <li>
+            <div className="heading">पदनाम/जन्मतिथि :</div>
+            <span>{item.dob}</span>
+          </li>
+          <li>
+            <div className="heading">वर्तमान वेतनमान / लेबल :</div>
+            <span>{item.presentSalary}</span>
+          </li>
+          <li>
+            <div className="heading">नियुक्ति जनपद :</div>
+            <span>{item.presentDistrict}</span>
+          </li>
+          <li>
+            <div className="heading">अजनपदीय संस्थान :</div>
+            <span>{item.institute}</span>
+          </li>
+          <li>
+            <div className="heading">नियुक्ति की तिथि :</div>
+            <span>{item.dateOfDeployment}</span>
+          </li>
+          <li>
+            <div className="heading">
+              10 वर्ष की सेवा पर प्रथम वित्तीय स्तरोन्नयन की प्रस्तावित
+              तिथि/प्रस्तावित वेतनमान व लेबल :
+            </div>
+            <span>{item.tenthIncrement}</span>
+          </li>
+          <li>
+            <div className="heading">
+              16 वर्ष की सेवा पर प्रथम वित्तीय स्तरोन्नयन की प्रस्तावित
+              तिथि/प्रस्तावित वेतनमान व लेबल :
+            </div>
+            <span>{item.sixteenIncrement}</span>
+          </li>
+          <li>
+            <div className="heading">
+              26 वर्ष की सेवा पर प्रथम वित्तीय स्तरोन्नयन की प्रस्तावित
+              तिथि/प्रस्तावित वेतनमान व लेबल :
+            </div>
+            <span>{item.twentySixthIncrement}</span>
+          </li>
+          <li>
+            <div className="heading">
+              प्रक्षा/दितीय/ उत्तीय पदोन्नति के पद पर नर्यभार ग्रहण |करने की
+              तिथि :
+            </div>
+            <span>{item.latestDeployementDate}</span>
+          </li>
+          <li>
+            <div className="heading">
+              विभागीय जाँच /अनुशासनिक कार्यवाही का विवरण यदि कोई हो। :
+            </div>
+            <span>{item.case}</span>
+          </li>
+        </ul>
+      </div>
+      <div className="btn-container">
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          disabled={item.approved}
+          onClick={() => approve("approve", item._id)}
+        >
+          Approve
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          color="secondary"
+          onClick={() => approve("delete", item._id)}
+        >
+          delete
+        </Button>
+      </div>
+    </Paper>
+  );
+};
+
+const PromotionComponent = ({ item }) => {
+  const approve = (type, id) => {
+    console.log(type, id);
+    axios
+      .post("api/users/approve", { type, id })
+      .then((res) => {
+        if (res.status == 200) {
+          alert("request submitted");
+          location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(error.message);
+        console.error(err);
+      });
+  };
+  return (
+    <Paper className="user-data">
+      <div className="wrapper row">
+        <ul>
+          <li>
+            <div className="heading">Form : </div>
+            <span>
+              {item.formName === "promotion"
+                ? "अभियोजन विभाग में समह–ग के पद पर प्रोन्नति के संबंध में विवरण"
+                : item.formName}
+            </span>
+          </li>
+          <li>
+            <div className="heading">कर्मचारी का नाम / पदनाम : </div>
+            <span>{item.officerName}</span>
+          </li>
+          <li>
+            <div className="heading">गृह / जनपद :</div>
+            <span>{item.district}</span>
+          </li>
+          <li>
+            <div className="heading">जन्मतिथि :</div>
+            <span>{item.dob}</span>
+          </li>
+          <li>
+            <div className="heading">वर्तमान पद पर नियुक्ति तिथी :</div>
+            <span>{item.presentPostDate}</span>
+          </li>
+          <li>
+            <div className="heading">स्थायीकरण का विवरण : </div>
+            <span>{item.dipiction}</span>
+          </li>
+          <li>
+            <div className="heading">वर्तमान तैनाती / स्थान : </div>
+            <span>{item.presentPost}</span>
+          </li>
+          <li>
+            <div className="heading">तिथि :</div>
+            <span>{item.dateOfDeployment}</span>
+          </li>
+          <li>
+            <div className="heading">अभ्युक्ती : </div>
+            <span>{item.remark}</span>
           </li>
         </ul>
       </div>

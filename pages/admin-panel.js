@@ -17,6 +17,7 @@ import Link from "next/link";
 import FormTwoTable from "../components/form-2-table";
 import PensionTable from "../components/tables/pension";
 import EmployementTable from "../components/tables/employement";
+import PromotionTable from "../components/tables/promotion";
 
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
@@ -29,6 +30,7 @@ export default function Admin({ token, posts, user }) {
     budget: false,
     pension: false,
     employement: false,
+    promotion: false,
   });
 
   const handleClick = (event) => {
@@ -105,17 +107,11 @@ export default function Admin({ token, posts, user }) {
             राज्य कर्मचारियों के लिये सुनिश्चित कैरियर प्रोन्नयन (ए0सी0पी0) की
             व्यवस्था।
           </MenuItem>
+          <MenuItem onClick={() => handleClose("promotion")}>
+            (Form-5) अभियोजन विभाग में समह–ग के पद पर प्रोन्नति के संबंध में
+            विवरण
+          </MenuItem>
 
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-4)</a>
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-5)</a>
-            </Link>
-          </MenuItem>
           <MenuItem>
             <Link href="#">
               <a href="">(Form-6)</a>
@@ -162,6 +158,11 @@ export default function Admin({ token, posts, user }) {
         {state.employement && (
           <EmployementTable
             posts={posts.filter((post) => post.formName == "employement")}
+          />
+        )}
+        {state.promotion && (
+          <PromotionTable
+            posts={posts.filter((post) => post.formName == "promotion")}
           />
         )}
       </div>

@@ -11,7 +11,7 @@ import DateFnsUtils from "@date-io/date-fns";
 
 import { AuthContext } from "../../context/auth";
 
-export default function EmployementForm() {
+export default function PromotionForm() {
   const context = useContext(AuthContext);
   const [submitting, setSubmitting] = useState(false);
 
@@ -24,31 +24,25 @@ export default function EmployementForm() {
             initialValues={{
               username: context.user?.name,
               userId: context.user?.id,
-              formName: "employement",
+              formName: "promotion",
               officerName: "",
+              district: "",
               dob: "",
-              presentSalary: "",
-              presentDistrict: "",
-              institute: "",
+              presentPostDate: "",
+              dipiction: "",
+              presentPost: "",
               dateOfdeployment: "",
-              tenthIncrement: "",
-              sixteenIncrement: "",
-              twentySixthIncrement: "",
-              latestDeployementDate: "",
-              case: "",
+              remark: "",
             }}
             validationSchema={Yup.object({
               officerName: Yup.string().required("Required"),
+              district: Yup.string().required("Required"),
               dob: Yup.date().required("Required"),
-              presentSalary: Yup.string().required("Required"),
-              presentDistrict: Yup.string().required("Required"),
-              institute: Yup.string().required("Required"),
+              presentPostDate: Yup.date().required("Required"),
+              dipiction: Yup.string().required("Required"),
+              presentPost: Yup.string().required("Required"),
               dateOfDeployment: Yup.date().required("Required"),
-              tenthIncrement: Yup.date().required("Required"),
-              sixteenIncrement: Yup.date().required("Required"),
-              twentySixthIncrement: Yup.date().required("Required"),
-              latestDeployementDate: Yup.date().required("Required"),
-              case: Yup.string().nullable(),
+              remark: Yup.string().required("Required"),
             })}
             onSubmit={(values, actions) => {
               setSubmitting(true);
@@ -79,15 +73,22 @@ export default function EmployementForm() {
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <Form autoComplete="off">
                 <Typography variant="h6" className="form-heading">
-                  वेतन समिति (2008) की संस्तुतियों पर लिये गये निर्णयानुसार
-                  राज्य कर्मचारियों के लिये सुनिश्चित कैरियर प्रोन्नयन
-                  (ए0सी0पी0) की व्यवस्था।
+                  अभियोजन विभाग में समह–ग के पद पर प्रोन्नति के संबंध में विवरण
                 </Typography>
                 <div className="form-block">
                   <Field
                     fullWidth
                     name="officerName"
-                    label="अधिकारी का नाम"
+                    label="कर्मचारी का नाम / पदनाम"
+                    component={TextField}
+                    variant="outlined"
+                  />
+                </div>
+                <div className="form-block">
+                  <Field
+                    fullWidth
+                    name="district"
+                    label="गृह / जनपद"
                     component={TextField}
                     variant="outlined"
                   />
@@ -96,7 +97,7 @@ export default function EmployementForm() {
                   <Field
                     fullWidth
                     name="dob"
-                    label="पदनाम/जन्मतिथि"
+                    label="जन्मतिथि "
                     component={DatePicker}
                     variant="outlined"
                   />
@@ -104,8 +105,17 @@ export default function EmployementForm() {
                 <div className="form-block">
                   <Field
                     fullWidth
-                    name="presentSalary"
-                    label="वर्तमान वेतनमान / लेबल"
+                    name="presentPostDate"
+                    label="वर्तमान पद पर नियुक्ति तिथी"
+                    component={DatePicker}
+                    variant="outlined"
+                  />
+                </div>
+                <div className="form-block">
+                  <Field
+                    fullWidth
+                    name="dipiction"
+                    label="स्थायीकरण का विवरण "
                     component={TextField}
                     variant="outlined"
                   />
@@ -113,17 +123,8 @@ export default function EmployementForm() {
                 <div className="form-block">
                   <Field
                     fullWidth
-                    name="presentDistrict"
-                    label="नियुक्ति जनपद"
-                    component={TextField}
-                    variant="outlined"
-                  />
-                </div>
-                <div className="form-block">
-                  <Field
-                    fullWidth
-                    name="institute"
-                    label="अजनपदीय संस्थान"
+                    name="presentPost"
+                    label="वर्तमान तैनाती / स्थान "
                     component={TextField}
                     variant="outlined"
                   />
@@ -132,7 +133,7 @@ export default function EmployementForm() {
                   <Field
                     fullWidth
                     name="dateOfDeployment"
-                    label="नियुक्ति की तिथि"
+                    label="तिथि"
                     component={DatePicker}
                     variant="outlined"
                   />
@@ -140,49 +141,12 @@ export default function EmployementForm() {
                 <div className="form-block">
                   <Field
                     fullWidth
-                    name="tenthIncrement"
-                    label="10 वर्ष की सेवा पर प्रथम वित्तीय स्तरोन्नयन की प्रस्तावित तिथि/प्रस्तावित वेतनमान व लेबल"
-                    component={DatePicker}
-                    variant="outlined"
-                  />
-                </div>
-                <div className="form-block">
-                  <Field
-                    fullWidth
-                    name="sixteenIncrement"
-                    label="16 वर्ष की सेवा पर प्रथम वित्तीय स्तरोन्नयन की प्रस्तावित तिथि/प्रस्तावित वेतनमान व लेबल"
-                    component={DatePicker}
-                    variant="outlined"
-                  />
-                </div>
-                <div className="form-block">
-                  <Field
-                    fullWidth
-                    name="twentySixthIncrement"
-                    label="26 वर्ष की सेवा पर प्रथम वित्तीय स्तरोन्नयन की प्रस्तावित तिथि/प्रस्तावित वेतनमान व लेबल"
-                    component={DatePicker}
-                    variant="outlined"
-                  />
-                </div>
-                <div className="form-block">
-                  <Field
-                    fullWidth
-                    name="latestDeployementDate"
-                    label="प्रक्षा/दितीय/ उत्तीय पदोन्नति के पद पर नर्यभार ग्रहण |करने की तिथि"
-                    component={DatePicker}
-                    variant="outlined"
-                  />
-                </div>
-                <div className="form-block">
-                  <Field
-                    fullWidth
-                    name="case"
-                    label="विभागीय जाँच /अनुशासनिक कार्यवाही का विवरण यदि कोई हो।"
+                    name="remark"
+                    label="अभ्युक्ती "
                     component={TextField}
                     variant="outlined"
                   />
                 </div>
-
                 {submitting ? (
                   <CircularProgress />
                 ) : (
