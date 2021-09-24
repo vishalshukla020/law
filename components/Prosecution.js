@@ -70,10 +70,10 @@ export default function Prosecution() {
                 .typeError("Should be a number"),
             })}
             onSubmit={(values, actions) => {
-               setSubmitting(true);
-               setTimeout(() => {
-                 setSubmitting(false);
-               }, 5000);
+              setSubmitting(true);
+              setTimeout(() => {
+                setSubmitting(false);
+              }, 5000);
               axios
                 .post("/api/posts", { ...values })
                 .then((res) => {
@@ -157,7 +157,7 @@ Cases pending at the beginning of January"
                   <Field
                     fullWidth
                     name="newSuits"
-                    label="वर्ष में दायर वाद / suits filed in the year"
+                    label="आलोचना अवधी में दायर वाद / suits filed in the year"
                     component={TextField}
                     variant="outlined"
                   />
@@ -166,21 +166,21 @@ Cases pending at the beginning of January"
                 <div className="form-block flex">
                   <Field
                     name="punishment"
-                    label="सजा / Punishment"
+                    label="सजा / Convicted"
                     component={TextField}
                     variant="outlined"
                   />
 
                   <Field
                     name="reconciliation"
-                    label="सुलह  / reconciliation"
+                    label="सुलह  / compounding"
                     component={TextField}
                     variant="outlined"
                   />
 
                   <Field
                     name="session"
-                    label="सत्र सुपुर्द / session handed over"
+                    label="सत्र सुपुर्द / session commited"
                     component={TextField}
                     variant="outlined"
                   />

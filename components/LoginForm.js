@@ -62,7 +62,7 @@ export default function LoginForm() {
                 width={280}
                 layout="intrinsic"
               />
-              <Typography variant="h3" className="form-heading">
+              <Typography variant="h4" className="form-heading">
                 Log in
               </Typography>
             </center>

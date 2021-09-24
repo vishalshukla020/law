@@ -1,7 +1,15 @@
-import { Button, CircularProgress, Paper, Typography } from "@material-ui/core";
+import {
+  Button,
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
-import { TextField } from "formik-material-ui";
+import { Select, TextField } from "formik-material-ui";
 import { useContext, useState } from "react";
 import * as Yup from "yup";
 import { AuthContext } from "../context/auth";
@@ -24,7 +32,6 @@ export default function BudgetForm() {
               itemCount: "",
               preAllocatedBudget: "",
               expenditureSoFar: "",
-              left: "",
               excessDemand: "",
               remark: "",
             }}
@@ -37,9 +44,6 @@ export default function BudgetForm() {
                 .required("Required")
                 .typeError("Must be a number"),
               expenditureSoFar: Yup.number()
-                .required("Required")
-                .typeError("Must be a number"),
-              left: Yup.number()
                 .required("Required")
                 .typeError("Must be a number"),
               excessDemand: Yup.number()
@@ -88,15 +92,20 @@ export default function BudgetForm() {
                   variant="outlined"
                 />
               </div>
-              <div className="form-block">
+
+              <FormControl className="form-block" fullWidth>
+                <InputLabel htmlFor="court-name">मद संख्या</InputLabel>
                 <Field
-                  fullWidth
-                  name="itemCount"
-                  label="मद संख्या"
-                  component={TextField}
-                  variant="outlined"
-                />
-              </div>
+                  component={Select}
+                  name="courtName"
+                  id="court-name"
+                  inputProps={{ id: "court-name" }}
+                >
+                  <MenuItem value="subordinate-court">1</MenuItem>
+                  <MenuItem value="session-court">2</MenuItem>
+                  <MenuItem value="DGC-session-court">3</MenuItem>
+                </Field>
+              </FormControl>
               <div className="form-block">
                 <Field
                   fullWidth
@@ -115,15 +124,7 @@ export default function BudgetForm() {
                   variant="outlined"
                 />
               </div>
-              <div className="form-block">
-                <Field
-                  fullWidth
-                  name="left"
-                  label="अवशेष"
-                  component={TextField}
-                  variant="outlined"
-                />
-              </div>
+
               <div className="form-block">
                 <Field
                   fullWidth

@@ -74,7 +74,7 @@ export default function FormTwoTable({ posts }) {
             itemCount: post.itemCount,
             preAllocatedBudget: post.preAllocatedBudget,
             expenditureSoFar: post.expenditureSoFar,
-            left: post.left,
+            left: parseInt(post.preAllocatedBudget)-parseInt(post.expenditureSoFar),
             excessDemand: post.excessDemand,
             remark: post.remark,
           };
