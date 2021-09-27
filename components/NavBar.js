@@ -47,7 +47,7 @@ export default function NavBar({ username, role }) {
                 src="/logo.png"
                 alt="logo"
                 height={65}
-                width={280}
+                width={65}
                 layout="intrinsic"
               />
               {username}

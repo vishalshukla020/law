@@ -59,7 +59,7 @@ export default function LoginForm() {
                 src="/logo.png"
                 alt="logo"
                 height={65}
-                width={280}
+                width={65}
                 layout="intrinsic"
               />
               <Typography variant="h4" className="form-heading">
