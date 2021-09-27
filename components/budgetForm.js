@@ -98,9 +98,6 @@ export default function BudgetForm() {
             }}
             validationSchema={Yup.object({
               officeName: Yup.string().required("Required"),
-              itemCount: Yup.number()
-                .required("Required")
-                .typeError("Must be a number"),
               preAllocatedBudget: Yup.number()
                 .required("Required")
                 .typeError("Must be a number"),
@@ -162,11 +159,11 @@ export default function BudgetForm() {
                   id="item-count"
                   inputProps={{ id: "item-count" }}
                 >
-                  {madd.map((item,i)=>(
-
-                  <MenuItem value={item} key={i}>{item}</MenuItem>
+                  {madd.map((item, i) => (
+                    <MenuItem value={item} key={i}>
+                      {item}
+                    </MenuItem>
                   ))}
-                  
                 </Field>
               </FormControl>
               <div className="form-block">

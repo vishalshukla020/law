@@ -119,7 +119,7 @@ export default function EmployementForm() {
               officerName: Yup.string().required("Required"),
               dob: Yup.date().required("Required"),
               presentSalary: Yup.string().required("Required"),
-              presentDistrict: Yup.string().required("Required"),
+             
               institute: Yup.string().required("Required"),
               dateOfDeployment: Yup.date().required("Required"),
               tenthIncrement: Yup.date().required("Required"),

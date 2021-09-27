@@ -114,7 +114,7 @@ export default function PromotionForm() {
             }}
             validationSchema={Yup.object({
               officerName: Yup.string().required("Required"),
-              district: Yup.string().required("Required"),
+              
               dob: Yup.date().required("Required"),
               presentPostDate: Yup.date().required("Required"),
               dipiction: Yup.string().required("Required"),
@@ -167,8 +167,8 @@ export default function PromotionForm() {
                   <Field
                     component={Select}
                     name="district"
-                    id="district"
-                    inputProps={{ id: "district" }}
+                    id="dist"
+                    inputProps={{ id: "dist" }}
                   >
                     {district.map((item, i) => (
                       <MenuItem value={item} key={i}>

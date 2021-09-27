@@ -114,7 +114,7 @@ export default function PensionForm() {
               mobile: "",
             }}
             validationSchema={Yup.object({
-              district: Yup.string().required("Required"),
+             
               retiredName: Yup.string().required("Required"),
               dueCertificate: Yup.string().required("Required"),
               gpf: Yup.string().required("Required"),
