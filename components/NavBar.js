@@ -79,6 +79,27 @@ export default function NavBar({ username, role }) {
                   register
                 </Button>
               )}
+
+              {role && role === "admin" && router.pathname !== "/logs" && (
+                <Button
+                  variant="contained"
+                  className="button"
+                  style={{ background: "#388E3C" }}
+                  onClick={() => router.push("/logs")}
+                >
+                  Logs
+                </Button>
+              )}
+              {role && role === "admin" && router.pathname !== "/admin-panel" && (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className="button"
+                  onClick={() => router.push("/admin-panel")}
+                >
+                  back to home
+                </Button>
+              )}
               {role &&
                 role === "user" &&
                 (router.pathname === "/" ? (

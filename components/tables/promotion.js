@@ -88,11 +88,11 @@ export default function PromotionTable({ posts }) {
             serial: index + 1,
             officerName: post.officerName,
             district: post.district,
-            dob: post.dob,
-            presentPostDate: post.presentPostDate,
+            dob: post.dob.substring(0, 10),
+            presentPostDate: post.presentPostDate.substring(0, 10),
             presentPost: post.presentPost,
             dipiction: post.dipiction,
-            dateOfDeployement: post.dateOfDeployment,
+            dateOfDeployement: post.dateOfDeployment.substring(0, 10),
             remark: post.remark,
           };
         })}

@@ -105,15 +105,15 @@ export default function EmployementTable({ posts }) {
           return {
             serial: index + 1,
             officerName: post.officerName,
-            dob: post.dob,
+            dob: post.dob.substring(0, 10),
             presentSalary: post.presentSalary,
             presentDistrict: post.presentDistrict,
             institute: post.institute,
-            dateOfDeployment: post.dateOfDeployment,
-            tenthIncrement: post.tenthIncrement,
-            sixteenIncrement: post.sixteenIncrement,
-            twentySixthIncrement: post.twentySixthIncrement,
-            latestDeployementDate: post.latestDeployementDate,
+            dateOfDeployment: post.dateOfDeployment.substring(0, 10),
+            tenthIncrement: post.tenthIncrement.substring(0, 10),
+            sixteenIncrement: post.sixteenIncrement.substring(0, 10),
+            twentySixthIncrement: post.twentySixthIncrement.substring(0, 10),
+            latestDeployementDate: post.latestDeployementDate.substring(0, 10),
             case: post.case,
           };
         })}
