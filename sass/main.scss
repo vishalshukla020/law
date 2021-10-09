@@ -31,7 +31,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-
 }
 
 body {
@@ -114,7 +113,6 @@ nav {
   font-size: 1.75rem;
   font-weight: 600;
   text-transform: capitalize;
- 
 }
 .flex {
   display: flex;
@@ -162,4 +160,10 @@ nav {
 
 .MuiTypography-h6 {
   padding-right: 3em;
+}
+
+center {
+  padding: 1em 0;
+  background: var(--color-white);
+  font-size:1.2em
 }
