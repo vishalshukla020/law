@@ -50,7 +50,6 @@ const myFilter = (array, court, setCourt, suite, setSuite, reduceValue) => {
 };
 
 export default function Table({ posts }) {
- 
   const obj = (posts, courtname, suitename, court, suite) => {
     return {
       courtName: courtname,
@@ -164,6 +163,7 @@ export default function Table({ posts }) {
         ]}
         title=" प्रदेश में हुए अभियोजन कार्य दिनांक 01 जनवरी, 2020 से दिनांक 31
               दिसंबर, 2020 तक"
+              
         options={{
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,

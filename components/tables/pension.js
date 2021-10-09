@@ -90,6 +90,12 @@ export default function PensionTable({ posts }) {
             mobile: post.mobile,
           };
         })}
+        options={{
+          headerStyle: { backgroundColor: "#f1f1f1" },
+          exportButton: true,
+          pageSize: 10,
+          exportButton: { csv: true },
+        }}
       />
     </div>
   );

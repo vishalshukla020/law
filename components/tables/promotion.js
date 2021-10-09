@@ -96,6 +96,12 @@ export default function PromotionTable({ posts }) {
             remark: post.remark,
           };
         })}
+        options={{
+          headerStyle: { backgroundColor: "#f1f1f1" },
+          exportButton: true,
+          pageSize: 10,
+          exportButton: { csv: true },
+        }}
       />
     </div>
   );

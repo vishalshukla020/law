@@ -46,7 +46,7 @@ export default function FormTwoTable({ posts }) {
   return (
     <div style={{ maxWidth: "100%" }}>
       <MaterialTable
-      icons={tableIcons}
+        icons={tableIcons}
         title="अतिरिक्त बजट मांगपत्र के सम्बन्ध में निर्धारित प्रारूप"
         columns={[
           {
@@ -74,11 +74,19 @@ export default function FormTwoTable({ posts }) {
             itemCount: post.itemCount,
             preAllocatedBudget: post.preAllocatedBudget,
             expenditureSoFar: post.expenditureSoFar,
-            left: parseInt(post.preAllocatedBudget)-parseInt(post.expenditureSoFar),
+            left:
+              parseInt(post.preAllocatedBudget) -
+              parseInt(post.expenditureSoFar),
             excessDemand: post.excessDemand,
             remark: post.remark,
           };
         })}
+        options={{
+          headerStyle: { backgroundColor: "#f1f1f1" },
+          exportButton: true,
+          pageSize: 10,
+          exportButton: { csv: true },
+        }}
       />
     </div>
   );

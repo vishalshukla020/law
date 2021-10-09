@@ -16,6 +16,7 @@
     "axios": "^0.21.1",
     "cookie": "^0.4.1",
     "date-fns": "^2.23.0",
+    "filefy": "^0.1.11",
     "formik": "^2.2.9",
     "formik-material-ui": "^3.0.1",
     "formik-material-ui-pickers": "^1.0.0-alpha.1",
