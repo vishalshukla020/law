@@ -48,7 +48,7 @@ export default function Home({ token }) {
   });
 
   return (
-    <>
+    <section id='page'>
       <NavBar username={context.user?.name} role={context.user?.role} />
 
       <div className="container" style={{ paddingBottom: "1em" }}>
@@ -126,7 +126,7 @@ export default function Home({ token }) {
       {state.pension && <PensionForm />}
       {state.employement && <EmployementForm />}
       {state.promotion && <PromotionForm />}
-    </>
+    </section>
   );
 }
 
