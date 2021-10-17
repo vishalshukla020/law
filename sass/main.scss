@@ -166,13 +166,29 @@ center {
   padding: 1em 0;
   background: var(--color-white);
   font-size: 1.2em;
-  
 }
 
-header{
+header {
+  color: var(--color-white);
+  background: var(--color-night);
   border-bottom: 1px solid var(--color-grayish);
 }
 
-#page{
-  background-color: var(--color-light)
+#page {
+  background-color: var(--color-light);
+}
+footer {
+  border-top: 1px solid var(--color-grayish);
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+.log-list {
+  li {
+    &:nth-child(odd) {
+      color: var(--color-night);
+    }
+  }
 }

@@ -43,32 +43,33 @@ export default function Logs({ token, posts, user }) {
   }
 
   return (
-    <>
+    <section id="page">
       <Navbar username={context.user?.name} role={context.user?.role} />
       <div className="container">
-        <Paper className="user-data ">
+        <div className="user-data">
           <div className="wrapper row">
             {posts.map((post) => (
-              <ul>
-                <li>
-                  <div className="heading">Form: </div>
-                  <span>{formsName[post.formName]}</span>
-                </li>
-                <li>
-                  <div className="heading">User: </div>
-                  <span>{post.username}</span>
-                </li>
-                <li>
-                  <div className="heading">Date: </div>
-                  <span>{post.date.substring(0, 10)}</span>
-                </li>
-                <hr />
-              </ul>
+              <Paper className="user-data">
+                <ul className="log-list">
+                  <li>
+                    <div className="heading">Form: </div>
+                    <span>{formsName[post.formName]}</span>
+                  </li>
+                  <li>
+                    <div className="heading">User: </div>
+                    <span>{post.username}</span>
+                  </li>
+                  <li>
+                    <div className="heading">Date: </div>
+                    <span>{post.date.substring(0, 10)}</span>
+                  </li>
+                </ul>
+              </Paper>
             ))}
           </div>
-        </Paper>
+        </div>
       </div>
-    </>
+    </section>
   );
 }
 

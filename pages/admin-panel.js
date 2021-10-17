@@ -68,7 +68,7 @@ export default function Admin({ token, posts, user }) {
   console.log(posts)
 
   return (
-    <>
+    <section id="page">
       <NavBar username={context.user?.name} role={context.user?.role} />
       <div className="container" style={{ paddingBottom: "1em" }}>
         <Button
@@ -166,7 +166,7 @@ export default function Admin({ token, posts, user }) {
           />
         )}
       </div>
-    </>
+    </section>
   );
 }
 
