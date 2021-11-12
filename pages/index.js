@@ -15,6 +15,8 @@ import Link from "next/link";
 import PensionForm from "../components/forms/pension";
 import EmployementForm from "../components/forms/employment";
 import PromotionForm from "../components/forms/promotion";
+import PowerOneForm from "../components/forms/power-1";
+import PowerTwoForm from "../components/forms/power-2";
 
 export default function Home({ token }) {
   const context = useContext(AuthContext);
@@ -27,6 +29,8 @@ export default function Home({ token }) {
     employement: false,
     pension: false,
     promotion: false,
+    powerOne: false,
+    powerTwo: false,
   });
 
   const handleClick = (event) => {
@@ -48,7 +52,7 @@ export default function Home({ token }) {
   });
 
   return (
-    <section id='page'>
+    <section id="page">
       <NavBar username={context.user?.name} role={context.user?.role} />
 
       <div className="container" style={{ paddingBottom: "1em" }}>
@@ -92,13 +96,13 @@ export default function Home({ token }) {
             (Form-5) अभियोजन विभाग में समह–ग के पद पर प्रोन्नति के संबंध में
             विवरण
           </MenuItem>
-
-         
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-6)</a>
-            </Link>
+          <MenuItem onClick={() => handleClose("powerOne")}>
+            (Form-6) मिशन शक्ति - राज्य अभियोजन सेवा संवर्ग
           </MenuItem>
+          <MenuItem onClick={() => handleClose("powerTwo")}>
+            (Form-7) मिशन शक्ति - शासकीय अधिवक्ता सेवा संवर्ग
+          </MenuItem>
+
           <MenuItem>
             <Link href="#">
               <a href="">(Form-7)</a>
@@ -126,6 +130,8 @@ export default function Home({ token }) {
       {state.pension && <PensionForm />}
       {state.employement && <EmployementForm />}
       {state.promotion && <PromotionForm />}
+      {state.powerOne && <PowerOneForm />}
+      {state.powerTwo && <PowerTwoForm />}
     </section>
   );
 }

@@ -52,6 +52,26 @@ export default function User({ token, data }) {
           .map((item) => (
             <PromotionComponent item={item} key={item._id} />
           ))}
+        {data
+          .filter((post) => post.formName == "power-1")
+          .reverse()
+          .map((item) => (
+            <PowerComponent
+              item={item}
+              name="मिशन शक्ति - राज्य अभियोजन सेवा संवर्ग"
+              key={item._id}
+            />
+          ))}
+        {data
+          .filter((post) => post.formName == "power-2")
+          .reverse()
+          .map((item) => (
+            <PowerComponent
+              item={item}
+              name="मिशन शक्ति  - शासकीय अधिवक्ता सेवा संवर्ग"
+              key={item._id}
+            />
+          ))}
       </div>
     </>
   );
@@ -218,6 +238,87 @@ const CardComponentTwo = ({ item }) => {
           <li>
             <div className="heading">अवशेष :</div>
             <span>{item.left}</span>
+          </li>
+        </ul>
+      </div>
+      <div className="btn-container">
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          disabled={item.approved}
+          onClick={() => approve("approve", item._id)}
+        >
+          Approve
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          color="secondary"
+          onClick={() => approve("delete", item._id)}
+        >
+          delete
+        </Button>
+      </div>
+    </Paper>
+  );
+};
+
+const PowerComponent = ({ item, name }) => {
+  const approve = (type, id) => {
+    console.log(type, id);
+    axios
+      .post("api/users/approve", { type, id })
+      .then((res) => {
+        if (res.status == 200) {
+          alert("request submitted");
+          location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(error.message);
+        console.error(err);
+      });
+  };
+  return (
+    <Paper className="user-data">
+      <div className="wrapper row">
+        <ul>
+          <li>
+            <div className="heading">Form : </div>
+            <span>{name}</span>
+          </li>
+          <li>
+            <div className="heading">जनपद :</div>
+            <span>{item.district}</span>
+          </li>
+          <li>
+            <div className="heading">अभियोजक का नाम :</div>
+            <span>{item.prosecutorName}</span>
+          </li>
+          <li>
+            <div className="heading">पद नाम :</div>
+            <span>{item.postName}</span>
+          </li>
+          <li>
+            <div className="heading">अ0सं0 :</div>
+            <span>{item.count}</span>
+          </li>
+          <li>
+            <div className="heading">धारा :</div>
+            <span>{item.act}</span>
+          </li>
+          <li>
+            <div className="heading">थाना :</div>
+            <span>{item.policeStation}</span>
+          </li>
+          <li>
+            <div className="heading">बनाम :</div>
+            <span>{item.verus}</span>
+          </li>
+          <li>
+            <div className="heading">सज़ा :</div>
+            <span>{item.punishment}</span>
           </li>
         </ul>
       </div>

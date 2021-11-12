@@ -18,6 +18,8 @@ import FormTwoTable from "../components/form-2-table";
 import PensionTable from "../components/tables/pension";
 import EmployementTable from "../components/tables/employement";
 import PromotionTable from "../components/tables/promotion";
+import PowerOneTable from "../components/tables/power-1";
+import PowerTwoTable from "../components/tables/power-2";
 
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
@@ -31,19 +33,18 @@ export default function Admin({ token, posts, user }) {
     pension: false,
     employement: false,
     promotion: false,
+    powerOne: false,
+    powerTwo: false,
   });
 
   const handleClick = (event) => {
-    
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = (formname) => {
-    
     setState({ [formname]: true });
     setAnchorEl(null);
   };
-
 
   useEffect(() => {
     if (!context.user && token) {
@@ -65,7 +66,7 @@ export default function Admin({ token, posts, user }) {
       </div>
     );
   }
-  console.log(posts)
+  console.log(posts);
 
   return (
     <section id="page">
@@ -111,17 +112,13 @@ export default function Admin({ token, posts, user }) {
             (Form-5) अभियोजन विभाग में समह–ग के पद पर प्रोन्नति के संबंध में
             विवरण
           </MenuItem>
+          <MenuItem onClick={() => handleClose("powerOne")}>
+            (Form-6) मिशन शक्ति - राज्य अभियोजन सेवा संवर्ग
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("powerTwo")}>
+            (Form-7) मिशन शक्ति - शासकीय अधिवक्ता सेवा संवर्ग
+          </MenuItem>
 
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-6)</a>
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-7)</a>
-            </Link>
-          </MenuItem>
           <MenuItem>
             <Link href="#">
               <a href="">(Form-8)</a>
@@ -163,6 +160,16 @@ export default function Admin({ token, posts, user }) {
         {state.promotion && (
           <PromotionTable
             posts={posts.filter((post) => post.formName == "promotion")}
+          />
+        )}
+        {state.powerOne && (
+          <PowerOneTable
+            posts={posts.filter((post) => post.formName == "power-1")}
+          />
+        )}
+        {state.powerTwo && (
+          <PowerTwoTable
+            posts={posts.filter((post) => post.formName == "power-2")}
           />
         )}
       </div>
