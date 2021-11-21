@@ -1,6 +1,6 @@
 import MaterialTable from "material-table";
 
-import { forwardRef } from "react";
+import { forwardRef, useState, useEffect } from "react";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -17,6 +17,13 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@material-ui/core";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -42,6 +49,84 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
+const districtArray = [
+  "Agra",
+  "Aligarh",
+  "Allahabad",
+  "Ambedkar Nagar",
+  "Amethi (Chatrapati Sahuji Mahraj Nagar)",
+  "Amroha (J.P. Nagar)",
+  "Auraiya",
+  "Azamgarh",
+  "Baghpat",
+  "Bahraich",
+  "Ballia",
+  "Balrampur",
+  "Banda",
+  "Barabanki",
+  "Bareilly",
+  "Basti",
+  "Bhadohi",
+  "Bijnor",
+  "Budaun",
+  "Bulandshahr",
+  "Chandauli",
+  "Chitrakoot",
+  "Deoria",
+  "Etah",
+  "Etawah",
+  "Faizabad",
+  "Farrukhabad",
+  "Fatehpur",
+  "Firozabad",
+  "Gautam Buddha Nagar",
+  "Ghaziabad",
+  "Ghazipur",
+  "Gonda",
+  "Gorakhpur",
+  "Hamirpur",
+  "Hapur (Panchsheel Nagar)",
+  "Hardoi",
+  "Hathras",
+  "Jalaun",
+  "Jaunpur",
+  "Jhansi",
+  "Kannauj",
+  "Kanpur Dehat",
+  "Kanpur Nagar",
+  "Kanshiram Nagar (Kasganj)",
+  "Kaushambi",
+  "Kushinagar (Padrauna)",
+  "Lakhimpur - Kheri",
+  "Lalitpur",
+  "Lucknow",
+  "Maharajganj",
+  "Mahoba",
+  "Mainpuri",
+  "Mathura",
+  "Mau",
+  "Meerut",
+  "Mirzapur",
+  "Moradabad",
+  "Muzaffarnagar",
+  "Pilibhit",
+  "Pratapgarh",
+  "RaeBareli",
+  "Rampur",
+  "Saharanpur",
+  "Sambhal (Bhim Nagar)",
+  "Sant Kabir Nagar",
+  "Shahjahanpur",
+  "Shamali (Prabuddh Nagar)",
+  "Shravasti",
+  "Siddharth Nagar",
+  "Sitapur",
+  "Sonbhadra",
+  "Sultanpur",
+  "Unnao",
+  "Varanasi",
+];
+
 const myFilter = (array, court, setCourt, suite, setSuite, reduceValue) => {
   return array
     .filter((e) => e[court] === setCourt)
@@ -50,6 +135,17 @@ const myFilter = (array, court, setCourt, suite, setSuite, reduceValue) => {
 };
 
 export default function Table({ posts }) {
+  const [district, setDistrict] = useState("All");
+  const [filteredData, setFilteredData] = useState(posts);
+
+  useEffect(() => {
+    setFilteredData(
+      district == "All"
+        ? posts
+        : posts.filter((post) => post.district === district)
+    );
+  }, [district]);
+
   const obj = (posts, courtname, suitename, court, suite) => {
     return {
       courtName: courtname,
@@ -94,7 +190,7 @@ export default function Table({ posts }) {
         "discharged"
       ),
       filed: myFilter(posts, "courtName", court, "suite", suite, "filed"),
-      left: "left",
+      left: myFilter(posts, "courtName", court, "suite", suite, "left"),
       percentage:
         (
           (myFilter(posts, "courtName", court, "suite", suite, "punishment") /
@@ -107,6 +203,26 @@ export default function Table({ posts }) {
 
   return (
     <div style={{ maxWidth: "100%" }}>
+      <FormControl fullWidth>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={district}
+          displayEmpty
+          onChange={(e) => setDistrict(e.target.value)}
+        >
+          <MenuItem>
+            <em>All</em>
+          </MenuItem>
+          {districtArray.map((item, i) => (
+            <MenuItem value={item} key={i}>
+              {item}
+            </MenuItem>
+          ))}
+        </Select>
+        <FormHelperText>Select District</FormHelperText>
+      </FormControl>
+
       <MaterialTable
         icons={tableIcons}
         columns={[
@@ -123,38 +239,51 @@ export default function Table({ posts }) {
           { title: "उन्मोचित", field: "discharged" },
           { title: "दाखिल दफ्तर", field: "filed" },
           { title: "अवशेष", field: "left" },
-          { title: "सजा का प्रतिशत ", field: "percentage" },
+          { title: "सजा का प्रतिशत", field: "percentage" },
         ]}
         data={[
           obj(
-            posts,
+            filteredData,
             "अधीनस्थ न्यायालय",
             "भा० द० वि०",
             "subordinate-court",
             "riot"
           ),
-          obj(posts, "", "अन्य अधि०	", "subordinate-court", "other"),
+          obj(filteredData, "", "अन्य अधि०	", "subordinate-court", "other"),
           obj(
-            posts,
+            filteredData,
             "सत्र न्यायालय (अभियोजन संवर्ग )",
             "भा० द० वि०",
             "session-court",
             "riot"
           ),
-          obj(posts, "", "अन्य अधि०", "session-court", "other"),
-          obj(posts, "", "एस०सी० एस०टी०", "session-court", "scst"),
-          obj(posts, "", "गिरोहबंद अधि० एवं माफिया", "session-court", "mafia"),
+          obj(filteredData, "", "अन्य अधि०", "session-court", "other"),
+          obj(filteredData, "", "एस०सी० एस०टी०", "session-court", "scst"),
           obj(
-            posts,
+            filteredData,
+            "",
+            "गिरोहबंद अधि० एवं माफिया",
+            "session-court",
+            "mafia"
+          ),
+          obj(
+            filteredData,
+            "",
+            "लैंगिक उत्पीड़न से बच्चों के संरक्षण",
+            "session-court",
+            "posco"
+          ),
+          obj(
+            filteredData,
             "सत्र न्यायालय ( डी.जी.सी० /ए.डी.जी.सी० संवर्ग )",
             "भा० द० वि०",
             "DGC-session-court",
             "riot"
           ),
-          obj(posts, "", "अन्य अधि०", "DGC-session-court", "other"),
-          obj(posts, "", "एस०सी० एस०टी०", "DGC-session-court", "scst"),
+          obj(filteredData, "", "अन्य अधि०", "DGC-session-court", "other"),
+          obj(filteredData, "", "एस०सी० एस०टी०", "DGC-session-court", "scst"),
           obj(
-            posts,
+            filteredData,
             "",
             "गिरोहबंद अधि० एवं माफिया",
             "DGC-session-court",
@@ -163,7 +292,6 @@ export default function Table({ posts }) {
         ]}
         title=" प्रदेश में हुए अभियोजन कार्य दिनांक 01 जनवरी, 2020 से दिनांक 31
               दिसंबर, 2020 तक"
-              
         options={{
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,

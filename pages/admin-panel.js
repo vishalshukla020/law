@@ -66,7 +66,6 @@ export default function Admin({ token, posts, user }) {
       </div>
     );
   }
-  console.log(posts);
 
   return (
     <section id="page">

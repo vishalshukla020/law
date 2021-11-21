@@ -118,6 +118,8 @@ export default function EmployementTable({ posts }) {
           };
         })}
         options={{
+          filtering: true,
+
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,
           pageSize: 10,

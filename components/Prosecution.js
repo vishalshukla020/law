@@ -15,6 +15,84 @@ import axios from "axios";
 
 import { AuthContext } from "../context/auth";
 
+const district = [
+  "Agra",
+  "Aligarh",
+  "Allahabad",
+  "Ambedkar Nagar",
+  "Amethi (Chatrapati Sahuji Mahraj Nagar)",
+  "Amroha (J.P. Nagar)",
+  "Auraiya",
+  "Azamgarh",
+  "Baghpat",
+  "Bahraich",
+  "Ballia",
+  "Balrampur",
+  "Banda",
+  "Barabanki",
+  "Bareilly",
+  "Basti",
+  "Bhadohi",
+  "Bijnor",
+  "Budaun",
+  "Bulandshahr",
+  "Chandauli",
+  "Chitrakoot",
+  "Deoria",
+  "Etah",
+  "Etawah",
+  "Faizabad",
+  "Farrukhabad",
+  "Fatehpur",
+  "Firozabad",
+  "Gautam Buddha Nagar",
+  "Ghaziabad",
+  "Ghazipur",
+  "Gonda",
+  "Gorakhpur",
+  "Hamirpur",
+  "Hapur (Panchsheel Nagar)",
+  "Hardoi",
+  "Hathras",
+  "Jalaun",
+  "Jaunpur",
+  "Jhansi",
+  "Kannauj",
+  "Kanpur Dehat",
+  "Kanpur Nagar",
+  "Kanshiram Nagar (Kasganj)",
+  "Kaushambi",
+  "Kushinagar (Padrauna)",
+  "Lakhimpur - Kheri",
+  "Lalitpur",
+  "Lucknow",
+  "Maharajganj",
+  "Mahoba",
+  "Mainpuri",
+  "Mathura",
+  "Mau",
+  "Meerut",
+  "Mirzapur",
+  "Moradabad",
+  "Muzaffarnagar",
+  "Pilibhit",
+  "Pratapgarh",
+  "RaeBareli",
+  "Rampur",
+  "Saharanpur",
+  "Sambhal (Bhim Nagar)",
+  "Sant Kabir Nagar",
+  "Shahjahanpur",
+  "Shamali (Prabuddh Nagar)",
+  "Shravasti",
+  "Siddharth Nagar",
+  "Sitapur",
+  "Sonbhadra",
+  "Sultanpur",
+  "Unnao",
+  "Varanasi",
+];
+
 export default function Prosecution() {
   const context = useContext(AuthContext);
   const [submitting, setSubmitting] = useState(false);
@@ -40,6 +118,8 @@ export default function Prosecution() {
               filed: "",
               decided: "",
               freed: "",
+              left: "",
+              district: "",
             }}
             validationSchema={Yup.object({
               courtName: Yup.string().required("required field"),
@@ -66,6 +146,9 @@ export default function Prosecution() {
                 .required("required field")
                 .typeError("Should be a number"),
               decided: Yup.number()
+                .required("required field")
+                .typeError("Should be a number"),
+              left: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
             })}
@@ -141,14 +224,32 @@ export default function Prosecution() {
                     <MenuItem value="mafia">
                       गिरोहबंद अधि० एवं माफिया / gangster or mafia
                     </MenuItem>
+                    <MenuItem value="posco">
+                      लैंगिक उत्पीड़न से बच्चों के संरक्षण / POCSO
+                    </MenuItem>
+                  </Field>
+                </FormControl>
+                <FormControl className="form-block" fullWidth>
+                  <InputLabel htmlFor="court-name">जनपद</InputLabel>
+                  <Field
+                    component={Select}
+                    name="district"
+                    id="district"
+                    inputProps={{ id: "district" }}
+                  >
+                    {district.map((item, i) => (
+                      <MenuItem value={item} key={i}>
+                        {item}
+                      </MenuItem>
+                    ))}
                   </Field>
                 </FormControl>
                 <div className="form-block">
                   <Field
                     fullWidth
                     name="suitsInJan"
-                    label="जनवरी माह के प्रारम्भ में लंबित वाद / 
-Cases pending at the beginning of January"
+                    label="माह के प्रारम्भ में लंबित वाद / 
+Cases pending at the beginning of month"
                     component={TextField}
                     variant="outlined"
                   />
@@ -181,6 +282,12 @@ Cases pending at the beginning of January"
                   <Field
                     name="session"
                     label="सत्र सुपुर्द / session commited"
+                    component={TextField}
+                    variant="outlined"
+                  />
+                  <Field
+                    name="left"
+                    label="शेष  / left"
                     component={TextField}
                     variant="outlined"
                   />
