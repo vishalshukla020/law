@@ -18,6 +18,13 @@ import PromotionForm from "../components/forms/promotion";
 import PowerOneForm from "../components/forms/power-1";
 import PowerTwoForm from "../components/forms/power-2";
 
+//batch forms total of 6
+import BatchFormOne from "../components/forms/batch/form-1";
+import BatchFormTwo from "../components/forms/batch/form-2";
+import BatchFormThree from "../components/forms/batch/form-3";
+import BatchFormFour from "../components/forms/batch/form-4";
+import BatchFormFive from "../components/forms/batch/form-5";
+
 export default function Home({ token }) {
   const context = useContext(AuthContext);
   const router = useRouter();
@@ -31,6 +38,11 @@ export default function Home({ token }) {
     promotion: false,
     powerOne: false,
     powerTwo: false,
+    batchFormOne: false,
+    batchFormTwo: false,
+    batchFormThree: false,
+    batchFormFour: false,
+    batchFormFive: false,
   });
 
   const handleClick = (event) => {
@@ -102,26 +114,25 @@ export default function Home({ token }) {
           <MenuItem onClick={() => handleClose("powerTwo")}>
             (Form-7) मिशन शक्ति - शासकीय अधिवक्ता सेवा संवर्ग
           </MenuItem>
-
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-7)</a>
-            </Link>
+          <MenuItem onClick={() => handleClose("batchFormOne")}>
+            (Form-7) सत्र न्यायालयो में गिरोहबन्द अधिनियम के अन्तर्गत डी०जी०सी
+            संवर्ग द्वारा अभियोजित वादो का विवरण
           </MenuItem>
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-8)</a>
-            </Link>
+          <MenuItem onClick={() => handleClose("batchFormTwo")}>
+            (Form-8) सत्र न्यायालयो में एससीएसटी एक्ट के अन्तर्गत डी0जी0सी
+            संवर्ग द्वारा अभियोजित वादो का विवरण
           </MenuItem>
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-9)</a>
-            </Link>
+          <MenuItem onClick={() => handleClose("batchFormThree")}>
+            (Form-9) सत्र न्यायालयो में गिरोहबन्द अधिनियम के अन्तर्गत अभियोजन
+            संवर्ग द्वारा अभियोजित वादो का विवरण
           </MenuItem>
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-10)</a>
-            </Link>
+          <MenuItem onClick={() => handleClose("batchFormFour")}>
+            (Form-10) सत्र न्यायालयो में भा0द0वि0 के अन्तर्गत डी०जी०सी संवर्ग
+            द्वारा अभियोजित वादो का विवरण
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("batchFormFive")}>
+            (Form-11) : सत्र न्यायालयो में अन्य अधिनियम के अन्तर्गत डी0जी0सी
+            संवर्ग द्वारा अभियोजित वादो का विवरण
           </MenuItem>
         </Menu>
       </div>
@@ -132,6 +143,11 @@ export default function Home({ token }) {
       {state.promotion && <PromotionForm />}
       {state.powerOne && <PowerOneForm />}
       {state.powerTwo && <PowerTwoForm />}
+      {state.batchFormOne && <BatchFormOne />}
+      {state.batchFormTwo && <BatchFormTwo />}
+      {state.batchFormThree && <BatchFormThree />}
+      {state.batchFormFour && <BatchFormFour />}
+      {state.batchFormFive && <BatchFormFive />}
     </section>
   );
 }
