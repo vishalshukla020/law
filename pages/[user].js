@@ -1,5 +1,5 @@
 import NavBar from "../components/NavBar";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth";
 import { parseCookies } from "../helper/parseCookies";
 import baseUrl from "../helper/baseURL";
@@ -8,7 +8,6 @@ import { Button, Paper } from "@material-ui/core";
 
 export default function User({ token, data }) {
   const context = useContext(AuthContext);
-  console.log(data);
 
   useEffect(() => {
     if (!context.user && token) {
@@ -18,43 +17,38 @@ export default function User({ token, data }) {
     }
   });
 
+  data = data.reverse();
   return (
     <>
       <NavBar username={context.user?.name} role={context.user?.role} />
       <div className="container">
         {data
           .filter((post) => post.formName == "prosecution")
-          .reverse()
           .map((item) => (
             <CardComponent item={item} key={item._id} />
           ))}
         {data
           .filter((post) => post.formName == "extraBudget")
-          .reverse()
           .map((item) => (
             <CardComponentTwo item={item} key={item._id} />
           ))}
         {data
           .filter((post) => post.formName == "pension")
-          .reverse()
           .map((item) => (
             <PensionComponent item={item} key={item._id} />
           ))}
         {data
           .filter((post) => post.formName == "employement")
-          .reverse()
           .map((item) => (
             <EmployementComponent item={item} key={item._id} />
           ))}
         {data
           .filter((post) => post.formName == "promotion")
-          .reverse()
           .map((item) => (
             <PromotionComponent item={item} key={item._id} />
           ))}
         {data
           .filter((post) => post.formName == "power-1")
-          .reverse()
           .map((item) => (
             <PowerComponent
               item={item}
@@ -64,11 +58,55 @@ export default function User({ token, data }) {
           ))}
         {data
           .filter((post) => post.formName == "power-2")
-          .reverse()
           .map((item) => (
             <PowerComponent
               item={item}
               name="मिशन शक्ति  - शासकीय अधिवक्ता सेवा संवर्ग"
+              key={item._id}
+            />
+          ))}
+        {data
+          .filter((post) => post.formName == "batch-form-1")
+          .map((item) => (
+            <BatchComponent
+              item={item}
+              name="सत्र न्यायालयो में गिरोहबन्द अधिनियम के अन्तर्गत डी०जी०सी संवर्ग द्वारा अभियोजित वादो का विवरण"
+              key={item._id}
+            />
+          ))}
+        {data
+          .filter((post) => post.formName == "batch-form-2")
+          .map((item) => (
+            <BatchComponent
+              item={item}
+              name="सत्र न्यायालयो में एससीएसटी एक्ट के अन्तर्गत डी0जी0सी संवर्ग द्वारा अभियोजित वादो का विवरण"
+              key={item._id}
+            />
+          ))}
+        {data
+          .filter((post) => post.formName == "batch-form-3")
+          .map((item) => (
+            <BatchComponent
+              item={item}
+              name="सत्र न्यायालयो में गिरोहबन्द अधिनियम के अन्तर्गत अभियोजन संवर्ग द्वारा अभियोजित वादो का विवरण"
+              key={item._id}
+            />
+          ))}
+        {data
+          .filter((post) => post.formName == "batch-form-4")
+          .map((item) => (
+            <BatchComponent
+              item={item}
+              name="सत्र न्यायालयो में भा0द0वि0 के अन्तर्गत डी०जी०सी संवर्ग द्वारा अभियोजित वादो का विवरण"
+              key={item._id}
+            />
+          ))}
+        {data
+          .filter((post) => post.formName == "batch-form-5")
+          .map((item) => (
+            <BatchComponent
+              item={item}
+              name="सत्र न्यायालयो में अन्य अधिनियम के अन्तर्गत डी0जी0सी संवर्ग द्वारा अभियोजित वादो का विवरण"
               key={item._id}
             />
           ))}
@@ -77,6 +115,126 @@ export default function User({ token, data }) {
   );
 }
 
+const BatchComponent = ({ item, name }) => {
+  const approve = (type, id) => {
+    console.log(type, id);
+    axios
+      .post("api/users/approve", { type, id })
+      .then((res) => {
+        if (res.status == 200) {
+          alert("request submitted");
+          location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(error.message);
+        console.error(err);
+      });
+  };
+  return (
+    <Paper className="user-data">
+      <div className="wrapper row">
+        <ul>
+          <li>
+            <div className="heading">Form : </div>
+            <span>{name}</span>
+          </li>
+          <li>
+            <div className="heading">जनपद का नाम :</div>
+            <span>{item.district}</span>
+          </li>
+          <li>
+            <div className="heading">माह मे लम्बित वाद :</div>
+            <span>{item.suitsInMonthLambit}</span>
+          </li>
+          <li>
+            <div className="heading">माह में दायर वाद :</div>
+            <span>{item.suitsInMonthDayar}</span>
+          </li>
+          <li>
+            <div className="heading">कुल योग :</div>
+            <span>{item.suitsInMonthFinaled}</span>
+          </li>
+          <li>
+            <div className="heading">निर्णीत :</div>
+            <span>{item.suitsInMonthTotal}</span>
+          </li>
+          <li>
+            <div className="heading">सजा वाद / गुण दोष के आधार / कुल वाद :</div>
+            <span>{item.punishTotal}</span>
+          </li>
+          <li>
+            <div className="heading">
+              सजा वाद / गुण दोष के आधार / कुल अभियुक्त :
+            </div>
+            <span>{item.punishTotalSuspect}</span>
+          </li>
+          <li>
+            <div className="heading">सजा वाद / जुर्म इकबाल के / कुल वाद :</div>
+            <span>{item.jurmTotal}</span>
+          </li>
+          <li>
+            <div className="heading">
+              सजा वाद / जुर्म इकबाल के / कुल अभियुक्त :
+            </div>
+            <span>{item.jurmTotalSuspect}</span>
+          </li>
+          <li>
+            <div className="heading">रिहा / कुल वाद :</div>
+            <span>{item.freedTotal}</span>
+          </li>
+          <li>
+            <div className="heading">रिहा / कुल अभियुक्त :</div>
+            <span>{item.freedTotalSuspect}</span>
+          </li>
+          <li>
+            <div className="heading">सुलह :</div>
+            <span>{item.sorted}</span>
+          </li>
+          <li>
+            <div className="heading">सत्र सुपुर्द / कुल वाद :</div>
+            <span>{item.satraTotal}</span>
+          </li>
+          <li>
+            <div className="heading">सत्र सुपुर्द / कुल अभियुक्त :</div>
+            <span>{item.satraTotalSuspect}</span>
+          </li>
+          <li>
+            <div className="heading">उन्मोचित :</div>
+            <span>{item.discharged}</span>
+          </li>
+          <li>
+            <div className="heading">दाखिल दफ्तर :</div>
+            <span>{item.filed}</span>
+          </li>
+          <li>
+            <div className="heading">अवशेष :</div>
+            <span>{item.left}</span>
+          </li>
+        </ul>
+      </div>
+      <div className="btn-container">
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          disabled={item.approved}
+          onClick={() => approve("approve", item._id)}
+        >
+          Approve
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          color="secondary"
+          onClick={() => approve("delete", item._id)}
+        >
+          delete
+        </Button>
+      </div>
+    </Paper>
+  );
+};
 const CardComponent = ({ item }) => {
   const approve = (type, id) => {
     console.log(type, id);
