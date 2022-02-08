@@ -11,6 +11,7 @@ export default async function handler(req, res) {
     const user = await User.findOne({ username });
 
     //if the user doesnt exist in db
+
     if (!user) {
       return res.status(404).send("user does not exist");
     }

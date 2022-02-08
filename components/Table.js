@@ -190,7 +190,7 @@ export default function Table({ posts }) {
         "discharged"
       ),
       filed: myFilter(posts, "courtName", court, "suite", suite, "filed"),
-      left: myFilter(posts, "courtName", court, "suite", suite, "left"),
+      left: String(myFilter(posts, "courtName", court, "suite", suite, "left")),
       percentage:
         (
           (myFilter(posts, "courtName", court, "suite", suite, "punishment") /

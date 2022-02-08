@@ -21,6 +21,13 @@ import PromotionTable from "../components/tables/promotion";
 import PowerOneTable from "../components/tables/power-1";
 import PowerTwoTable from "../components/tables/power-2";
 
+//batch tables
+import BatchTableOne from "../components/tables/batch/table-1";
+import BatchTableTwo from "../components/tables/batch/table-2";
+import BatchTableThree from "../components/tables/batch/table-3";
+import BatchTableFour from "../components/tables/batch/table-4";
+import BatchTableFive from "../components/tables/batch/table-5";
+
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
   const router = useRouter();
@@ -35,6 +42,11 @@ export default function Admin({ token, posts, user }) {
     promotion: false,
     powerOne: false,
     powerTwo: false,
+    batchTableOne: false,
+    batchTableTwo: false,
+    batchTableThree: false,
+    batchTableFour: false,
+    batchTableFive: false,
   });
 
   const handleClick = (event) => {
@@ -117,6 +129,26 @@ export default function Admin({ token, posts, user }) {
           <MenuItem onClick={() => handleClose("powerTwo")}>
             (Form-7) मिशन शक्ति - शासकीय अधिवक्ता सेवा संवर्ग
           </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTableOne")}>
+            (Form-8) सत्र न्यायालयो में गिरोहबन्द अधिनियम के अन्तर्गत डी०जी०सी
+            संवर्ग द्वारा अभियोजित वादो का विवरण
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTableTwo")}>
+            (Form-9) सत्र न्यायालयो में एससीएसटी एक्ट के अन्तर्गत डी0जी0सी
+            संवर्ग द्वारा अभियोजित वादो का विवरण
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTableThree")}>
+            (Form-10) सत्र न्यायालयो में गिरोहबन्द अधिनियम के अन्तर्गत अभियोजन
+            संवर्ग द्वारा अभियोजित वादो का विवरण
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTableFour")}>
+            (Form-11) : सत्र न्यायालयो में भा0द0वि0 के अन्तर्गत डी०जी०सी संवर्ग
+            द्वारा अभियोजित वादो का विवरण
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTableFive")}>
+            (Form-12) सत्र न्यायालयो में अन्य अधिनियम के अन्तर्गत डी0जी0सी
+            संवर्ग द्वारा अभियोजित वादो का विवरण
+          </MenuItem>
 
           <MenuItem>
             <Link href="#">
@@ -169,6 +201,31 @@ export default function Admin({ token, posts, user }) {
         {state.powerTwo && (
           <PowerTwoTable
             posts={posts.filter((post) => post.formName == "power-2")}
+          />
+        )}
+        {state.batchTableOne && (
+          <BatchTableOne
+            posts={posts.filter((post) => post.formName == "batch-form-1")}
+          />
+        )}
+        {state.batchTableTwo && (
+          <BatchTableTwo
+            posts={posts.filter((post) => post.formName == "batch-form-2")}
+          />
+        )}
+        {state.batchTableThree && (
+          <BatchTableThree
+            posts={posts.filter((post) => post.formName == "batch-form-3")}
+          />
+        )}
+        {state.batchTableFour && (
+          <BatchTableFour
+            posts={posts.filter((post) => post.formName == "batch-form-4")}
+          />
+        )}
+        {state.batchTableFive && (
+          <BatchTableFive
+            posts={posts.filter((post) => post.formName == "batch-form-5")}
           />
         )}
       </div>
