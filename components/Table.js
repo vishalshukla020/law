@@ -290,9 +290,10 @@ export default function Table({ posts }) {
             "mafia"
           ),
         ]}
-        title=" प्रदेश में हुए अभियोजन कार्य दिनांक 01 जनवरी, 2020 से दिनांक 31
-              दिसंबर, 2020 तक"
+        title=" प्रदेश में हुए अभियोजन कार्य"
         options={{
+          filtering: true,
+
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,
           pageSize: 10,
