@@ -1,5 +1,6 @@
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
+import moment from "moment";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -78,6 +79,7 @@ export default function PensionTable({ posts }) {
             field: "processed",
           },
           { title: "मो0नंबर", field: "mobile" },
+          { title: "Date", field: "date" },
         ]}
         data={posts.map((post, index) => {
           return {
@@ -88,6 +90,7 @@ export default function PensionTable({ posts }) {
             gpf: post.gpf,
             processed: post.processed,
             mobile: post.mobile,
+            date: moment(post.date).format("ll"),
           };
         })}
         options={{

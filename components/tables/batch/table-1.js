@@ -1,5 +1,6 @@
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
+import moment from "moment";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -118,6 +119,10 @@ export default function BatchTableOne({ posts }) {
             title: "अवशेष",
             field: "left",
           },
+          {
+            title: "Date",
+            field: "date",
+          },
         ]}
         data={posts.map((post, index) => {
           return {
@@ -139,6 +144,7 @@ export default function BatchTableOne({ posts }) {
             discharged: post.discharged,
             filed: post.filed,
             left: post.left,
+            date: moment(post.date).format("ll"),
           };
         })}
         options={{

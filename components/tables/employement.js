@@ -1,5 +1,6 @@
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
+import moment from "moment";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -100,6 +101,10 @@ export default function EmployementTable({ posts }) {
             title: "विभागीय जाँच /अनुशासनिक कार्यवाही का विवरण यदि कोई हो।",
             field: "case",
           },
+          {
+            title: "Date",
+            field: "date",
+          },
         ]}
         data={posts.map((post, index) => {
           return {
@@ -115,6 +120,7 @@ export default function EmployementTable({ posts }) {
             twentySixthIncrement: post.twentySixthIncrement.substring(0, 10),
             latestDeployementDate: post.latestDeployementDate.substring(0, 10),
             case: post.case,
+            date: moment(post.date).format("ll"),
           };
         })}
         options={{

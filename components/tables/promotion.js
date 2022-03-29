@@ -1,5 +1,6 @@
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
+import moment from "moment";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -82,6 +83,10 @@ export default function PromotionTable({ posts }) {
             title: "अभ्युक्ती",
             field: "remark",
           },
+          {
+            title: "Date",
+            field: "date",
+          },
         ]}
         data={posts.map((post, index) => {
           return {
@@ -94,6 +99,7 @@ export default function PromotionTable({ posts }) {
             dipiction: post.dipiction,
             dateOfDeployement: post.dateOfDeployment.substring(0, 10),
             remark: post.remark,
+            date: moment(post.date).format("ll"),
           };
         })}
         options={{

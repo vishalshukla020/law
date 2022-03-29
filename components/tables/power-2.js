@@ -1,5 +1,6 @@
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
+import moment from "moment";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -80,6 +81,10 @@ export default function PensionTable({ posts }) {
             title: "सज़ा",
             field: "punishment",
           },
+          {
+            title: "Date",
+            field: "date",
+          },
         ]}
         data={posts.map((post, index) => {
           return {
@@ -92,6 +97,7 @@ export default function PensionTable({ posts }) {
             policeStation: post.policeStation,
             versus: post.versus,
             punishment: post.punishment,
+            date: moment(post.date).format("ll"),
           };
         })}
         options={{

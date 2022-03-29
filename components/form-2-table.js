@@ -1,4 +1,5 @@
 import MaterialTable from "material-table";
+import moment from "moment";
 import { forwardRef } from "react";
 
 import AddBox from "@material-ui/icons/AddBox";
@@ -66,6 +67,10 @@ export default function FormTwoTable({ posts }) {
             title: "अभ्युक्ति (लंबित बिल/अति० व्यय का विवरण)",
             field: "remark",
           },
+          {
+            title: "Date",
+            field: "date",
+          },
         ]}
         data={posts.map((post, index) => {
           return {
@@ -79,6 +84,7 @@ export default function FormTwoTable({ posts }) {
               parseInt(post.expenditureSoFar),
             excessDemand: post.excessDemand,
             remark: post.remark,
+            date: moment(post.date).format("ll"),
           };
         })}
         options={{
