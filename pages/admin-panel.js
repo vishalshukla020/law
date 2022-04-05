@@ -28,6 +28,10 @@ import BatchTableThree from "../components/tables/batch/table-3";
 import BatchTableFour from "../components/tables/batch/table-4";
 import BatchTableFive from "../components/tables/batch/table-5";
 
+//batchTableTwo
+import BatchTwoTableOne from "../components/tables/batchtwo/table-1";
+import BatchTwoTableTwo from "../components/tables/batchtwo/table-2";
+
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
   const router = useRouter();
@@ -47,6 +51,8 @@ export default function Admin({ token, posts, user }) {
     batchTableThree: false,
     batchTableFour: false,
     batchTableFive: false,
+    batchTwoTableOne: false,
+    batchTwoTableTwo: false,
   });
 
   const handleClick = (event) => {
@@ -78,7 +84,7 @@ export default function Admin({ token, posts, user }) {
       </div>
     );
   }
-
+  console.log(posts);
   return (
     <section id="page">
       <NavBar username={context.user?.name} role={context.user?.role} />
@@ -149,21 +155,14 @@ export default function Admin({ token, posts, user }) {
             (Form-12) सत्र न्यायालयो में अन्य अधिनियम के अन्तर्गत डी0जी0सी
             संवर्ग द्वारा अभियोजित वादो का विवरण
           </MenuItem>
-
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-8)</a>
-            </Link>
+          <MenuItem onClick={() => handleClose("batchTwoTableOne")}>
+            (Form-13) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
+            वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-9)</a>
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link href="#">
-              <a href="">(Form-10)</a>
-            </Link>
+          <MenuItem onClick={() => handleClose("batchTwoTableTwo")}>
+            (Form-14) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम
+            व आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा निर्णीत
+            वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
         </Menu>
       </div>
@@ -226,6 +225,16 @@ export default function Admin({ token, posts, user }) {
         {state.batchTableFive && (
           <BatchTableFive
             posts={posts.filter((post) => post.formName == "batch-form-5")}
+          />
+        )}
+        {state.batchTwoTableOne && (
+          <BatchTwoTableOne
+            posts={posts.filter((post) => post.formName == "batchTwoForm-1")}
+          />
+        )}
+        {state.batchTwoTableTwo && (
+          <BatchTwoTableTwo
+            posts={posts.filter((post) => post.formName == "batchTwoForm-2")}
           />
         )}
       </div>

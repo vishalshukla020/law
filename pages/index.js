@@ -25,6 +25,10 @@ import BatchFormThree from "../components/forms/batch/form-3";
 import BatchFormFour from "../components/forms/batch/form-4";
 import BatchFormFive from "../components/forms/batch/form-5";
 
+//batch from total of two
+import BatchTwoFormOne from "../components/forms/batchtwo/form-1";
+import BatchTwoFormTwo from "../components/forms/batchtwo/form-2";
+
 export default function Home({ token }) {
   const context = useContext(AuthContext);
   const router = useRouter();
@@ -43,6 +47,8 @@ export default function Home({ token }) {
     batchFormThree: false,
     batchFormFour: false,
     batchFormFive: false,
+    batchTwoFormOne: false,
+    batchTwoFormTwo: false,
   });
 
   const handleClick = (event) => {
@@ -134,6 +140,15 @@ export default function Home({ token }) {
             (Form-11) : सत्र न्यायालयो में अन्य अधिनियम के अन्तर्गत डी0जी0सी
             संवर्ग द्वारा अभियोजित वादो का विवरण
           </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTwoFormOne")}>
+            (Form-12) : पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
+            वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTwoFormTwo")}>
+            (Form-13) : विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध
+            अधिनियम व आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा
+            निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
         </Menu>
       </div>
       {state.prosecution && <Prosecution />}
@@ -148,6 +163,8 @@ export default function Home({ token }) {
       {state.batchFormThree && <BatchFormThree />}
       {state.batchFormFour && <BatchFormFour />}
       {state.batchFormFive && <BatchFormFive />}
+      {state.batchTwoFormOne && <BatchTwoFormOne />}
+      {state.batchTwoFormTwo && <BatchTwoFormTwo />}
     </section>
   );
 }

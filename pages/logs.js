@@ -61,7 +61,7 @@ export default function Logs({ token, posts, user }) {
                   </li>
                   <li>
                     <div className="heading">Date: </div>
-                    <span>{post.date.substring(0, 10)}</span>
+                    <span>{moment(post.date).format("ll")}</span>
                   </li>
                 </ul>
               </Paper>
