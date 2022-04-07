@@ -46,14 +46,15 @@ const percentage = (num1, num2) => {
   return (num1 * 100) / num2;
 };
 
-export default function BatchTwoTableOne({ posts }) {
-  // console.log(posts);
+export default function BatchTwoTableThree({ posts }) {
+  console.log(posts);
   return (
     <div style={{ maxWidth: "100%" }}>
       <MaterialTable
         icons={tableIcons}
-        title="पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने वाले
-                  तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र"
+        title="माफियाओं, गैंगस्टर, गुण्डों एवं जनपदों व थानों के टॉप-10 व
+                    STF/ATS के अपराधियों के विरूद्ध माह में विचारण प्रारम्भ किये
+                    जाने वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र"
         columns={[
           {
             title: "जनपद",
@@ -109,6 +110,10 @@ export default function BatchTwoTableOne({ posts }) {
             field: "timeTaken",
           },
           {
+            title: "सजा की अवधि",
+            field: "punishmentTime",
+          },
+          {
             title: "सजा का प्रतिशत",
             field: "punishedPercentage",
           },
@@ -124,7 +129,7 @@ export default function BatchTwoTableOne({ posts }) {
             district: post.courtName,
             officerName: post.officerName,
             prosecutor: post.prosecutor,
-            dicriminantName: post.dicriminantName,
+            discriminantName: post.discriminantName,
             policeStation: post.policeStation,
             satraSankhya: post.satraSankhya,
             act: post.act,
@@ -133,10 +138,12 @@ export default function BatchTwoTableOne({ posts }) {
             punished: post.punished,
             freed: post.freed,
             timeTaken: post.timeTaken,
+            punishmentTime: post.punishmentTime,
             punishedPercentage: `${percentage(
               post.punished,
               post.totalCases
             ).toFixed(2)} %`,
+
             date: moment(post.date).format("ll"),
           };
         })}

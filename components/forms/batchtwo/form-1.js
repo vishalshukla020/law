@@ -113,7 +113,9 @@ export default function BatchTwoFormOne() {
               username: context.user?.name,
               userId: context.user?.id,
               courtName: "",
+              district: "",
               officerName: "",
+              discriminantName: "",
               prosecutor: "",
               policeStation: "",
               satraSankhya: "",
@@ -123,13 +125,14 @@ export default function BatchTwoFormOne() {
               punished: "",
               freed: "",
               timeTaken: "",
-              punishedPercentage: "",
             }}
             validationSchema={Yup.object({
               courtName: Yup.string().required("required field"),
+              district: Yup.string().required("required field"),
 
               officerName: Yup.string().required("required field"),
               prosecutor: Yup.string().required("required field"),
+              discriminantName: Yup.string().required("required field"),
               policeStation: Yup.string().required("required field"),
               satraSankhya: Yup.number()
                 .required("required field")
@@ -148,9 +151,6 @@ export default function BatchTwoFormOne() {
                 .required("required field")
                 .typeError("Should be a number"),
               timeTaken: Yup.number()
-                .required("required field")
-                .typeError("Should be a number"),
-              punishedPercentage: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
             })}
@@ -188,6 +188,15 @@ export default function BatchTwoFormOne() {
                   <div className="form-block">
                     <Field
                       fullWidth
+                      name="district"
+                      label="जनपद"
+                      component={TextField}
+                      variant="outlined"
+                    />
+                  </div>
+                  <div className="form-block">
+                    <Field
+                      fullWidth
                       name="courtName"
                       label="न्यायालय का नाम"
                       component={TextField}
@@ -211,7 +220,15 @@ export default function BatchTwoFormOne() {
                       component={TextField}
                       variant="outlined"
                     />
-
+                    <Field
+                      fullWidth
+                      name="discriminantName"
+                      label="विवेचक का नाम"
+                      component={TextField}
+                      variant="outlined"
+                    />
+                  </div>
+                  <div className="form-block">
                     <Field
                       fullWidth
                       name="policeStation"
@@ -281,15 +298,6 @@ export default function BatchTwoFormOne() {
                           fullWidth
                           name="timeTaken"
                           label="आरोप विरचन से निर्णय तक अवधि"
-                          component={TextField}
-                          variant="outlined"
-                        />
-                      </div>
-                      <div className="form-block">
-                        <Field
-                          fullWidth
-                          name="punishedPercentage"
-                          label="सजा का प्रतिशत"
                           component={TextField}
                           variant="outlined"
                         />

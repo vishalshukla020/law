@@ -42,6 +42,10 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
+const percentage = (num1, num2) => {
+  return (num1 * 100) / num2;
+};
+
 export default function BatchTwoTableTwo({ posts }) {
   console.log(posts);
   return (
@@ -53,6 +57,10 @@ export default function BatchTwoTableTwo({ posts }) {
                     निर्णीत वादों सम्बन्धी मासिक विवरण पत्र"
         columns={[
           {
+            title: "जनपद",
+            field: "district",
+          },
+          {
             title: "न्यायालय का नाम",
             field: "courtName",
           },
@@ -63,6 +71,10 @@ export default function BatchTwoTableTwo({ posts }) {
           {
             title: "अभियोजक का नाम",
             field: "prosecutor",
+          },
+          {
+            title: "विवेचक का नाम",
+            field: "discriminantName",
           },
           {
             title: "थाना",
@@ -99,7 +111,7 @@ export default function BatchTwoTableTwo({ posts }) {
           },
           {
             title: "सजा का प्रतिशत",
-            field: "punishedTotal",
+            field: "punishedPercentage",
           },
           {
             title: "Date",
@@ -110,8 +122,10 @@ export default function BatchTwoTableTwo({ posts }) {
           return {
             serial: index + 1,
             courtName: post.courtName,
+            district: post.district,
             officerName: post.officerName,
             prosecutor: post.prosecutor,
+            discriminantName: post.discriminantName,
             policeStation: post.policeStation,
             satraSankhya: post.satraSankhya,
             act: post.act,
@@ -120,7 +134,11 @@ export default function BatchTwoTableTwo({ posts }) {
             punished: post.punished,
             freed: post.freed,
             timeTaken: post.timeTaken,
-            punishedPercentage: post.punishedPercentage,
+            punishedPercentage: `${percentage(
+              post.punished,
+              post.totalCases
+            ).toFixed(2)} %`,
+
             date: moment(post.date).format("ll"),
           };
         })}

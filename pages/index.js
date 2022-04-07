@@ -28,6 +28,7 @@ import BatchFormFive from "../components/forms/batch/form-5";
 //batch from total of two
 import BatchTwoFormOne from "../components/forms/batchtwo/form-1";
 import BatchTwoFormTwo from "../components/forms/batchtwo/form-2";
+import BatchTwoFormThree from "../components/forms/batchtwo/form-3";
 
 export default function Home({ token }) {
   const context = useContext(AuthContext);
@@ -49,6 +50,7 @@ export default function Home({ token }) {
     batchFormFive: false,
     batchTwoFormOne: false,
     batchTwoFormTwo: false,
+    batchTwoFormThree: false,
   });
 
   const handleClick = (event) => {
@@ -149,6 +151,11 @@ export default function Home({ token }) {
             अधिनियम व आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा
             निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTwoFormThree")}>
+            (Form-14) : माफियाओं, गैंगस्टर, गुण्डों एवं जनपदों व थानों के टॉप-10
+            व STF/ATS के अपराधियों के विरूद्ध माह में विचारण प्रारम्भ किये जाने
+            वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
         </Menu>
       </div>
       {state.prosecution && <Prosecution />}
@@ -165,6 +172,7 @@ export default function Home({ token }) {
       {state.batchFormFive && <BatchFormFive />}
       {state.batchTwoFormOne && <BatchTwoFormOne />}
       {state.batchTwoFormTwo && <BatchTwoFormTwo />}
+      {state.batchTwoFormThree && <BatchTwoFormThree />}
     </section>
   );
 }

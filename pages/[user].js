@@ -113,7 +113,7 @@ export default function User({ token, data }) {
         {data
           .filter((post) => post.formName == "batchTwoForm-1")
           .map((item) => (
-            <BatchComponent
+            <BatchTwoComponent
               item={item}
               name="पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने वाले
                   तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र"
@@ -123,11 +123,22 @@ export default function User({ token, data }) {
         {data
           .filter((post) => post.formName == "batchTwoForm-2")
           .map((item) => (
-            <BatchComponent
+            <BatchTwoComponent
               item={item}
               name="विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम व
                     आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा
                     निर्णीत वादों सम्बन्धी मासिक विवरण पत्र"
+              key={item._id}
+            />
+          ))}
+        {data
+          .filter((post) => post.formName == "batchTwoForm-3")
+          .map((item) => (
+            <BatchTwoComponentExtra
+              item={item}
+              name="माफियाओं, गैंगस्टर, गुण्डों एवं जनपदों व थानों के टॉप-10 व
+                    STF/ATS के अपराधियों के विरूद्ध माह में विचारण प्रारम्भ किये
+                    जाने वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र"
               key={item._id}
             />
           ))}
@@ -348,6 +359,103 @@ const BatchTwoComponent = ({ item, name }) => {
     </Paper>
   );
 };
+const BatchTwoComponentExtra = ({ item, name }) => {
+  const approve = (type, id) => {
+    console.log(type, id);
+    axios
+      .post("api/users/approve", { type, id })
+      .then((res) => {
+        if (res.status == 200) {
+          alert("request submitted");
+          location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(error.message);
+        console.error(err);
+      });
+  };
+  return (
+    <Paper className="user-data">
+      <div className="wrapper row">
+        <ul>
+          <li>
+            <div className="heading">Form : </div>
+            <span>{name}</span>
+          </li>
+          <li>
+            <div className="heading">न्यायालय का नाम :</div>
+            <span>{item.courtName}</span>
+          </li>
+          <li>
+            <div className="heading">पीठासीन अधिकारी का नाम :</div>
+            <span>{item.officerName}</span>
+          </li>
+          <li>
+            <div className="heading">अभियोजक का नाम :</div>
+            <span>{item.prosecutor}</span>
+          </li>
+          <li>
+            <div className="heading">थाना :</div>
+            <span>{item.policeStation}</span>
+          </li>
+          <li>
+            <div className="heading">अ0सं0 / सत्र विचारण सं0 :</div>
+            <span>{item.satraSankhya}</span>
+          </li>
+          <li>
+            <div className="heading">धारा :</div>
+            <span>{item.act}</span>
+          </li>
+          <li>
+            <div className="heading">आरोप विरचित किये जाने का दिनांक :</div>
+            <span>{item.dated}</span>
+          </li>
+          <li>
+            <div className="heading">कुल निर्णीत वाद :</div>
+            <span>{item.totalCases}</span>
+          </li>
+          <li>
+            <div className="heading">सजा :</div>
+            <span>{item.punished}</span>
+          </li>
+          <li>
+            <div className="heading">आरोप विरचन से निर्णय तक अवधि :</div>
+            <span>{item.timeTaken}</span>
+          </li>
+          <li>
+            <div className="heading">सजा की अवधि :</div>
+            <span>{item.punishmentTime}</span>
+          </li>
+          <li>
+            <div className="heading">सजा का प्रतिशत :</div>
+            <span>{item.punishedPercentage}</span>
+          </li>
+        </ul>
+      </div>
+      <div className="btn-container">
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          disabled={item.approved}
+          onClick={() => approve("approve", item._id)}
+        >
+          Approve
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          color="secondary"
+          onClick={() => approve("delete", item._id)}
+        >
+          delete
+        </Button>
+      </div>
+    </Paper>
+  );
+};
+
 const CardComponent = ({ item }) => {
   const approve = (type, id) => {
     console.log(type, id);

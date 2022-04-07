@@ -98,7 +98,7 @@ const district = [
   "Varanasi",
 ];
 
-export default function BatchTwoFormTwo() {
+export default function BatchTwoFormThree() {
   const context = useContext(AuthContext);
   const [submitting, setSubmitting] = useState(false);
 
@@ -109,7 +109,7 @@ export default function BatchTwoFormTwo() {
           <Formik
             enableReinitialize
             initialValues={{
-              formName: "batchTwoForm-1",
+              formName: "batchTwoForm-3",
               username: context.user?.name,
               userId: context.user?.id,
               courtName: "",
@@ -123,6 +123,7 @@ export default function BatchTwoFormTwo() {
               dated: "",
               totalCases: "",
               punished: "",
+              punishmentTime: "",
               freed: "",
               timeTaken: "",
             }}
@@ -131,8 +132,8 @@ export default function BatchTwoFormTwo() {
               district: Yup.string().required("required field"),
 
               officerName: Yup.string().required("required field"),
-              discriminantName: Yup.string().required("required field"),
               prosecutor: Yup.string().required("required field"),
+              discriminantName: Yup.string().required("required field"),
               policeStation: Yup.string().required("required field"),
               satraSankhya: Yup.number()
                 .required("required field")
@@ -145,6 +146,9 @@ export default function BatchTwoFormTwo() {
                 .required("required field")
                 .typeError("Should be a number"),
               punished: Yup.number()
+                .required("required field")
+                .typeError("Should be a number"),
+              punishmentTime: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
               freed: Yup.number()
@@ -182,9 +186,9 @@ export default function BatchTwoFormTwo() {
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Form autoComplete="off">
                   <Typography variant="h6" className="form-heading">
-                    विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम व
-                    आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा
-                    निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+                    माफियाओं, गैंगस्टर, गुण्डों एवं जनपदों व थानों के टॉप-10 व
+                    STF/ATS के अपराधियों के विरूद्ध माह में विचारण प्रारम्भ किये
+                    जाने वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
                   </Typography>
                   <div className="form-block">
                     <Field
@@ -221,11 +225,19 @@ export default function BatchTwoFormTwo() {
                       component={TextField}
                       variant="outlined"
                     />
-
                     <Field
                       fullWidth
                       name="discriminantName"
                       label="विवेचक का नाम"
+                      component={TextField}
+                      variant="outlined"
+                    />
+                  </div>
+                  <div className="form-block">
+                    <Field
+                      fullWidth
+                      name="policeStation"
+                      label="थाना"
                       component={TextField}
                       variant="outlined"
                     />
@@ -235,20 +247,11 @@ export default function BatchTwoFormTwo() {
                     <div className="form-block flex">
                       <Field
                         fullWidth
-                        name="policeStation"
-                        label="थाना"
-                        component={TextField}
-                        variant="outlined"
-                      />
-                      <Field
-                        fullWidth
                         name="satraSankhya"
                         label="अ0सं0 / सत्र विचारण सं0"
                         component={TextField}
                         variant="outlined"
                       />
-                    </div>
-                    <div className="form-block flex">
                       <Field
                         fullWidth
                         name="act"
@@ -300,6 +303,15 @@ export default function BatchTwoFormTwo() {
                           fullWidth
                           name="timeTaken"
                           label="आरोप विरचन से निर्णय तक अवधि"
+                          component={TextField}
+                          variant="outlined"
+                        />
+                      </div>
+                      <div className="form-block">
+                        <Field
+                          fullWidth
+                          name="punishmentTime"
+                          label="सजा की अवधि"
                           component={TextField}
                           variant="outlined"
                         />

@@ -31,6 +31,7 @@ import BatchTableFive from "../components/tables/batch/table-5";
 //batchTableTwo
 import BatchTwoTableOne from "../components/tables/batchtwo/table-1";
 import BatchTwoTableTwo from "../components/tables/batchtwo/table-2";
+import BatchTwoTableThree from "../components/tables/batchtwo/table-3";
 
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
@@ -53,6 +54,7 @@ export default function Admin({ token, posts, user }) {
     batchTableFive: false,
     batchTwoTableOne: false,
     batchTwoTableTwo: false,
+    batchTwoTableThree: false,
   });
 
   const handleClick = (event) => {
@@ -164,6 +166,11 @@ export default function Admin({ token, posts, user }) {
             व आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा निर्णीत
             वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTwoTableThree")}>
+            (Form-15) माफियाओं, गैंगस्टर, गुण्डों एवं जनपदों व थानों के टॉप-10 व
+            STF/ATS के अपराधियों के विरूद्ध माह में विचारण प्रारम्भ किये जाने
+            वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
         </Menu>
       </div>
       <div className="containerTable">
@@ -235,6 +242,11 @@ export default function Admin({ token, posts, user }) {
         {state.batchTwoTableTwo && (
           <BatchTwoTableTwo
             posts={posts.filter((post) => post.formName == "batchTwoForm-2")}
+          />
+        )}
+        {state.batchTwoTableThree && (
+          <BatchTwoTableThree
+            posts={posts.filter((post) => post.formName == "batchTwoForm-3")}
           />
         )}
       </div>
