@@ -31,6 +31,7 @@ import BatchTwoFormTwo from "../components/forms/batchtwo/form-2";
 import BatchTwoFormThree from "../components/forms/batchtwo/form-3";
 import BatchTwoFormFour from "../components/forms/batchtwo/form-4";
 import BatchTwoFormFive from "../components/forms/batchtwo/form-5";
+import BatchTwoFormSix from "../components/forms/batchtwo/form-6";
 
 export default function Home({ token }) {
   const context = useContext(AuthContext);
@@ -55,6 +56,7 @@ export default function Home({ token }) {
     batchTwoFormThree: false,
     BatchTwoFormFour: false,
     BatchTwoFormFive: false,
+    BatchTwoFormSix: false,
   });
 
   const handleClick = (event) => {
@@ -172,6 +174,10 @@ export default function Home({ token }) {
             विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
             पत्र
           </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTwoFormSix")}>
+            (Form-17) : महिलाओं के विरुद्ध लैंगिक/बलात्कार/ गम्भीर अपराधों से
+            सम्बन्धित विवरण पत्र
+          </MenuItem>
         </Menu>
       </div>
       {state.prosecution && <Prosecution />}
@@ -191,6 +197,7 @@ export default function Home({ token }) {
       {state.batchTwoFormThree && <BatchTwoFormThree />}
       {state.batchTwoFormFour && <BatchTwoFormFour />}
       {state.batchTwoFormFive && <BatchTwoFormFive />}
+      {state.batchTwoFormSix && <BatchTwoFormSix />}
     </section>
   );
 }

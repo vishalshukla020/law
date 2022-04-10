@@ -47,7 +47,6 @@ const percentage = (num1, num2) => {
 };
 
 export default function batchTwoTableFive({ posts }) {
-  console.log(posts);
   return (
     <div style={{ maxWidth: "100%" }}>
       <MaterialTable
@@ -199,3 +198,19 @@ export default function batchTwoTableFive({ posts }) {
     </div>
   );
 }
+
+const GROUPED_HEADER = [
+  {
+    title: "क्र०सं0",
+    field: "serial",
+  },
+  {
+    title: "जनपद",
+    columns: [
+      {
+        title: "क्र०सं0",
+        field: "serial",
+      },
+    ],
+  },
+];
