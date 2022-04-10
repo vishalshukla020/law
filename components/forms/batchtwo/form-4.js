@@ -98,7 +98,7 @@ const district = [
   "Varanasi",
 ];
 
-export default function BatchTwoFormTwo() {
+export default function BatchTwoFormFour() {
   const context = useContext(AuthContext);
   const [submitting, setSubmitting] = useState(false);
 
@@ -109,7 +109,7 @@ export default function BatchTwoFormTwo() {
           <Formik
             enableReinitialize
             initialValues={{
-              formName: "batchTwoForm-1",
+              formName: "batchTwoForm-4",
               username: context.user?.name,
               userId: context.user?.id,
               courtName: "",
@@ -126,6 +126,7 @@ export default function BatchTwoFormTwo() {
               freed: "",
               timeTaken: "",
               punishmentTime: "",
+              satraSupurd: "",
             }}
             validationSchema={Yup.object({
               courtName: Yup.string().required("required field"),
@@ -157,6 +158,9 @@ export default function BatchTwoFormTwo() {
               timeTaken: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
+              satraSupurd: Yup.number()
+                .required("required field")
+                .typeError("Should be a number"),
             })}
             onSubmit={(values, actions) => {
               setSubmitting(true);
@@ -186,9 +190,10 @@ export default function BatchTwoFormTwo() {
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Form autoComplete="off">
                   <Typography variant="h6" className="form-heading">
-                    विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम व
-                    आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा
-                    निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+                    विशष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब से
+                    सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
+                    विधारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण
+                    पत्र
                   </Typography>
                   <div className="form-block">
                     <Field
@@ -313,6 +318,15 @@ export default function BatchTwoFormTwo() {
                           fullWidth
                           name="punishmentTime"
                           label="सजा की अवधि"
+                          component={TextField}
+                          variant="outlined"
+                        />
+                      </div>
+                      <div className="form-block">
+                        <Field
+                          fullWidth
+                          name="satraSupurd"
+                          label="सत्र सुपुर्द"
                           component={TextField}
                           variant="outlined"
                         />

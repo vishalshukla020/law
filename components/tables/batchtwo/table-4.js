@@ -46,15 +46,16 @@ const percentage = (num1, num2) => {
   return (num1 * 100) / num2;
 };
 
-export default function BatchTwoTableTwo({ posts }) {
+export default function BatchTwoTableThree({ posts }) {
   console.log(posts);
   return (
     <div style={{ maxWidth: "100%" }}>
       <MaterialTable
         icons={tableIcons}
-        title="विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम व
-                    आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा
-                    निर्णीत वादों सम्बन्धी मासिक विवरण पत्र"
+        title="विशष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब से
+                    सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
+                    विधारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण
+                    पत्र"
         columns={[
           {
             title: "जनपद",
@@ -102,10 +103,6 @@ export default function BatchTwoTableTwo({ posts }) {
             field: "punished",
           },
           {
-            title: "सजा की अवधि",
-            field: "punishmentTime",
-          },
-          {
             title: "रिहा",
             field: "freed",
           },
@@ -114,8 +111,16 @@ export default function BatchTwoTableTwo({ posts }) {
             field: "timeTaken",
           },
           {
+            title: "सजा की अवधि",
+            field: "punishmentTime",
+          },
+          {
             title: "सजा का प्रतिशत",
             field: "punishedPercentage",
+          },
+          {
+            title: "सत्र सुपुर्द",
+            field: "satraSupurd",
           },
           {
             title: "Date",
@@ -126,7 +131,7 @@ export default function BatchTwoTableTwo({ posts }) {
           return {
             serial: index + 1,
             courtName: post.courtName,
-            district: post.district,
+            district: post.courtName,
             officerName: post.officerName,
             prosecutor: post.prosecutor,
             discriminantName: post.discriminantName,
@@ -136,9 +141,10 @@ export default function BatchTwoTableTwo({ posts }) {
             dated: moment(post.dated).format("ll"),
             totalCases: post.totalCases,
             punished: post.punished,
-            punishmentTime: post.punishmentTime,
             freed: post.freed,
             timeTaken: post.timeTaken,
+            punishmentTime: post.punishmentTime,
+            satraSupurd: post.satraSupurd,
             punishedPercentage: `${percentage(
               post.punished,
               post.totalCases

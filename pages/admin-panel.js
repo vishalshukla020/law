@@ -32,6 +32,8 @@ import BatchTableFive from "../components/tables/batch/table-5";
 import BatchTwoTableOne from "../components/tables/batchtwo/table-1";
 import BatchTwoTableTwo from "../components/tables/batchtwo/table-2";
 import BatchTwoTableThree from "../components/tables/batchtwo/table-3";
+import BatchTwoTableFour from "../components/tables/batchtwo/table-4";
+import BatchTwoTableFive from "../components/tables/batchtwo/table-5";
 
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
@@ -55,6 +57,8 @@ export default function Admin({ token, posts, user }) {
     batchTwoTableOne: false,
     batchTwoTableTwo: false,
     batchTwoTableThree: false,
+    batchTwoTableFour: false,
+    batchTwoTableFive: false,
   });
 
   const handleClick = (event) => {
@@ -110,7 +114,9 @@ export default function Admin({ token, posts, user }) {
           onClose={handleClose}
           style={{
             marginLeft: "55%",
+            marginBottom: "5rem",
             transform: "translate(-50%,45px)",
+            width: "80%",
           }}
         >
           <MenuItem onClick={() => handleClose("prosecution")}>
@@ -170,6 +176,16 @@ export default function Admin({ token, posts, user }) {
             (Form-15) माफियाओं, गैंगस्टर, गुण्डों एवं जनपदों व थानों के टॉप-10 व
             STF/ATS के अपराधियों के विरूद्ध माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTwoTableFour")}>
+            (Form-16) विशष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब से
+            सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के विधारण
+            प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTwoTableFive")}>
+            (Form-17) प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
+            विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
+            पत्र
           </MenuItem>
         </Menu>
       </div>
@@ -247,6 +263,16 @@ export default function Admin({ token, posts, user }) {
         {state.batchTwoTableThree && (
           <BatchTwoTableThree
             posts={posts.filter((post) => post.formName == "batchTwoForm-3")}
+          />
+        )}
+        {state.batchTwoTableFour && (
+          <BatchTwoTableFour
+            posts={posts.filter((post) => post.formName == "batchTwoForm-4")}
+          />
+        )}
+        {state.batchTwoTableFive && (
+          <BatchTwoTableFive
+            posts={posts.filter((post) => post.formName == "batchTwoForm-5")}
           />
         )}
       </div>

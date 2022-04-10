@@ -29,6 +29,8 @@ import BatchFormFive from "../components/forms/batch/form-5";
 import BatchTwoFormOne from "../components/forms/batchtwo/form-1";
 import BatchTwoFormTwo from "../components/forms/batchtwo/form-2";
 import BatchTwoFormThree from "../components/forms/batchtwo/form-3";
+import BatchTwoFormFour from "../components/forms/batchtwo/form-4";
+import BatchTwoFormFive from "../components/forms/batchtwo/form-5";
 
 export default function Home({ token }) {
   const context = useContext(AuthContext);
@@ -51,6 +53,8 @@ export default function Home({ token }) {
     batchTwoFormOne: false,
     batchTwoFormTwo: false,
     batchTwoFormThree: false,
+    BatchTwoFormFour: false,
+    BatchTwoFormFive: false,
   });
 
   const handleClick = (event) => {
@@ -95,7 +99,9 @@ export default function Home({ token }) {
           onClose={handleClose}
           style={{
             marginLeft: "55%",
+            marginBottom: "5rem",
             transform: "translate(-50%,45px)",
+            width: "80%",
           }}
         >
           <MenuItem onClick={() => handleClose("prosecution")}>
@@ -156,6 +162,16 @@ export default function Home({ token }) {
             व STF/ATS के अपराधियों के विरूद्ध माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTwoFormFour")}>
+            (Form-15) : विशष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब
+            से सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
+            विधारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("batchTwoFormFive")}>
+            (Form-16) : प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
+            विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
+            पत्र
+          </MenuItem>
         </Menu>
       </div>
       {state.prosecution && <Prosecution />}
@@ -173,6 +189,8 @@ export default function Home({ token }) {
       {state.batchTwoFormOne && <BatchTwoFormOne />}
       {state.batchTwoFormTwo && <BatchTwoFormTwo />}
       {state.batchTwoFormThree && <BatchTwoFormThree />}
+      {state.batchTwoFormFour && <BatchTwoFormFour />}
+      {state.batchTwoFormFive && <BatchTwoFormFive />}
     </section>
   );
 }

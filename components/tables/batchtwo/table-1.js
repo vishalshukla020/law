@@ -101,6 +101,10 @@ export default function BatchTwoTableOne({ posts }) {
             field: "punished",
           },
           {
+            title: "सजा की अवधि",
+            field: "punishmentTime",
+          },
+          {
             title: "रिहा",
             field: "freed",
           },
@@ -131,6 +135,7 @@ export default function BatchTwoTableOne({ posts }) {
             dated: moment(post.dated).format("ll"),
             totalCases: post.totalCases,
             punished: post.punished,
+            punishmentTime: post.punishmentTime,
             freed: post.freed,
             timeTaken: post.timeTaken,
             punishedPercentage: `${percentage(

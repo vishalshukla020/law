@@ -46,16 +46,20 @@ const percentage = (num1, num2) => {
   return (num1 * 100) / num2;
 };
 
-export default function BatchTwoTableTwo({ posts }) {
+export default function batchTwoTableFive({ posts }) {
   console.log(posts);
   return (
     <div style={{ maxWidth: "100%" }}>
       <MaterialTable
         icons={tableIcons}
-        title="विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम व
-                    आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा
-                    निर्णीत वादों सम्बन्धी मासिक विवरण पत्र"
+        title="प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
+            विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
+            पत्र"
         columns={[
+          {
+            title: "क्र०सं0",
+            field: "serial",
+          },
           {
             title: "जनपद",
             field: "district",
@@ -65,20 +69,19 @@ export default function BatchTwoTableTwo({ posts }) {
             field: "courtName",
           },
           {
-            title: "पीठासीन अधिकारी का नाम",
-            field: "officerName",
+            title: "चिन्हित माफिया अपराधी का नाम",
+            field: "criminalName",
           },
           {
             title: "अभियोजक का नाम",
             field: "prosecutor",
           },
           {
-            title: "विवेचक का नाम",
-            field: "discriminantName",
-          },
-          {
             title: "थाना",
             field: "policeStation",
+          },
+          {
+            title: "गिरोहबन्द अधिनियम",
           },
           {
             title: "अ0सं0 / सत्र विचारण सं0",
@@ -94,28 +97,61 @@ export default function BatchTwoTableTwo({ posts }) {
             field: "dated",
           },
           {
+            title: "लाइसेन्स  निरस्तीकरण",
+            field: "liscenseTermination",
+          },
+          {
+            title:
+              "धारा 14 (1) के अन्तर्गत कुर्क तथा जब्तीकरण,ध्वस्ती करण एवं अवमुक्त सम्पति का मूल्य",
+            field: "propertyValue",
+          },
+          {
+            title: "माह में निर्णीत वादों का विवरण",
+          },
+          {
             title: "कुल निर्णीत वाद",
-            field: "totalCases",
+          },
+          {
+            title: "गिरोहबन्द",
+            field: "totalGiroh",
+          },
+          {
+            title: "भा0द0वि0",
+            field: "totalBhav",
           },
           {
             title: "सजा",
-            field: "punished",
+          },
+          {
+            title: "गिरोहबन्द",
+            field: "punishGiroh",
+          },
+          {
+            title: "भा0द0वि0",
+            field: "punishBhav",
+          },
+          {
+            title: "रिहा",
+          },
+          {
+            title: "गिरोहबन्द",
+            field: "freedGiroh",
+          },
+          {
+            title: "भा0द0वि0",
+            field: "freedBhav",
+          },
+          {
+            title: "आरोप विरचन से निर्णय अवधि",
+            field: "timeTaken",
           },
           {
             title: "सजा की अवधि",
             field: "punishmentTime",
           },
           {
-            title: "रिहा",
-            field: "freed",
-          },
-          {
-            title: "आरोप विरचन से निर्णय तक अवधि",
-            field: "timeTaken",
-          },
-          {
-            title: "सजा का प्रतिशत",
-            field: "punishedPercentage",
+            title: "सजा का  प्रतिशत",
+            field: "punishmentPercentage",
           },
           {
             title: "Date",
@@ -126,22 +162,27 @@ export default function BatchTwoTableTwo({ posts }) {
           return {
             serial: index + 1,
             courtName: post.courtName,
-            district: post.district,
-            officerName: post.officerName,
+            district: post.courtName,
+            criminalName: post.criminalName,
             prosecutor: post.prosecutor,
-            discriminantName: post.discriminantName,
             policeStation: post.policeStation,
             satraSankhya: post.satraSankhya,
             act: post.act,
             dated: moment(post.dated).format("ll"),
-            totalCases: post.totalCases,
-            punished: post.punished,
-            punishmentTime: post.punishmentTime,
-            freed: post.freed,
+            liscenseTermination: moment(post.liscenseTermination).format("ll"),
+            propertyValue: post.propertyValue,
+            totalGiroh: post.totalGiroh,
+            totalBhav: post.totalBhav,
+            punishGiroh: post.punishGiroh,
+            punishBhav: post.punishBhav,
+            freedGiroh: post.freedGiroh,
+            freedBhav: post.freedBhav,
+
             timeTaken: post.timeTaken,
-            punishedPercentage: `${percentage(
-              post.punished,
-              post.totalCases
+            punishmentTime: post.punishmentTime,
+            punishmentPercentage: `${percentage(
+              post.punishGiroh + post.punishBhav,
+              post.totalGiroh + post.totalBhav
             ).toFixed(2)} %`,
 
             date: moment(post.date).format("ll"),

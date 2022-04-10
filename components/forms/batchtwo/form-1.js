@@ -123,6 +123,7 @@ export default function BatchTwoFormOne() {
               dated: "",
               totalCases: "",
               punished: "",
+              punishmentTime: "",
               freed: "",
               timeTaken: "",
             }}
@@ -145,6 +146,9 @@ export default function BatchTwoFormOne() {
                 .required("required field")
                 .typeError("Should be a number"),
               punished: Yup.number()
+                .required("required field")
+                .typeError("Should be a number"),
+              punishmentTime: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
               freed: Yup.number()
@@ -287,12 +291,22 @@ export default function BatchTwoFormOne() {
                       <div className="form-block">
                         <Field
                           fullWidth
+                          name="punishmentTime"
+                          label="सजा की अवधि"
+                          component={TextField}
+                          variant="outlined"
+                        />
+                      </div>
+                      <div className="form-block">
+                        <Field
+                          fullWidth
                           name="freed"
                           label="रिहा"
                           component={TextField}
                           variant="outlined"
                         />
                       </div>
+
                       <div className="form-block">
                         <Field
                           fullWidth

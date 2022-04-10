@@ -5,6 +5,7 @@ import { parseCookies } from "../helper/parseCookies";
 import baseUrl from "../helper/baseURL";
 import axios from "axios";
 import { Button, Paper } from "@material-ui/core";
+import moment from "moment";
 
 export default function User({ token, data }) {
   const context = useContext(AuthContext);
@@ -134,11 +135,34 @@ export default function User({ token, data }) {
         {data
           .filter((post) => post.formName == "batchTwoForm-3")
           .map((item) => (
-            <BatchTwoComponentExtra
+            <BatchTwoComponent
               item={item}
               name="माफियाओं, गैंगस्टर, गुण्डों एवं जनपदों व थानों के टॉप-10 व
                     STF/ATS के अपराधियों के विरूद्ध माह में विचारण प्रारम्भ किये
                     जाने वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र"
+              key={item._id}
+            />
+          ))}
+        {data
+          .filter((post) => post.formName == "batchTwoForm-4")
+          .map((item) => (
+            <BatchTwoComponent
+              item={item}
+              name="विशष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब से
+                    सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
+                    विधारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण
+                    पत्र"
+              key={item._id}
+            />
+          ))}
+        {data
+          .filter((post) => post.formName == "batchTwoForm-5")
+          .map((item) => (
+            <CriminalComponent
+              item={item}
+              name="प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के विरूद्ध
+                    माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
+                    पत्र"
               key={item._id}
             />
           ))}
@@ -267,6 +291,146 @@ const BatchComponent = ({ item, name }) => {
     </Paper>
   );
 };
+
+const CriminalComponent = ({ item, name }) => {
+  const approve = (type, id) => {
+    console.log(type, id);
+    axios
+      .post("api/users/approve", { type, id })
+      .then((res) => {
+        if (res.status == 200) {
+          alert("request submitted");
+          location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(error.message);
+        console.error(err);
+      });
+  };
+  return (
+    <Paper className="user-data">
+      <div className="wrapper row">
+        <ul>
+          <li>
+            <div className="heading">Form : </div>
+            <span>{name}</span>
+          </li>
+          <li>
+            <div className="heading">न्यायालय का नाम :</div>
+            <span>{item.courtName}</span>
+          </li>
+          <li>
+            <div className="heading">जनपद :</div>
+            <span>{item.district}</span>
+          </li>
+          <li>
+            <div className="heading">चिन्हित माफिया अपराधी का नाम :</div>
+            <span>{item.criminalName}</span>
+          </li>
+          <li>
+            <div className="heading">अभियोजक का नाम :</div>
+            <span>{item.prosecutor}</span>
+          </li>
+          <li>
+            <div className="heading">थाना :</div>
+            <span>{item.policeStation}</span>
+          </li>
+          <fieldset>
+            <legend>गिरोहबन्द अधिनियम</legend>
+            <li>
+              <div className="heading">अ0सं0 / सत्र विचारण सं0 :</div>
+              <span>{item.satraSankhya}</span>
+            </li>
+            <li>
+              <div className="heading">धारा :</div>
+              <span>{item.act}</span>
+            </li>
+            <li>
+              <div className="heading">आरोप विरचित किये जाने का दिनांक :</div>
+              <span>{moment(item.dated).format("ll")}</span>
+            </li>
+            <li>
+              <div className="heading">लाइसेन्स निरस्तीकरण :</div>
+              <span>{moment(item.liscenseTermination).format("ll")}</span>
+            </li>
+            <li>
+              <div className="heading">
+                धारा 14 (1) के अन्तर्गत कुर्क तथा जब्तीकरण,ध्वस्ती करण एवं
+                अवमुक्त सम्पति का मूल्य :
+              </div>
+              <span>{item.propertyValue}</span>
+            </li>
+          </fieldset>
+
+          <fieldset>
+            <legend>माह में निर्णीत वादों का विवरण</legend>
+            <fieldset>
+              <legend>कुल निर्णीत वाद</legend>
+              <li>
+                <div className="heading">गिरोहबन्द :</div>
+                <span>{item.totalGiroh}</span>
+              </li>
+              <li>
+                <div className="heading">भा0द0वि0 :</div>
+                <span>{item.totalBhav}</span>
+              </li>
+            </fieldset>
+            <fieldset>
+              <legend>सजा</legend>
+              <li>
+                <div className="heading">गिरोहबन्द :</div>
+                <span>{item.punishGiroh}</span>
+              </li>
+              <li>
+                <div className="heading">भा0द0वि0 :</div>
+                <span>{item.punishBhav}</span>
+              </li>
+            </fieldset>
+            <fieldset>
+              <legend>रिहा</legend>
+              <li>
+                <div className="heading">गिरोहबन्द :</div>
+                <span>{item.freedGiroh}</span>
+              </li>
+              <li>
+                <div className="heading">भा0द0वि0 :</div>
+                <span>{item.freedBhav}</span>
+              </li>
+            </fieldset>
+          </fieldset>
+          <li>
+            <div className="heading">आरोप विरचन से निर्णय अवधि :</div>
+            <span>{item.timeTaken}</span>
+          </li>
+          <li>
+            <div className="heading">सजा की अवधि :</div>
+            <span>{item.punishmentTime}</span>
+          </li>
+        </ul>
+      </div>
+      <div className="btn-container">
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          disabled={item.approved}
+          onClick={() => approve("approve", item._id)}
+        >
+          Approve
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          color="secondary"
+          onClick={() => approve("delete", item._id)}
+        >
+          delete
+        </Button>
+      </div>
+    </Paper>
+  );
+};
 const BatchTwoComponent = ({ item, name }) => {
   const approve = (type, id) => {
     console.log(type, id);
@@ -328,104 +492,12 @@ const BatchTwoComponent = ({ item, name }) => {
             <span>{item.punished}</span>
           </li>
           <li>
-            <div className="heading">आरोप विरचन से निर्णय तक अवधि :</div>
-            <span>{item.timeTaken}</span>
-          </li>
-          <li>
-            <div className="heading">सजा का प्रतिशत :</div>
-            <span>{item.punishedPercentage}</span>
-          </li>
-        </ul>
-      </div>
-      <div className="btn-container">
-        <Button
-          variant="contained"
-          fullWidth
-          color="primary"
-          disabled={item.approved}
-          onClick={() => approve("approve", item._id)}
-        >
-          Approve
-        </Button>
-        <Button
-          variant="contained"
-          fullWidth
-          color="secondary"
-          onClick={() => approve("delete", item._id)}
-        >
-          delete
-        </Button>
-      </div>
-    </Paper>
-  );
-};
-const BatchTwoComponentExtra = ({ item, name }) => {
-  const approve = (type, id) => {
-    console.log(type, id);
-    axios
-      .post("api/users/approve", { type, id })
-      .then((res) => {
-        if (res.status == 200) {
-          alert("request submitted");
-          location.reload();
-        }
-      })
-      .catch((err) => {
-        alert(error.message);
-        console.error(err);
-      });
-  };
-  return (
-    <Paper className="user-data">
-      <div className="wrapper row">
-        <ul>
-          <li>
-            <div className="heading">Form : </div>
-            <span>{name}</span>
-          </li>
-          <li>
-            <div className="heading">न्यायालय का नाम :</div>
-            <span>{item.courtName}</span>
-          </li>
-          <li>
-            <div className="heading">पीठासीन अधिकारी का नाम :</div>
-            <span>{item.officerName}</span>
-          </li>
-          <li>
-            <div className="heading">अभियोजक का नाम :</div>
-            <span>{item.prosecutor}</span>
-          </li>
-          <li>
-            <div className="heading">थाना :</div>
-            <span>{item.policeStation}</span>
-          </li>
-          <li>
-            <div className="heading">अ0सं0 / सत्र विचारण सं0 :</div>
-            <span>{item.satraSankhya}</span>
-          </li>
-          <li>
-            <div className="heading">धारा :</div>
-            <span>{item.act}</span>
-          </li>
-          <li>
-            <div className="heading">आरोप विरचित किये जाने का दिनांक :</div>
-            <span>{item.dated}</span>
-          </li>
-          <li>
-            <div className="heading">कुल निर्णीत वाद :</div>
-            <span>{item.totalCases}</span>
-          </li>
-          <li>
-            <div className="heading">सजा :</div>
-            <span>{item.punished}</span>
-          </li>
-          <li>
-            <div className="heading">आरोप विरचन से निर्णय तक अवधि :</div>
-            <span>{item.timeTaken}</span>
-          </li>
-          <li>
             <div className="heading">सजा की अवधि :</div>
             <span>{item.punishmentTime}</span>
+          </li>
+          <li>
+            <div className="heading">आरोप विरचन से निर्णय तक अवधि :</div>
+            <span>{item.timeTaken}</span>
           </li>
           <li>
             <div className="heading">सजा का प्रतिशत :</div>
