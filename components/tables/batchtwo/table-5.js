@@ -1,4 +1,4 @@
-import MaterialTable from "material-table";
+import MaterialTable, { MTableHeader } from "material-table";
 import { forwardRef } from "react";
 import moment from "moment";
 
