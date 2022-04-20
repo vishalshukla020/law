@@ -90,16 +90,19 @@ export default function NavBar({ username, role }) {
                   Logs
                 </Button>
               )}
-              {role && role === "admin" && router.pathname !== "/admin-panel" && (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className="button"
-                  onClick={() => router.push("/admin-panel")}
-                >
-                  back to home
-                </Button>
-              )}
+              {role &&
+                role === "admin" &&
+                router.pathname !== "/admin-panel" &&
+                router.pathname !== "/admin-panel/new-forms" && (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className="button"
+                    onClick={() => router.push("/admin-panel")}
+                  >
+                    back to home
+                  </Button>
+                )}
               {role &&
                 role === "user" &&
                 (router.pathname === "/" ? (

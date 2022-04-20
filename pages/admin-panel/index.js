@@ -1,39 +1,39 @@
-import { parseCookies } from "../helper/parseCookies";
+import { parseCookies } from "../../helper/parseCookies";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 
-import { AuthContext } from "../context/auth";
-import baseUrl from "../helper/baseURL";
-import NavBar from "../components/NavBar";
-import Table from "../components/Table";
+import { AuthContext } from "../../context/auth";
+import baseUrl from "../../helper/baseURL";
+import NavBar from "../../components/NavBar";
+import Table from "../../components/Table";
 
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import Link from "next/link";
-import FormTwoTable from "../components/form-2-table";
-import PensionTable from "../components/tables/pension";
-import EmployementTable from "../components/tables/employement";
-import PromotionTable from "../components/tables/promotion";
-import PowerOneTable from "../components/tables/power-1";
-import PowerTwoTable from "../components/tables/power-2";
+import FormTwoTable from "../../components/form-2-table";
+import PensionTable from "../../components/tables/pension";
+import EmployementTable from "../../components/tables/employement";
+import PromotionTable from "../../components/tables/promotion";
+import PowerOneTable from "../../components/tables/power-1";
+import PowerTwoTable from "../../components/tables/power-2";
 
 //batch tables
-import BatchTableOne from "../components/tables/batch/table-1";
-import BatchTableTwo from "../components/tables/batch/table-2";
-import BatchTableThree from "../components/tables/batch/table-3";
-import BatchTableFour from "../components/tables/batch/table-4";
-import BatchTableFive from "../components/tables/batch/table-5";
+import BatchTableOne from "../../components/tables/batch/table-1";
+import BatchTableTwo from "../../components/tables/batch/table-2";
+import BatchTableThree from "../../components/tables/batch/table-3";
+import BatchTableFour from "../../components/tables/batch/table-4";
+import BatchTableFive from "../../components/tables/batch/table-5";
 
 //batchTableTwo
-import BatchTwoTableOne from "../components/tables/batchtwo/table-1";
-import BatchTwoTableTwo from "../components/tables/batchtwo/table-2";
-import BatchTwoTableThree from "../components/tables/batchtwo/table-3";
-import BatchTwoTableFour from "../components/tables/batchtwo/table-4";
-import BatchTwoTableFive from "../components/tables/batchtwo/table-5";
+import BatchTwoTableOne from "../../components/tables/batchtwo/table-1";
+import BatchTwoTableTwo from "../../components/tables/batchtwo/table-2";
+import BatchTwoTableThree from "../../components/tables/batchtwo/table-3";
+import BatchTwoTableFour from "../../components/tables/batchtwo/table-4";
+import BatchTwoTableFive from "../../components/tables/batchtwo/table-5";
 
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
@@ -94,6 +94,19 @@ export default function Admin({ token, posts, user }) {
   return (
     <section id="page">
       <NavBar username={context.user?.name} role={context.user?.role} />
+
+      <div className="container" style={{ paddingBottom: "1em" }}>
+        <Link href="/admin-panel/new-forms">
+          <Button
+            disableElevation
+            fullWidth
+            color="primary"
+            variant="contained"
+          >
+            Select from new forms
+          </Button>
+        </Link>
+      </div>
       <div className="container" style={{ paddingBottom: "1em" }}>
         <Button
           aria-controls="simple-menu"
