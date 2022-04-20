@@ -80,7 +80,18 @@ export default function Home({ token }) {
   return (
     <section id="page">
       <NavBar username={context.user?.name} role={context.user?.role} />
-
+      <div className="container" style={{ paddingBottom: "1em" }}>
+        <Link href="/new-forms">
+          <Button
+            disableElevation
+            fullWidth
+            color="secondary"
+            variant="contained"
+          >
+            Select From New Forms
+          </Button>
+        </Link>
+      </div>
       <div className="container" style={{ paddingBottom: "1em" }}>
         <Button
           aria-controls="simple-menu"
@@ -88,7 +99,7 @@ export default function Home({ token }) {
           onClick={handleClick}
           disableElevation
           fullWidth
-          color="secondary"
+          color="primary"
           variant="contained"
         >
           Select form
@@ -180,6 +191,7 @@ export default function Home({ token }) {
           </MenuItem>
         </Menu>
       </div>
+
       {state.prosecution && <Prosecution />}
       {state.budget && <BudgetForm />}
       {state.pension && <PensionForm />}
