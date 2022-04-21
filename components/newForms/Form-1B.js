@@ -98,7 +98,7 @@ const district = [
   "Varanasi",
 ];
 
-export default function FormSix() {
+export default function FormThree() {
   const context = useContext(AuthContext);
   const [submitting, setSubmitting] = useState(false);
 
@@ -109,24 +109,36 @@ export default function FormSix() {
           <Formik
             enableReinitialize
             initialValues={{
-              formName: "newAddedForm-6",
+              formName: "Form-1B",
               username: context.user?.name,
               userId: context.user?.id,
               district: "",
-              total: "",
-              punised: "",
-              freed: "",
+              totalGiroh: "",
+              totalBhav: "",
+              punishGiroh: "",
+              punishBhav: "",
+              freedGiroh: "",
+              freedBhav: "",
             }}
             validationSchema={Yup.object({
               district: Yup.string().required("required field"),
 
-              total: Yup.number()
+              totalGiroh: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
-              punished: Yup.number()
+              totalBhav: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
-              freed: Yup.number()
+              punishGiroh: Yup.number()
+                .required("required field")
+                .typeError("Should be a number"),
+              punishBhav: Yup.number()
+                .required("required field")
+                .typeError("Should be a number"),
+              freedGiroh: Yup.number()
+                .required("required field")
+                .typeError("Should be a number"),
+              freedBhav: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
             })}
@@ -158,8 +170,8 @@ export default function FormSix() {
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Form autoComplete="off">
                   <Typography variant="h6" className="form-heading">
-                    विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम के
-                    नवीन वादों के विचारण प्रारम्भ होने तथा निर्णीत वादों
+                    प्रारूप (ब) - प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके
+                    गिरोह के विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों
                     सम्बन्धी मासिक विवरण पत्र
                   </Typography>
 
@@ -174,33 +186,60 @@ export default function FormSix() {
                   </div>
 
                   <fieldset>
-                    <legend>निर्णीत वादों का विवरण</legend>
-                    <div className="form-block">
+                    <legend>कुल निर्णीत वाद</legend>
+                    <div className="form-block flex">
                       <Field
                         fullWidth
-                        name="total"
-                        label="कुल"
+                        name="totalGiroh"
+                        label="गिरोहबन्द"
                         component={TextField}
                         variant="outlined"
                       />
-                      <div className="form-block">
-                        <Field
-                          fullWidth
-                          name="punished"
-                          label="सजा"
-                          component={TextField}
-                          variant="outlined"
-                        />
-                      </div>
-                      <div className="form-block">
-                        <Field
-                          fullWidth
-                          name="freed"
-                          label="रिहा"
-                          component={TextField}
-                          variant="outlined"
-                        />
-                      </div>
+                      <Field
+                        fullWidth
+                        name="totalBhav"
+                        label="भा0द0वि0"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend>सजा</legend>
+                    <div className="form-block flex">
+                      <Field
+                        fullWidth
+                        name="punishGiroh"
+                        label="गिरोहबन्द"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                      <Field
+                        fullWidth
+                        name="punishBhav"
+                        label="भा0द0वि0"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend>रिहा</legend>
+                    <div className="form-block flex">
+                      <Field
+                        fullWidth
+                        name="freedGiroh"
+                        label="गिरोहबन्द"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                      <Field
+                        fullWidth
+                        name="freedBhav"
+                        label="भा0द0वि0"
+                        component={TextField}
+                        variant="outlined"
+                      />
                     </div>
                   </fieldset>
 

@@ -10,13 +10,22 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import Link from "next/link";
-import NewFormOne from "../components/newForms/Form-1";
-import NewFormTwo from "../components/newForms/Form-2";
-import NewFormThree from "../components/newForms/Form-3";
-import NewFormFour from "../components/newForms/Form-4";
-import NewFormFive from "../components/newForms/Form-5";
-import NewFormSix from "../components/newForms/Form-6";
-import NewFormSeven from "../components/newForms/Form-7";
+// import NewFormOne from "../components/newForms/Form-1A";
+// import NewFormTwo from "../components/newForms/Form-2A";
+// import NewFormThree from "../components/newForms/Form-1B";
+// import NewFormFour from "../components/newForms/Form-2B";
+// import NewFormFive from "../components/newForms/Form-4A";
+// import NewFormSix from "../components/newForms/Form-5B";
+// import NewFormSeven from "../components/newForms/Form-4B";
+
+import NewFormOne from "../components/newForms/Form-1A";
+import NewFormTwo from "../components/newForms/Form-1B";
+import NewFormThree from "../components/newForms/Form-2A";
+import NewFormFour from "../components/newForms/Form-2B";
+import NewFormFive from "../components/newForms/Form-4A";
+import NewFormSix from "../components/newForms/Form-4B";
+import NewFormSeven from "../components/newForms/Form-5A";
+import NewFormEight from "../components/newForms/Form-5B";
 
 export default function HomeTwo({ token }) {
   const context = useContext(AuthContext);
@@ -31,6 +40,7 @@ export default function HomeTwo({ token }) {
     newFormFive: false,
     newFormSix: false,
     newFormSeven: false,
+    newFormEight: false,
   });
 
   const handleClick = (event) => {
@@ -62,7 +72,7 @@ export default function HomeTwo({ token }) {
             color="primary"
             variant="contained"
           >
-            Select From Old Forms
+            अभियोजन निदेशालय के प्रारूप
           </Button>
         </Link>
       </div>
@@ -92,35 +102,40 @@ export default function HomeTwo({ token }) {
           }}
         >
           <MenuItem onClick={() => handleClose("newFormOne")}>
-            (Form-1) प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
-            विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
-            पत्र
-          </MenuItem>
-          <MenuItem onClick={() => handleClose("newFormThree")}>
-            (Form-2) प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
+            (Form-1A) प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
             विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
             पत्र
           </MenuItem>
           <MenuItem onClick={() => handleClose("newFormTwo")}>
-            (Form-3) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
+            (Form-1B) प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
+            विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
+            पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("newFormThree")}>
+            (Form-2A) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
           <MenuItem onClick={() => handleClose("newFormFour")}>
-            (Form-4) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
+            (Form-2B) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
-          <MenuItem onClick={() => handleClose("newFormSix")}>
-            (Form-5) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब से
-            सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के विचारण
-            प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
-          </MenuItem>
           <MenuItem onClick={() => handleClose("newFormFive")}>
-            (Form-6) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम
+            (Form-4A) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब
+            से सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
+            विचारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("newFormSix")}>
+            (Form-4B) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब
+            से सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
+            विचारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("newFormSeven")}>
+            (Form-5A) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम
             के नवीन वादों के विचारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी
             मासिक विवरण पत्र
           </MenuItem>
-          <MenuItem onClick={() => handleClose("newFormSix")}>
-            (Form-7) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम
+          <MenuItem onClick={() => handleClose("newFormEight")}>
+            (Form-5B) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम
             के नवीन वादों के विचारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी
             मासिक विवरण पत्र
           </MenuItem>
@@ -134,6 +149,7 @@ export default function HomeTwo({ token }) {
       {state.newFormFive && <NewFormFive />}
       {state.newFormSix && <NewFormSix />}
       {state.newFormSeven && <NewFormSeven />}
+      {state.newFormEight && <NewFormEight />}
     </section>
   );
 }

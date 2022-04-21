@@ -109,7 +109,7 @@ export default function FormThree() {
           <Formik
             enableReinitialize
             initialValues={{
-              formName: "newAddedForm-4",
+              formName: "Form-2B",
               username: context.user?.name,
               userId: context.user?.id,
               district: "",
@@ -158,8 +158,8 @@ export default function FormThree() {
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Form autoComplete="off">
                   <Typography variant="h6" className="form-heading">
-                    पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने वाले
-                    तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+                    प्रारूप (ब) - पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ
+                    किये जाने वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
                   </Typography>
 
                   <div className="form-block">

@@ -98,7 +98,7 @@ const district = [
   "Varanasi",
 ];
 
-export default function FormOne() {
+export default function FormFive() {
   const context = useContext(AuthContext);
   const [submitting, setSubmitting] = useState(false);
 
@@ -109,7 +109,7 @@ export default function FormOne() {
           <Formik
             enableReinitialize
             initialValues={{
-              formName: "newAddedForm-2",
+              formName: "Form-4A",
               username: context.user?.name,
               userId: context.user?.id,
               district: "",
@@ -134,9 +134,7 @@ export default function FormOne() {
               discriminantName: Yup.string().required("required field"),
               policeStation: Yup.string().required("required field"),
 
-              satraSankhya: Yup.number()
-                .required("required field")
-                .typeError("Should be a number"),
+              satraSankhya: Yup.string().required("required field"),
               act: Yup.string().required("required field"),
 
               filedDate: Yup.date()
@@ -186,8 +184,10 @@ export default function FormOne() {
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Form autoComplete="off">
                   <Typography variant="h6" className="form-heading">
-                    पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने वाले
-                    तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+                    प्रारूप (अ) - विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत
+                    जहरीली शराब से सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम
+                    के नवीन वादों के विचारण प्रारम्भ होने तथा निर्णीत वादों
+                    सम्बन्धी मासिक विवरण पत्र
                   </Typography>
 
                   <div className="form-block">
@@ -232,18 +232,20 @@ export default function FormOne() {
                       component={TextField}
                       variant="outlined"
                     />
-                    <Field
-                      fullWidth
-                      name="policeStation"
-                      label="थाना"
-                      component={TextField}
-                      variant="outlined"
-                    />
                   </div>
 
                   <fieldset>
                     <legend>विरचित किये गये आरोपों का विवरण</legend>
-                    <div className="form-block flex">
+                    <div className="form-block">
+                      <Field
+                        fullWidth
+                        name="policeStation"
+                        label="थाना"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                    </div>
+                    <div className="form-block">
                       <Field
                         fullWidth
                         name="satraSankhya"
@@ -251,6 +253,8 @@ export default function FormOne() {
                         component={TextField}
                         variant="outlined"
                       />
+                    </div>
+                    <div className="form-block">
                       <Field
                         fullWidth
                         name="act"
@@ -269,45 +273,44 @@ export default function FormOne() {
                         variant="outlined"
                       />
                     </div>
+
+                    <div className="form-block">
+                      <Field
+                        fullWidth
+                        name="punished"
+                        label="सजा"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                    </div>
+                    <div className="form-block">
+                      <Field
+                        fullWidth
+                        name="freed"
+                        label="रिहा"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                    </div>
+                    <div className="form-block">
+                      <Field
+                        fullWidth
+                        name="timeTaken"
+                        label="आरोप विरचन से निर्णय तक की अवधि"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                    </div>
+                    <div className="form-block">
+                      <Field
+                        fullWidth
+                        name="punishmentTime"
+                        label="सजा की अवधि"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                    </div>
                   </fieldset>
-
-                  <div className="form-block">
-                    <Field
-                      fullWidth
-                      name="punished"
-                      label="सजा"
-                      component={TextField}
-                      variant="outlined"
-                    />
-                  </div>
-                  <div className="form-block">
-                    <Field
-                      fullWidth
-                      name="freed"
-                      label="रिहा"
-                      component={TextField}
-                      variant="outlined"
-                    />
-                  </div>
-                  <div className="form-block">
-                    <Field
-                      fullWidth
-                      name="timeTaken"
-                      label="आरोप विरचन से निर्णय तक की अवधि"
-                      component={TextField}
-                      variant="outlined"
-                    />
-                  </div>
-                  <div className="form-block">
-                    <Field
-                      fullWidth
-                      name="punishmentTime"
-                      label="सजा की अवधि"
-                      component={TextField}
-                      variant="outlined"
-                    />
-                  </div>
-
                   {submitting ? (
                     <CircularProgress />
                   ) : (

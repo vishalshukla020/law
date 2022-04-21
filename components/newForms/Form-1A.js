@@ -98,7 +98,7 @@ const district = [
   "Varanasi",
 ];
 
-export default function FormFive() {
+export default function FormOne() {
   const context = useContext(AuthContext);
   const [submitting, setSubmitting] = useState(false);
 
@@ -109,29 +109,29 @@ export default function FormFive() {
           <Formik
             enableReinitialize
             initialValues={{
-              formName: "newAddedForm-5",
+              formName: "Form-1A",
               username: context.user?.name,
               userId: context.user?.id,
-              district: "",
+              criminalName: "",
               courtName: "",
-              officerName: "",
               prosecutorName: "",
-              discriminantName: "",
               policeStation: "",
               satraSankhya: "",
               act: "",
               filedDate: "",
-              punished: "",
-              freed: "",
+              liscenseTermination: "",
+              netWorth: "",
+              punishGiroh: "",
+              punishBhav: "",
+              freedGiroh: "",
+              freedBhav: "",
               timeTaken: "",
               punishmentTime: "",
             }}
             validationSchema={Yup.object({
-              district: Yup.string().required("required field"),
+              criminalName: Yup.string().required("required field"),
               courtName: Yup.string().required("required field"),
-              officerName: Yup.string().required("required field"),
               prosecutorName: Yup.string().required("required field"),
-              discriminantName: Yup.string().required("required field"),
               policeStation: Yup.string().required("required field"),
 
               satraSankhya: Yup.number()
@@ -142,15 +142,16 @@ export default function FormFive() {
               filedDate: Yup.date()
                 .required("required field")
                 .typeError("Should be a date"),
-
-              punished: Yup.number()
+              liscenseTermination: Yup.date()
+                .required("required field")
+                .typeError("Should be a date"),
+              netWorth: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
-
-              freed: Yup.number()
-                .required("required field")
-                .typeError("Should be a number"),
-
+              punishGiroh: Yup.string().required("required field"),
+              punishBhav: Yup.string().required("required field"),
+              freedGiroh: Yup.string().required("required field"),
+              freedBhav: Yup.string().required("required field"),
               timeTaken: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
@@ -186,16 +187,16 @@ export default function FormFive() {
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Form autoComplete="off">
                   <Typography variant="h6" className="form-heading">
-                    विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम के
-                    नवीन वादों के विचारण प्रारम्भ होने तथा निर्णीत वादों
+                    प्रारूप (अ) - प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके
+                    गिरोह के विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों
                     सम्बन्धी मासिक विवरण पत्र
                   </Typography>
 
                   <div className="form-block">
                     <Field
                       fullWidth
-                      name="district"
-                      label="जनपद"
+                      name="criminalName"
+                      label="चिन्हित माफिया अपराधी का नाम"
                       component={TextField}
                       variant="outlined"
                     />
@@ -212,41 +213,23 @@ export default function FormFive() {
                   <div className="form-block flex">
                     <Field
                       fullWidth
-                      name="officerName"
-                      label="पीठासीन अधिकारी का नाम"
-                      component={TextField}
-                      variant="outlined"
-                    />
-                    <Field
-                      fullWidth
                       name="prosecutorName"
                       label="अभियोजक का नाम"
                       component={TextField}
                       variant="outlined"
                     />
-                  </div>
-                  <div className="form-block flex">
+
                     <Field
                       fullWidth
-                      name="discriminantName"
-                      label="विवेचक का नाम"
+                      name="policeStation"
+                      label="थाना"
                       component={TextField}
                       variant="outlined"
                     />
                   </div>
-
                   <fieldset>
-                    <legend>विरचित किये गये आरोपों का विवरण</legend>
-                    <div className="form-block">
-                      <Field
-                        fullWidth
-                        name="policeStation"
-                        label="थाना"
-                        component={TextField}
-                        variant="outlined"
-                      />
-                    </div>
-                    <div className="form-block">
+                    <legend>गिरोहबन्द अधिनियम</legend>
+                    <div className="form-block flex">
                       <Field
                         fullWidth
                         name="satraSankhya"
@@ -254,8 +237,6 @@ export default function FormFive() {
                         component={TextField}
                         variant="outlined"
                       />
-                    </div>
-                    <div className="form-block">
                       <Field
                         fullWidth
                         name="act"
@@ -274,44 +255,82 @@ export default function FormFive() {
                         variant="outlined"
                       />
                     </div>
-
                     <div className="form-block">
                       <Field
                         fullWidth
-                        name="punished"
-                        label="सजा"
-                        component={TextField}
+                        name="liscenseTermination"
+                        label="लाइसेन्स निरस्तीकरण"
+                        component={DatePicker}
                         variant="outlined"
                       />
                     </div>
                     <div className="form-block">
                       <Field
                         fullWidth
-                        name="freed"
-                        label="रिहा"
-                        component={TextField}
-                        variant="outlined"
-                      />
-                    </div>
-                    <div className="form-block">
-                      <Field
-                        fullWidth
-                        name="timeTaken"
-                        label="आरोप विरचन से निर्णय तक की अवधि"
-                        component={TextField}
-                        variant="outlined"
-                      />
-                    </div>
-                    <div className="form-block">
-                      <Field
-                        fullWidth
-                        name="punishmentTime"
-                        label="सजा की अवधि"
+                        name="netWorth"
+                        label="धारा 14 (1) के अन्तर्गत कुर्क तथा जब्तीकरण,ध्वस्तीकरण एवं अवमुक्त सम्पति का मूल्य"
                         component={TextField}
                         variant="outlined"
                       />
                     </div>
                   </fieldset>
+                  <fieldset>
+                    <legend>सजा</legend>
+                    <div className="form-block flex">
+                      <Field
+                        fullWidth
+                        name="punishGiroh"
+                        label="गिरोहबन्द"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                      <Field
+                        fullWidth
+                        name="punishBhav"
+                        label="भा0द0वि0"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend>रिहा</legend>
+                    <div className="form-block flex">
+                      <Field
+                        fullWidth
+                        name="freedGiroh"
+                        label="गिरोहबन्द"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                      <Field
+                        fullWidth
+                        name="freedBhav"
+                        label="भा0द0वि0"
+                        component={TextField}
+                        variant="outlined"
+                      />
+                    </div>
+                  </fieldset>
+                  <div className="form-block">
+                    <Field
+                      fullWidth
+                      name="timeTaken"
+                      label="आरोप विरचन से निर्णय तक की अवधि"
+                      component={TextField}
+                      variant="outlined"
+                    />
+                  </div>
+                  <div className="form-block">
+                    <Field
+                      fullWidth
+                      name="punishmentTime"
+                      label="सजा की अवधि"
+                      component={TextField}
+                      variant="outlined"
+                    />
+                  </div>
+
                   {submitting ? (
                     <CircularProgress />
                   ) : (

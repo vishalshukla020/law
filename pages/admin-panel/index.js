@@ -103,7 +103,7 @@ export default function Admin({ token, posts, user }) {
             color="primary"
             variant="contained"
           >
-            Select from new forms
+            शासन के प्रारूप
           </Button>
         </Link>
       </div>

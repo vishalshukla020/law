@@ -88,7 +88,7 @@ export default function Home({ token }) {
             color="secondary"
             variant="contained"
           >
-            Select From New Forms
+            शासन के प्रारूप
           </Button>
         </Link>
       </div>

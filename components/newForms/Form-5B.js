@@ -98,7 +98,7 @@ const district = [
   "Varanasi",
 ];
 
-export default function FormSeven() {
+export default function FormSix() {
   const context = useContext(AuthContext);
   const [submitting, setSubmitting] = useState(false);
 
@@ -109,7 +109,7 @@ export default function FormSeven() {
           <Formik
             enableReinitialize
             initialValues={{
-              formName: "newAddedForm-7",
+              formName: "Form-5B",
               username: context.user?.name,
               userId: context.user?.id,
               district: "",
@@ -158,10 +158,9 @@ export default function FormSeven() {
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Form autoComplete="off">
                   <Typography variant="h6" className="form-heading">
-                    विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब से
-                    सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
-                    विचारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण
-                    पत्र
+                    प्रारूप (ब) - विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत
+                    आयुध अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा
+                    निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
                   </Typography>
 
                   <div className="form-block">

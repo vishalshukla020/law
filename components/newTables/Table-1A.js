@@ -126,6 +126,7 @@ export default function TableOne({ posts }) {
             title: "सजा की अवधि",
             field: "punishmentTime",
           },
+
           {
             title: "Date",
             field: "date",

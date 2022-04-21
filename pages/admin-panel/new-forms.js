@@ -14,13 +14,22 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import Link from "next/link";
 
-import TableOne from "../../components/newTables/Table-1";
-import TableTwo from "../../components/newTables/Table-2";
-import TableThree from "../../components/newTables/Table-3";
-import TableFour from "../../components/newTables/Table-4";
-import TableFive from "../../components/newTables/Table-5";
-import TableSix from "../../components/newTables/Table-6";
-import TableSeven from "../../components/newTables/Table-7";
+// import TableOne from "../../components/newTables/Table-1";
+// import TableTwo from "../../components/newTables/Table-2";
+// import TableThree from "../../components/newTables/Table-3";
+// import TableFour from "../../components/newTables/Table-4";
+// import TableFive from "../../components/newTables/Table-5";
+// import TableSix from "../../components/newTables/Table-6";
+// import TableSeven from "../../components/newTables/Table-7";
+
+import TableOne from "../../components/newTables/Table-1A";
+import TableTwo from "../../components/newTables/Table-1B";
+import TableThree from "../../components/newTables/Table-2A";
+import TableFour from "../../components/newTables/Table-2B";
+import TableFive from "../../components/newTables/Table-4A";
+import TableSix from "../../components/newTables/Table-4B";
+import TableSeven from "../../components/newTables/Table-5A";
+import TableEight from "../../components/newTables/Table-5B";
 
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
@@ -36,6 +45,7 @@ export default function Admin({ token, posts, user }) {
     tableFive: false,
     tableSix: false,
     tableSeven: false,
+    tableEight: false,
   });
 
   const handleClick = (event) => {
@@ -78,7 +88,7 @@ export default function Admin({ token, posts, user }) {
             color="primary"
             variant="contained"
           >
-            Select from old forms
+            अभियोजन निदेशालय के प्रारूप
           </Button>
         </Link>
       </div>
@@ -108,35 +118,40 @@ export default function Admin({ token, posts, user }) {
           }}
         >
           <MenuItem onClick={() => handleClose("tableOne")}>
-            (Form-1) प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
-            विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
-            पत्र
-          </MenuItem>
-          <MenuItem onClick={() => handleClose("tableThree")}>
-            (Form-2) प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
+            (Form-1A) प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
             विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
             पत्र
           </MenuItem>
           <MenuItem onClick={() => handleClose("tableTwo")}>
-            (Form-3) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
+            (Form-1B) प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
+            विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
+            पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("tableThree")}>
+            (Form-2) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
           <MenuItem onClick={() => handleClose("tableFour")}>
-            (Form-4) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
+            (Form-2B) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
-          <MenuItem onClick={() => handleClose("tableSeven")}>
-            (Form-5) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब से
-            सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के विचारण
-            प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
-          </MenuItem>
           <MenuItem onClick={() => handleClose("tableFive")}>
-            (Form-6) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम
+            (Form-4A) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब
+            से सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
+            विचारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("tableSix")}>
+            (Form-4B) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब
+            से सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
+            विचारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("tableSeven")}>
+            (Form-5A) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम
             के नवीन वादों के विचारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी
             मासिक विवरण पत्र
           </MenuItem>
-          <MenuItem onClick={() => handleClose("tableSix")}>
-            (Form-7) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम
+          <MenuItem onClick={() => handleClose("tableEight")}>
+            (Form-5B) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम
             के नवीन वादों के विचारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी
             मासिक विवरण पत्र
           </MenuItem>
@@ -145,37 +160,42 @@ export default function Admin({ token, posts, user }) {
       <div className="containerTable">
         {state.tableOne && (
           <TableOne
-            posts={posts.filter((post) => post.formName == "newAddedForm-1")}
+            posts={posts.filter((post) => post.formName == "Form-1A")}
           />
         )}
         {state.tableTwo && (
           <TableTwo
-            posts={posts.filter((post) => post.formName == "newAddedForm-2")}
+            posts={posts.filter((post) => post.formName == "Form-1B")}
           />
         )}
         {state.tableThree && (
           <TableThree
-            posts={posts.filter((post) => post.formName == "newAddedForm-3")}
+            posts={posts.filter((post) => post.formName == "Form-2A")}
           />
         )}
         {state.tableFour && (
           <TableFour
-            posts={posts.filter((post) => post.formName == "newAddedForm-4")}
+            posts={posts.filter((post) => post.formName == "Form-2B")}
           />
         )}
         {state.tableFive && (
           <TableFive
-            posts={posts.filter((post) => post.formName == "newAddedForm-5")}
+            posts={posts.filter((post) => post.formName == "Form-4A")}
           />
         )}
         {state.tableSix && (
           <TableSix
-            posts={posts.filter((post) => post.formName == "newAddedForm-6")}
+            posts={posts.filter((post) => post.formName == "Form-4B")}
           />
         )}
         {state.tableSeven && (
           <TableSeven
-            posts={posts.filter((post) => post.formName == "newAddedForm-7")}
+            posts={posts.filter((post) => post.formName == "Form-5A")}
+          />
+        )}
+        {state.tableEight && (
+          <TableSeven
+            posts={posts.filter((post) => post.formName == "Form-5B")}
           />
         )}
       </div>
