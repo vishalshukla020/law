@@ -134,9 +134,7 @@ export default function FormOne() {
               prosecutorName: Yup.string().required("required field"),
               policeStation: Yup.string().required("required field"),
 
-              satraSankhya: Yup.number()
-                .required("required field")
-                .typeError("Should be a number"),
+              satraSankhya: Yup.string().required("required field"),
               act: Yup.string().required("required field"),
 
               filedDate: Yup.date()
@@ -145,19 +143,13 @@ export default function FormOne() {
               liscenseTermination: Yup.date()
                 .required("required field")
                 .typeError("Should be a date"),
-              netWorth: Yup.number()
-                .required("required field")
-                .typeError("Should be a number"),
+              netWorth: Yup.string().required("required field"),
               punishGiroh: Yup.string().required("required field"),
               punishBhav: Yup.string().required("required field"),
               freedGiroh: Yup.string().required("required field"),
               freedBhav: Yup.string().required("required field"),
-              timeTaken: Yup.number()
-                .required("required field")
-                .typeError("Should be a number"),
-              punishmentTime: Yup.number()
-                .required("required field")
-                .typeError("Should be a number"),
+              timeTaken: Yup.string().required("required field"),
+              punishmentTime: Yup.string().required("required field"),
             })}
             onSubmit={(values, actions) => {
               setSubmitting(true);

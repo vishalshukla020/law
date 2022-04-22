@@ -149,12 +149,8 @@ export default function FormFive() {
                 .required("required field")
                 .typeError("Should be a number"),
 
-              timeTaken: Yup.number()
-                .required("required field")
-                .typeError("Should be a number"),
-              punishmentTime: Yup.number()
-                .required("required field")
-                .typeError("Should be a number"),
+              timeTaken: Yup.string().required("required field"),
+              punishmentTime: Yup.string().required("required field"),
             })}
             onSubmit={(values, actions) => {
               setSubmitting(true);
