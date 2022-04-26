@@ -26,6 +26,7 @@ import NewFormFive from "../components/newForms/Form-4A";
 import NewFormSix from "../components/newForms/Form-4B";
 import NewFormSeven from "../components/newForms/Form-5A";
 import NewFormEight from "../components/newForms/Form-5B";
+import NewFormNine from "../components/newForms/From-3";
 
 export default function HomeTwo({ token }) {
   const context = useContext(AuthContext);
@@ -41,6 +42,7 @@ export default function HomeTwo({ token }) {
     newFormSix: false,
     newFormSeven: false,
     newFormEight: false,
+    newFormNine: false,
   });
 
   const handleClick = (event) => {
@@ -119,6 +121,10 @@ export default function HomeTwo({ token }) {
             (Form-2B) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
+          <MenuItem onClick={() => handleClose("newFormNine")}>
+            (Form-3) महिलाओं के विरुद्ध लैंगिक/बलात्कार/ गम्भीर अपराधों से
+            सम्बन्धित विवरण पत्र
+          </MenuItem>
           <MenuItem onClick={() => handleClose("newFormFive")}>
             (Form-4A) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब
             से सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
@@ -150,6 +156,7 @@ export default function HomeTwo({ token }) {
       {state.newFormSix && <NewFormSix />}
       {state.newFormSeven && <NewFormSeven />}
       {state.newFormEight && <NewFormEight />}
+      {state.newFormNine && <NewFormNine />}
     </section>
   );
 }

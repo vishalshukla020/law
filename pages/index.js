@@ -161,34 +161,34 @@ export default function Home({ token }) {
             (Form-11) : सत्र न्यायालयो में अन्य अधिनियम के अन्तर्गत डी0जी0सी
             संवर्ग द्वारा अभियोजित वादो का विवरण
           </MenuItem>
-          <MenuItem onClick={() => handleClose("batchTwoFormOne")}>
+          {/* <MenuItem onClick={() => handleClose("batchTwoFormOne")}>
             (Form-12) : पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
-          </MenuItem>
-          <MenuItem onClick={() => handleClose("batchTwoFormTwo")}>
+          </MenuItem> */}
+          {/* <MenuItem onClick={() => handleClose("batchTwoFormTwo")}>
             (Form-13) : विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध
             अधिनियम व आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा
             निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem onClick={() => handleClose("batchTwoFormThree")}>
-            (Form-14) : माफियाओं, गैंगस्टर, गुण्डों एवं जनपदों व थानों के टॉप-10
+            (Form-12) : माफियाओं, गैंगस्टर, गुण्डों एवं जनपदों व थानों के टॉप-10
             व STF/ATS के अपराधियों के विरूद्ध माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
-          <MenuItem onClick={() => handleClose("batchTwoFormFour")}>
+          {/* <MenuItem onClick={() => handleClose("batchTwoFormFour")}>
             (Form-15) : विशष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब
             से सम्बन्धित धारा 60 (क) उ0प्र0 आबकारी अधिनियम के नवीन वादों के
             विधारण प्रारम्भ होने तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
-          </MenuItem>
-          <MenuItem onClick={() => handleClose("batchTwoFormFive")}>
+          </MenuItem> */}
+          {/* <MenuItem onClick={() => handleClose("batchTwoFormFive")}>
             (Form-16) : प्रदेश के 25 चिन्हित माफिया अपराधी एवं उनके गिरोह के
             विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों सम्बन्धी मासिक विवरण
             पत्र
-          </MenuItem>
-          <MenuItem onClick={() => handleClose("batchTwoFormSix")}>
+          </MenuItem> */}
+          {/* <MenuItem onClick={() => handleClose("batchTwoFormSix")}>
             (Form-17) : महिलाओं के विरुद्ध लैंगिक/बलात्कार/ गम्भीर अपराधों से
             सम्बन्धित विवरण पत्र
-          </MenuItem>
+          </MenuItem> */}
         </Menu>
       </div>
 
