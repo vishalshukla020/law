@@ -112,7 +112,6 @@ export default function BatchTwoFormFour() {
               formName: "Form-3A",
               username: context.user?.name,
               userId: context.user?.id,
-              district: "",
               act: "",
               totalCases: "",
               caseIncreaseInMonth: "",
@@ -127,13 +126,11 @@ export default function BatchTwoFormFour() {
               rebel: "",
               behaviour: "",
               noProof: "",
-              temp: "",
+              asangat: "",
               appealCount: "",
-              timeTaken: "",
             }}
             validationSchema={Yup.object({
               act: Yup.string().required("required field"),
-              district: Yup.string().required("required field"),
               totalCases: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
@@ -145,6 +142,9 @@ export default function BatchTwoFormFour() {
                 .typeError("Should be a number"),
 
               moreThanTenYearJail: Yup.number()
+                .required("required field")
+                .typeError("Should be a number"),
+              deathPenalty: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
               lifeImprisonment: Yup.number()
@@ -183,9 +183,6 @@ export default function BatchTwoFormFour() {
               appealCount: Yup.number()
                 .required("required field")
                 .typeError("Should be a number"),
-              timeTaken: Yup.number()
-                .required("required field")
-                .typeError("Should be a number"),
             })}
             onSubmit={(values, actions) => {
               setSubmitting(true);
@@ -218,21 +215,7 @@ export default function BatchTwoFormFour() {
                     महिलाओं के विरुद्ध लैंगिक/बलात्कार/ गम्भीर अपराधों से
                     सम्बन्धित विवरण पत्र
                   </Typography>
-                  <FormControl className="form-block" fullWidth>
-                    <InputLabel htmlFor="district">जनपद</InputLabel>
-                    <Field
-                      component={Select}
-                      name="district"
-                      id="district"
-                      inputProps={{ id: "district" }}
-                    >
-                      {district.map((item, i) => (
-                        <MenuItem value={item} key={i}>
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Field>
-                  </FormControl>
+
                   <FormControl className="form-block" fullWidth>
                     <InputLabel htmlFor="act">धारा</InputLabel>
                     <Field
@@ -241,19 +224,19 @@ export default function BatchTwoFormFour() {
                       id="act"
                       inputProps={{ id: "act" }}
                     >
-                      <MenuItem value="बलात्कार धारा 378 भा०द०वि०">
+                      <MenuItem value="rape">
                         बलात्कार धारा 378 भा०द०वि०
                       </MenuItem>
-                      <MenuItem value="बलात्कार सहित हत्या">
+                      <MenuItem value="rapeAndMurder">
                         बलात्कार सहित हत्या
                       </MenuItem>
-                      <MenuItem value="लज्जा मंग धारा 354 भा०द०वि०">
+                      <MenuItem value="lajjaBhang">
                         लज्जा मंग धारा 354 भा०द०वि०
                       </MenuItem>
-                      <MenuItem value="यौन उत्पीड़न धारा 354 ए.बी.सी.टी. भा०द०वि०">
+                      <MenuItem value="molestation">
                         यौन उत्पीड़न धारा 354 ए.बी.सी.टी. भा०द०वि०
                       </MenuItem>
-                      <MenuItem value="अश्लीलता धारा 294 भा०द०वि०">
+                      <MenuItem value="indecency">
                         अश्लीलता धारा 294 भा०द०वि०
                       </MenuItem>
                     </Field>
@@ -307,7 +290,7 @@ export default function BatchTwoFormFour() {
                       <Field
                         fullWidth
                         name="moreThanTenYearJail"
-                        label="दस वर्ष या उससे अधिक की सजा "
+                        label="दस वर्ष या उससे अधिक की सजा"
                         component={TextField}
                         variant="outlined"
                       />
@@ -413,7 +396,7 @@ export default function BatchTwoFormFour() {
                       <Field
                         fullWidth
                         name="appealCount"
-                        label="अपील की संस्तुति एवं अपील दायर किये गए वादों इन संख्या "
+                        label="अपील की संस्तुति एवं अपील दायर किये गए वादों इन संख्या"
                         component={TextField}
                         variant="outlined"
                       />

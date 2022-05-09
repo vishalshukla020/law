@@ -30,6 +30,7 @@ import TableFive from "../../components/newTables/Table-4A";
 import TableSix from "../../components/newTables/Table-4B";
 import TableSeven from "../../components/newTables/Table-5A";
 import TableEight from "../../components/newTables/Table-5B";
+import TableNine from "../../components/newTables/Table-3A";
 
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
@@ -46,6 +47,7 @@ export default function Admin({ token, posts, user }) {
     tableSix: false,
     tableSeven: false,
     tableEight: false,
+    tableNine: false,
   });
 
   const handleClick = (event) => {
@@ -128,12 +130,16 @@ export default function Admin({ token, posts, user }) {
             पत्र
           </MenuItem>
           <MenuItem onClick={() => handleClose("tableThree")}>
-            (Form-2) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
+            (Form-2A) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
           </MenuItem>
           <MenuItem onClick={() => handleClose("tableFour")}>
             (Form-2B) पॉक्सो न्यायालयों में माह में विचारण प्रारम्भ किये जाने
             वाले तथा निर्णीत वादों सम्बन्धी मासिक विवरण पत्र
+          </MenuItem>
+          <MenuItem onClick={() => handleClose("tableNine")}>
+            (Form-3) महिलाओं के विरुद्ध लैंगिक / बलात्कार / गंभीर अपराधों से
+            समन्धित्त विवरण पत्र
           </MenuItem>
           <MenuItem onClick={() => handleClose("tableFive")}>
             (Form-4A) विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत जहरीली शराब
@@ -194,8 +200,13 @@ export default function Admin({ token, posts, user }) {
           />
         )}
         {state.tableEight && (
-          <TableSeven
+          <TableEight
             posts={posts.filter((post) => post.formName == "Form-5B")}
+          />
+        )}
+        {state.tableNine && (
+          <TableNine
+            posts={posts.filter((post) => post.formName == "Form-3A")}
           />
         )}
       </div>

@@ -144,6 +144,8 @@ export default function TableTwo({ posts }) {
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,
           pageSize: 10,
+          pageSizeOptions: [5, 10, 20, 30, 50, 75, 100],
+
           exportButton: { csv: true },
         }}
       />

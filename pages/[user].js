@@ -207,6 +207,16 @@ export default function User({ token, data }) {
             />
           ))}
         {data
+          .filter((post) => post.formName == "Form-3A")
+          .map((item) => (
+            <New3A
+              item={item}
+              name="महिलाओं के विरुद्ध लैंगिक/बलात्कार/ गम्भीर अपराधों से
+                    सम्बन्धित विवरण पत्र"
+              key={item._id}
+            />
+          ))}
+        {data
           .filter((post) => post.formName == "Form-4A")
           .map((item) => (
             <New2A
@@ -248,6 +258,143 @@ export default function User({ token, data }) {
 }
 
 //components for new added formsName
+const New3A = ({ item, name }) => {
+  const approve = (type, id) => {
+    console.log(type, id);
+    axios
+      .post("api/users/approve", { type, id })
+      .then((res) => {
+        if (res.status == 200) {
+          alert("request submitted");
+          location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(error.message);
+        console.error(err);
+      });
+  };
+  return (
+    <Paper className="user-data">
+      <div className="wrapper row">
+        <ul>
+          <li>
+            <div className="heading">Form : </div>
+            <span>{name}</span>
+          </li>
+          <li>
+            <div className="heading">धारा :</div>
+            <span>{item.act}</span>
+          </li>
+          <li>
+            <div className="heading">कुल लम्बित वादों की संख्या :</div>
+            <span>{item.totalCases}</span>
+          </li>
+          <li>
+            <div className="heading">माह में बढे़ वादों की संख्या :</div>
+            <span>{item.caseIncreaseInMonth}</span>
+          </li>
+          <li>
+            <div className="heading">
+              माह में कुल निस्तारित वादों की संख्या :
+            </div>
+            <span>{item.caseDisposedOfInMonth}</span>
+          </li>
+          <fieldset>
+            <legend>दोषसिद्ध वादों की संख्या</legend>
+            <li>
+              <div className="heading">फांसी :</div>
+              <span>{item.deathPenalty}</span>
+            </li>
+            <li>
+              <div className="heading">आजीवन कारावास :</div>
+              <span>{item.lifeImprisonment}</span>
+            </li>
+            <li>
+              <div className="heading">दस वर्ष या उससे अधिक की सजा :</div>
+              <span>{item.moreThanTenYearJail}</span>
+            </li>
+          </fieldset>
+
+          <fieldset>
+            <legend>10 वर्ष से कम की सजा</legend>
+            <li>
+              <div className="heading">कुल सजा :</div>
+              <span>{item.totalPunished}</span>
+            </li>
+            <li>
+              <div className="heading">सजा की अवधि :</div>
+              <span>{item.punishmentTime}</span>
+            </li>
+          </fieldset>
+          <fieldset>
+            <legend>कुल सजा हुए वाद</legend>
+            <li>
+              <div className="heading">वादों की संख्या :</div>
+              <span>{item.argumentCount}</span>
+            </li>
+            <li>
+              <div className="heading">अभियुक्तों की संख्या :</div>
+              <span>{item.prosecutorCount}</span>
+            </li>
+          </fieldset>
+          <fieldset>
+            <legend>दोषमुक्त वादों की संख्या</legend>
+            <li>
+              <div className="heading">वादों की संख्या :</div>
+              <span>{item.freedArgumentCount}</span>
+            </li>
+            <li>
+              <div className="heading">अभियुक्तों की संख्या :</div>
+              <span>{item.freedProsecutorCount}</span>
+            </li>
+            <li>
+              <div className="heading">पक्षद्रोही के कारण :</div>
+              <span>{item.rebel}</span>
+            </li>
+            <li>
+              <div className="heading">गुड़ दोष के आधार पर :</div>
+              <span>{item.behaviour}</span>
+            </li>
+            <li>
+              <div className="heading">साक्ष्य के आभाव के कारण :</div>
+              <span>{item.noProof}</span>
+            </li>
+            <li>
+              <div className="heading">असंगत दोषमुक्ति :</div>
+              <span>{item.asangat}</span>
+            </li>
+            <li>
+              <div className="heading">
+                अपील की संस्तुति एवं अपील दायर किये गए वादों इन संख्या :
+              </div>
+              <span>{item.appealCount}</span>
+            </li>
+          </fieldset>
+        </ul>
+      </div>
+      <div className="btn-container">
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          disabled={item.approved}
+          onClick={() => approve("approve", item._id)}
+        >
+          Approve
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          color="secondary"
+          onClick={() => approve("delete", item._id)}
+        >
+          delete
+        </Button>
+      </div>
+    </Paper>
+  );
+};
 const New1A = ({ item, name }) => {
   const approve = (type, id) => {
     console.log(type, id);

@@ -126,7 +126,6 @@ export default function TableOne({ posts }) {
             title: "सजा की अवधि",
             field: "punishmentTime",
           },
-
           {
             title: "Date",
             field: "date",
@@ -166,7 +165,8 @@ export default function TableOne({ posts }) {
           filtering: true,
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,
-          pageSize: 10,
+          pageSize: 20,
+          pageSizeOptions: [5, 10, 20, 30, 50, 75, 100],
           exportButton: { csv: true },
         }}
       />
