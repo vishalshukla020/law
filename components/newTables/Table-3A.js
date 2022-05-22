@@ -1,6 +1,14 @@
 import MaterialTable, { MTableHeader } from "material-table";
 import { forwardRef } from "react";
 import moment from "moment";
+import { useState, useEffect } from "react";
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@material-ui/core";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -41,6 +49,84 @@ const tableIcons = {
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
+
+const districtArray = [
+  "Agra",
+  "Aligarh",
+  "Allahabad",
+  "Ambedkar Nagar",
+  "Amethi (Chatrapati Sahuji Mahraj Nagar)",
+  "Amroha (J.P. Nagar)",
+  "Auraiya",
+  "Azamgarh",
+  "Baghpat",
+  "Bahraich",
+  "Ballia",
+  "Balrampur",
+  "Banda",
+  "Barabanki",
+  "Bareilly",
+  "Basti",
+  "Bhadohi",
+  "Bijnor",
+  "Budaun",
+  "Bulandshahr",
+  "Chandauli",
+  "Chitrakoot",
+  "Deoria",
+  "Etah",
+  "Etawah",
+  "Faizabad",
+  "Farrukhabad",
+  "Fatehpur",
+  "Firozabad",
+  "Gautam Buddha Nagar",
+  "Ghaziabad",
+  "Ghazipur",
+  "Gonda",
+  "Gorakhpur",
+  "Hamirpur",
+  "Hapur (Panchsheel Nagar)",
+  "Hardoi",
+  "Hathras",
+  "Jalaun",
+  "Jaunpur",
+  "Jhansi",
+  "Kannauj",
+  "Kanpur Dehat",
+  "Kanpur Nagar",
+  "Kanshiram Nagar (Kasganj)",
+  "Kaushambi",
+  "Kushinagar (Padrauna)",
+  "Lakhimpur - Kheri",
+  "Lalitpur",
+  "Lucknow",
+  "Maharajganj",
+  "Mahoba",
+  "Mainpuri",
+  "Mathura",
+  "Mau",
+  "Meerut",
+  "Mirzapur",
+  "Moradabad",
+  "Muzaffarnagar",
+  "Pilibhit",
+  "Pratapgarh",
+  "RaeBareli",
+  "Rampur",
+  "Saharanpur",
+  "Sambhal (Bhim Nagar)",
+  "Sant Kabir Nagar",
+  "Shahjahanpur",
+  "Shamali (Prabuddh Nagar)",
+  "Shravasti",
+  "Siddharth Nagar",
+  "Sitapur",
+  "Sonbhadra",
+  "Sultanpur",
+  "Unnao",
+  "Varanasi",
+];
 
 const percentage = (num1, num2) => {
   return (num1 * 100) / num2;
@@ -123,9 +209,38 @@ const footerData = (records) => {
 };
 
 export default function TableThreeA({ posts }) {
-  console.log(obj(posts, "rape", "बलात्कार धारा 378 भा०द०वि०"));
+  const [district, setDistrict] = useState("All");
+  const [filteredData, setFilteredData] = useState(posts);
+
+  useEffect(() => {
+    setFilteredData(
+      district == "All"
+        ? posts
+        : posts.filter((post) => post.district === district)
+    );
+  }, [district]);
+
   return (
     <div style={{ maxWidth: "100%" }}>
+      <FormControl fullWidth>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={district}
+          displayEmpty
+          onChange={(e) => setDistrict(e.target.value)}
+        >
+          <MenuItem>
+            <em>All</em>
+          </MenuItem>
+          {districtArray.map((item, i) => (
+            <MenuItem value={item} key={i}>
+              {item}
+            </MenuItem>
+          ))}
+        </Select>
+        <FormHelperText>Select District</FormHelperText>
+      </FormControl>
       <MaterialTable
         icons={tableIcons}
         title="महिलाओं के विरुद्ध लैंगिक/बलात्कार/ गम्भीर अपराधों से
@@ -218,23 +333,23 @@ export default function TableThreeA({ posts }) {
           },
         ]}
         data={[
-          obj(posts, "rape", "बलात्कार धारा 378 भा०द०वि०"),
-          obj(posts, "rapeAndMurder", "बलात्कार सहित हत्या"),
-          obj(posts, "lajjaBhang", "लज्जा मंग धारा 354 भा०द०वि०"),
+          obj(filteredData, "rape", "बलात्कार धारा 378 भा०द०वि०"),
+          obj(filteredData, "rapeAndMurder", "बलात्कार सहित हत्या"),
+          obj(filteredData, "lajjaBhang", "लज्जा मंग धारा 354 भा०द०वि०"),
           obj(
-            posts,
+            filteredData,
             "molestation",
             "यौन उत्पीड़न धारा 354 ए.बी.सी.टी. भा०द०वि०"
           ),
-          obj(posts, "indecency", "अश्लीलता धारा 294 भा०द०वि०"),
-          footerData(posts),
+          obj(filteredData, "indecency", "अश्लीलता धारा 294 भा०द०वि०"),
+          footerData(filteredData),
         ]}
         options={{
           filtering: true,
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,
           pageSize: 6,
-          pageSizeOptions: [5, 10, 20, 30, 50, 75, 100],
+          pageSizeOptions: [5, 10, 20, 30, 50, 75, 100, 1000, 10000],
 
           exportButton: { csv: true },
         }}

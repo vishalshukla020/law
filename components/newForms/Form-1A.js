@@ -112,6 +112,7 @@ export default function FormOne() {
               formName: "Form-1A",
               username: context.user?.name,
               userId: context.user?.id,
+              district: "",
               criminalName: "",
               courtName: "",
               prosecutorName: "",
@@ -183,7 +184,21 @@ export default function FormOne() {
                     गिरोह के विरूद्ध माह में कृत कार्यवाही तथा निर्णीत वादों
                     सम्बन्धी मासिक विवरण पत्र
                   </Typography>
-
+                  <FormControl className="form-block" fullWidth>
+                    <InputLabel htmlFor="district">जनपद</InputLabel>
+                    <Field
+                      component={Select}
+                      name="district"
+                      id="district"
+                      inputProps={{ id: "district" }}
+                    >
+                      {district.map((item, i) => (
+                        <MenuItem value={item} key={i}>
+                          {item}
+                        </MenuItem>
+                      ))}
+                    </Field>
+                  </FormControl>
                   <div className="form-block">
                     <Field
                       fullWidth

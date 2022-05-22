@@ -9,6 +9,8 @@ import Image from "next/image";
 
 import { AuthContext } from "../context/auth";
 
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 export default function LoginForm() {
   const context = useContext(AuthContext);
   const router = useRouter();
@@ -35,10 +37,12 @@ export default function LoginForm() {
     <section className="container max-height flex">
       <Paper className="paper login-form ">
         <Formik
-          initialValues={{ username: "", password: "" }}
+          initialValues={{ phone: "" }}
           validationSchema={Yup.object({
-            username: Yup.string().required("Required"),
-            password: Yup.string().required("Password can't be empty"),
+            phone: Yup.string().matches(
+              phoneRegExp,
+              "Phone number is not valid"
+            ),
           })}
           onSubmit={(values, actions) => {
             setSubmitting(true);
@@ -46,25 +50,22 @@ export default function LoginForm() {
               setSubmitting(false);
             }, 5000);
             axios
-              .post("/api/users/login", { ...values })
+              .post("/api/users/forgot-password", { ...values })
               .then((res) => {
                 if (res.status === 200) {
-                  if (res.data.role == "admin") {
-                    //saving the user in context
-                    context.login(res.data.token);
-                    //redirect to admin page
-                    router.push("/admin-panel");
-                  } else {
-                    //redirect to main page
-                    router.push("/");
-                  }
+                  alert(
+                    "Your are credentials are successfully sent to your email id. Your are now being redirect to login page. "
+                  );
+                  router.push("/login");
                 }
               })
               .catch((err) => {
                 if (err.response.status === 403) {
                   alert("incorrect credentials");
                 } else if (err.response.status === 404) {
-                  alert("user not found");
+                  alert(
+                    "User not found. Please enter the correct registered phone number"
+                  );
                 }
               });
             actions.resetForm();
@@ -81,32 +82,24 @@ export default function LoginForm() {
               />
               <Typography variant="h4" className="form-heading">
                 उत्तर प्रदेश अभियोजन <br />
-                LOG IN
+                Forgot Password Recovery
               </Typography>
             </center>
             <div className="form-block">
               <Field
                 fullWidth
-                name="username"
-                label="Username"
+                name="phone"
+                label="Enter Registered Phone Number"
                 component={TextField}
                 variant="outlined"
               />
             </div>
-            <div className="form-block">
-              <Field
-                fullWidth
-                name="password"
-                label="Password"
-                component={TextField}
-                variant="outlined"
-              />
-            </div>
+
             <Typography
               className="forgot-password"
-              onClick={() => router.push("/forgot-password")}
+              onClick={() => router.push("/login")}
             >
-              Forgot Password?
+              Remember Password?
             </Typography>
             {submitting ? (
               <CircularProgress />

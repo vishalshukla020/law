@@ -60,6 +60,10 @@ export default function TableOne({ posts }) {
             field: "serial",
           },
           {
+            title: "जनपद",
+            field: "district",
+          },
+          {
             title: "चिन्हित माफिया अपराधी का नाम",
             field: "criminalName",
           },
@@ -134,6 +138,7 @@ export default function TableOne({ posts }) {
         data={posts.map((post, index) => {
           return {
             serial: index + 1,
+
             courtName: post.courtName,
             district: post.courtName,
             criminalName: post.criminalName,
@@ -166,7 +171,7 @@ export default function TableOne({ posts }) {
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,
           pageSize: 20,
-          pageSizeOptions: [5, 10, 20, 30, 50, 75, 100],
+          pageSizeOptions: [5, 10, 20, 30, 50, 75, 100, 1000, 10000],
           exportButton: { csv: true },
         }}
       />

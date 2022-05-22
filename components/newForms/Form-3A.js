@@ -112,6 +112,7 @@ export default function BatchTwoFormFour() {
               formName: "Form-3A",
               username: context.user?.name,
               userId: context.user?.id,
+              district: "",
               act: "",
               totalCases: "",
               caseIncreaseInMonth: "",
@@ -215,6 +216,21 @@ export default function BatchTwoFormFour() {
                     महिलाओं के विरुद्ध लैंगिक/बलात्कार/ गम्भीर अपराधों से
                     सम्बन्धित विवरण पत्र
                   </Typography>
+                  <FormControl className="form-block" fullWidth>
+                    <InputLabel htmlFor="district">जनपद</InputLabel>
+                    <Field
+                      component={Select}
+                      name="district"
+                      id="district"
+                      inputProps={{ id: "district" }}
+                    >
+                      {district.map((item, i) => (
+                        <MenuItem value={item} key={i}>
+                          {item}
+                        </MenuItem>
+                      ))}
+                    </Field>
+                  </FormControl>
 
                   <FormControl className="form-block" fullWidth>
                     <InputLabel htmlFor="act">धारा</InputLabel>
