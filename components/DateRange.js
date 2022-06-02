@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import moment from "moment";
 import { useState } from "react";
 
-import { Formik, Form, Field } from "Formik";
+import { Formik, Form, Field } from "formik";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { DatePicker } from "formik-material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
