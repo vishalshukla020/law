@@ -25,6 +25,7 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+import DateRange from "../DateRange";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -212,6 +213,21 @@ export default function TableThreeA({ posts }) {
   const [district, setDistrict] = useState("All");
   const [filteredData, setFilteredData] = useState(posts);
 
+  const [to, setTo] = useState("");
+  const [from, setFrom] = useState("");
+
+  useEffect(() => {
+    if (to) {
+      setFilteredData(() => {
+        return posts.filter((post) => {
+          const postDate = new Date(post.date);
+
+          return postDate > from && postDate < to;
+        });
+      });
+    }
+  }, [to]);
+
   useEffect(() => {
     setFilteredData(
       district == "All"
@@ -241,6 +257,8 @@ export default function TableThreeA({ posts }) {
         </Select>
         <FormHelperText>Select District</FormHelperText>
       </FormControl>
+      <DateRange setFrom={setFrom} setTo={setTo} />
+
       <MaterialTable
         icons={tableIcons}
         title="महिलाओं के विरुद्ध लैंगिक/बलात्कार/ गम्भीर अपराधों से
@@ -352,6 +370,8 @@ export default function TableThreeA({ posts }) {
           pageSizeOptions: [5, 10, 20, 30, 50, 75, 100, 1000, 10000],
 
           exportButton: { csv: true },
+          exportFileName: `महिलाओं के विरुद्ध लैंगिक/बलात्कार/ गम्भीर अपराधों से
+                    सम्बन्धित विवरण पत्र`,
         }}
       />
     </div>

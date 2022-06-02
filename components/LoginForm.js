@@ -44,7 +44,7 @@ export default function LoginForm() {
             setSubmitting(true);
             setTimeout(() => {
               setSubmitting(false);
-            }, 5000);
+            }, 20000);
             axios
               .post("/api/users/login", { ...values })
               .then((res) => {

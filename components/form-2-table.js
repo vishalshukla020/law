@@ -1,6 +1,7 @@
 import MaterialTable from "material-table";
 import moment from "moment";
 import { forwardRef } from "react";
+import { useState, useEffect } from "react";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -17,6 +18,8 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+
+import DateRange from "./DateRange";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -43,9 +46,28 @@ const tableIcons = {
 };
 
 export default function FormTwoTable({ posts }) {
-  console.log(posts);
+  const [filteredData, setFilteredData] = useState(posts);
+  const [to, setTo] = useState("");
+  const [from, setFrom] = useState("");
+
+  useEffect(() => {
+    if (to) {
+      console.log("triggered");
+      console.log("from: ", from, "to: ", to);
+      setFilteredData(() => {
+        return posts.filter((post) => {
+          const postDate = new Date(post.date);
+
+          return postDate > from && postDate < to;
+        });
+      });
+    }
+  }, [to]);
+
   return (
     <div style={{ maxWidth: "100%" }}>
+      <DateRange setFrom={setFrom} setTo={setTo} />
+
       <MaterialTable
         icons={tableIcons}
         title="अतिरिक्त बजट मांगपत्र के सम्बन्ध में निर्धारित प्रारूप"
@@ -72,7 +94,7 @@ export default function FormTwoTable({ posts }) {
             field: "date",
           },
         ]}
-        data={posts.map((post, index) => {
+        data={filteredData.map((post, index) => {
           return {
             serial: index + 1,
             officeName: post.officeName,
@@ -89,7 +111,8 @@ export default function FormTwoTable({ posts }) {
         })}
         options={{
           filtering: true,
-
+          exportFileName:
+            "अतिरिक्त बजट मांगपत्र के सम्बन्ध में निर्धारित प्रारूप",
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,
           pageSize: 10,

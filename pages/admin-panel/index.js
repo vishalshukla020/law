@@ -4,10 +4,13 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 
+import moment from "moment";
+
 import { AuthContext } from "../../context/auth";
 import baseUrl from "../../helper/baseURL";
 import NavBar from "../../components/NavBar";
 import Table from "../../components/Table";
+import DateRange from "../../components/DateRange";
 
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -34,10 +37,15 @@ import BatchTwoTableTwo from "../../components/tables/batchtwo/table-2";
 import BatchTwoTableThree from "../../components/tables/batchtwo/table-3";
 import BatchTwoTableFour from "../../components/tables/batchtwo/table-4";
 import BatchTwoTableFive from "../../components/tables/batchtwo/table-5";
+import { CircularProgress } from "@material-ui/core";
 
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
   const router = useRouter();
+
+  //states for dated
+  const [submitting, setSubmitting] = useState(false);
+  const [filteredData, setFilteredData] = useState(posts);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -90,22 +98,33 @@ export default function Admin({ token, posts, user }) {
       </div>
     );
   }
-  console.log(posts);
+
+  const progress = () => {
+    setSubmitting(true);
+    router.push("admin-panel/new-forms");
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 20000);
+  };
+
   return (
     <section id="page">
       <NavBar username={context.user?.name} role={context.user?.role} />
 
       <div className="container" style={{ paddingBottom: "1em" }}>
-        <Link href="/admin-panel/new-forms">
+        {!submitting ? (
           <Button
             disableElevation
             fullWidth
             color="primary"
             variant="contained"
+            onClick={progress}
           >
             शासन के प्रारूप
           </Button>
-        </Link>
+        ) : (
+          <CircularProgress />
+        )}
       </div>
       <div className="container" style={{ paddingBottom: "1em" }}>
         <Button
@@ -180,90 +199,117 @@ export default function Admin({ token, posts, user }) {
           </MenuItem>
         </Menu>
       </div>
+
       <div className="containerTable">
         {state.prosecution && (
           <Table
-            posts={posts.filter((post) => post.formName == "prosecution")}
+            posts={filteredData.filter(
+              (post) => post.formName == "prosecution"
+            )}
           />
         )}
         {state.budget && (
           <FormTwoTable
-            posts={posts.filter((post) => post.formName == "extraBudget")}
+            posts={filteredData.filter(
+              (post) => post.formName == "extraBudget"
+            )}
           />
         )}
         {state.pension && (
           <PensionTable
-            posts={posts.filter((post) => post.formName == "pension")}
+            posts={filteredData.filter((post) => post.formName == "pension")}
           />
         )}
         {state.employement && (
           <EmployementTable
-            posts={posts.filter((post) => post.formName == "employement")}
+            posts={filteredData.filter(
+              (post) => post.formName == "employement"
+            )}
           />
         )}
         {state.promotion && (
           <PromotionTable
-            posts={posts.filter((post) => post.formName == "promotion")}
+            posts={filteredData.filter((post) => post.formName == "promotion")}
           />
         )}
         {state.powerOne && (
           <PowerOneTable
-            posts={posts.filter((post) => post.formName == "power-1")}
+            posts={filteredData.filter((post) => post.formName == "power-1")}
           />
         )}
         {state.powerTwo && (
           <PowerTwoTable
-            posts={posts.filter((post) => post.formName == "power-2")}
+            posts={filteredData.filter((post) => post.formName == "power-2")}
           />
         )}
         {state.batchTableOne && (
           <BatchTableOne
-            posts={posts.filter((post) => post.formName == "batch-form-1")}
+            posts={filteredData.filter(
+              (post) => post.formName == "batch-form-1"
+            )}
           />
         )}
         {state.batchTableTwo && (
           <BatchTableTwo
-            posts={posts.filter((post) => post.formName == "batch-form-2")}
+            posts={filteredData.filter(
+              (post) => post.formName == "batch-form-2"
+            )}
           />
         )}
         {state.batchTableThree && (
           <BatchTableThree
-            posts={posts.filter((post) => post.formName == "batch-form-3")}
+            posts={filteredData.filter(
+              (post) => post.formName == "batch-form-3"
+            )}
           />
         )}
         {state.batchTableFour && (
           <BatchTableFour
-            posts={posts.filter((post) => post.formName == "batch-form-4")}
+            posts={filteredData.filter(
+              (post) => post.formName == "batch-form-4"
+            )}
           />
         )}
         {state.batchTableFive && (
           <BatchTableFive
-            posts={posts.filter((post) => post.formName == "batch-form-5")}
+            posts={filteredData.filter(
+              (post) => post.formName == "batch-form-5"
+            )}
           />
         )}
         {state.batchTwoTableOne && (
           <BatchTwoTableOne
-            posts={posts.filter((post) => post.formName == "batchTwoForm-1")}
+            posts={filteredData.filter(
+              (post) => post.formName == "batchTwoForm-1"
+            )}
           />
         )}
         {state.batchTwoTableTwo && (
           <BatchTwoTableTwo
-            posts={posts.filter((post) => post.formName == "batchTwoForm-2")}
+            posts={filteredData.filter(
+              (post) => post.formName == "batchTwoForm-2"
+            )}
           />
         )}
         {state.batchTwoTableThree && (
           <BatchTwoTableThree
-            posts={posts.filter((post) => post.formName == "batchTwoForm-3")}
+            posts={filteredData.filter(
+              (post) => post.formName == "batchTwoForm-3"
+            )}
           />
         )}
         {state.batchTwoTableFour && (
           <BatchTwoTableFour
-            posts={posts.filter((post) => post.formName == "batchTwoForm-4")}
+            posts={filteredData.filter(
+              (post) => post.formName == "batchTwoForm-4"
+            )}
           />
         )}
         {state.batchTwoTableFive && (
           <BatchTwoTableFive
-            posts={posts.filter((post) => post.formName == "batchTwoForm-5")}
+            posts={filteredData.filter(
+              (post) => post.formName == "batchTwoForm-5"
+            )}
           />
         )}
       </div>

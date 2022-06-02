@@ -1,4 +1,7 @@
 import MaterialTable from "material-table";
+import axios from "axios";
+
+import { baseUrl } from "../helper/baseURL";
 
 import { forwardRef, useState, useEffect } from "react";
 
@@ -24,6 +27,8 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
+
+import DateRange from "../components/DateRange";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -127,6 +132,23 @@ const districtArray = [
   "Varanasi",
 ];
 
+// useEffect(async () => {
+//   if (from != "" && to != "") {
+//     console.log("requesting");
+//     await axios
+//       .post(`${baseUrl}/api/posts/range`, {
+//         fromDate: from,
+//         toDate: to,
+//       })
+//       .then((res) => {
+//         if (res.status == 200) {
+//           setFilteredData(res.data);
+//         }
+//       })
+//       .catch((err) => console.log(err));
+//   }
+// }, [to]);
+
 const myFilter = (array, court, setCourt, suite, setSuite, reduceValue) => {
   return array
     .filter((e) => e[court] === setCourt)
@@ -136,13 +158,28 @@ const myFilter = (array, court, setCourt, suite, setSuite, reduceValue) => {
 
 export default function Table({ posts }) {
   const [district, setDistrict] = useState("All");
+
   const [filteredData, setFilteredData] = useState(posts);
+  const [to, setTo] = useState("");
+  const [from, setFrom] = useState("");
+
+  useEffect(() => {
+    if (to) {
+      setFilteredData(
+        posts.filter((post) => {
+          const postDate = new Date(post.date);
+
+          return postDate > from && postDate < to;
+        })
+      );
+    }
+  }, [to]);
 
   useEffect(() => {
     setFilteredData(
       district == "All"
         ? posts
-        : posts.filter((post) => post.district === district)
+        : posts.filter((post) => post.district == district)
     );
   }, [district]);
 
@@ -222,6 +259,7 @@ export default function Table({ posts }) {
         </Select>
         <FormHelperText>Select District</FormHelperText>
       </FormControl>
+      <DateRange setFrom={setFrom} setTo={setTo} />
 
       <MaterialTable
         icons={tableIcons}
@@ -290,7 +328,7 @@ export default function Table({ posts }) {
             "mafia"
           ),
         ]}
-        title=" प्रदेश में हुए अभियोजन कार्य"
+        title="प्रदेश में हुए अभियोजन कार्य"
         options={{
           filtering: true,
 
@@ -298,6 +336,7 @@ export default function Table({ posts }) {
           exportButton: true,
           pageSize: 10,
           exportButton: { csv: true },
+          exportFileName: "प्रदेश में हुए अभियोजन कार्य",
         }}
       />
     </div>

@@ -2,6 +2,8 @@ import MaterialTable from "material-table";
 import { forwardRef } from "react";
 import moment from "moment";
 
+import { useState, useEffect } from "react";
+
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Check from "@material-ui/icons/Check";
@@ -18,6 +20,7 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 
+import DateRange from "../DateRange";
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -43,9 +46,27 @@ const tableIcons = {
 };
 
 export default function PensionTable({ posts }) {
-  console.log(posts);
+  const [filteredData, setFilteredData] = useState(posts);
+  const [to, setTo] = useState("");
+  const [from, setFrom] = useState("");
+
+  useEffect(() => {
+    if (to) {
+      console.log("triggered");
+      console.log("from: ", from, "to: ", to);
+      setFilteredData(() => {
+        return posts.filter((post) => {
+          const postDate = new Date(post.date);
+
+          return postDate > from && postDate < to;
+        });
+      });
+    }
+  }, [to]);
   return (
     <div style={{ maxWidth: "100%" }}>
+      <DateRange setFrom={setFrom} setTo={setTo} />
+
       <MaterialTable
         icons={tableIcons}
         title="पेंशन पटल से मॉगी जाने वाली सूचना का प्रारूप-"
@@ -81,7 +102,7 @@ export default function PensionTable({ posts }) {
           { title: "मो0नंबर", field: "mobile" },
           { title: "Date", field: "date" },
         ]}
-        data={posts.map((post, index) => {
+        data={filteredData.map((post, index) => {
           return {
             serial: index + 1,
             retiredName: post.retiredName,
@@ -95,7 +116,7 @@ export default function PensionTable({ posts }) {
         })}
         options={{
           filtering: true,
-
+          exportFileName: "पेंशन पटल से मॉगी जाने वाली सूचना का प्रारूप",
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,
           pageSize: 10,

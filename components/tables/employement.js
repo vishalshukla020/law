@@ -1,5 +1,5 @@
 import MaterialTable from "material-table";
-import { forwardRef } from "react";
+import { forwardRef, useState, useEffect } from "react";
 import moment from "moment";
 
 import AddBox from "@material-ui/icons/AddBox";
@@ -17,6 +17,7 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+import DateRange from "../DateRange";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -43,9 +44,27 @@ const tableIcons = {
 };
 
 export default function EmployementTable({ posts }) {
-  console.log(posts);
+  const [filteredData, setFilteredData] = useState(posts);
+  const [to, setTo] = useState("");
+  const [from, setFrom] = useState("");
+
+  useEffect(() => {
+    if (to) {
+      console.log("triggered");
+      console.log("from: ", from, "to: ", to);
+      setFilteredData(() => {
+        return posts.filter((post) => {
+          const postDate = new Date(post.date);
+
+          return postDate > from && postDate < to;
+        });
+      });
+    }
+  }, [to]);
   return (
     <div style={{ maxWidth: "100%" }}>
+      <DateRange setFrom={setFrom} setTo={setTo} />
+
       <MaterialTable
         icons={tableIcons}
         title="वेतन समिति (2008) की संस्तुतियों पर लिये गये निर्णयानुसार
@@ -106,7 +125,7 @@ export default function EmployementTable({ posts }) {
             field: "date",
           },
         ]}
-        data={posts.map((post, index) => {
+        data={filteredData.map((post, index) => {
           return {
             serial: index + 1,
             officerName: post.officerName,
@@ -125,7 +144,9 @@ export default function EmployementTable({ posts }) {
         })}
         options={{
           filtering: true,
-
+          exportFileName: `वेतन समिति (2008) की संस्तुतियों पर लिये गये निर्णयानुसार
+                  राज्य कर्मचारियों के लिये सुनिश्चित कैरियर प्रोन्नयन
+                  (ए0सी0पी0) की व्यवस्था`,
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,
           pageSize: 10,

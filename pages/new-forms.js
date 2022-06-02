@@ -28,9 +28,13 @@ import NewFormSeven from "../components/newForms/Form-5A";
 import NewFormEight from "../components/newForms/Form-5B";
 import NewFormNine from "../components/newForms/Form-3A";
 
+import { CircularProgress } from "@material-ui/core";
+
 export default function HomeTwo({ token }) {
   const context = useContext(AuthContext);
   const router = useRouter();
+
+  const [submitting, setSubmitting] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [state, setState] = useState({
@@ -63,20 +67,31 @@ export default function HomeTwo({ token }) {
     }
   });
 
+  const progress = () => {
+    setSubmitting(true);
+    router.push("/");
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 10000);
+  };
+
   return (
     <section id="page">
       <NavBar username={context.user?.name} role={context.user?.role} />
       <div className="container" style={{ paddingBottom: "1em" }}>
-        <Link href="/">
+        {!submitting ? (
           <Button
             disableElevation
             fullWidth
             color="primary"
             variant="contained"
+            onClick={progress}
           >
             अभियोजन निदेशालय के प्रारूप
           </Button>
-        </Link>
+        ) : (
+          <CircularProgress />
+        )}
       </div>
       <div className="container" style={{ paddingBottom: "1em" }}>
         <Button

@@ -31,11 +31,13 @@ import TableSix from "../../components/newTables/Table-4B";
 import TableSeven from "../../components/newTables/Table-5A";
 import TableEight from "../../components/newTables/Table-5B";
 import TableNine from "../../components/newTables/Table-3A";
+import { CircularProgress } from "@material-ui/core";
 
 export default function Admin({ token, posts, user }) {
   const context = useContext(AuthContext);
   const router = useRouter();
 
+  const [submitting, setSubmitting] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [state, setState] = useState({
@@ -79,20 +81,32 @@ export default function Admin({ token, posts, user }) {
       </div>
     );
   }
+
+  const progress = () => {
+    setSubmitting(true);
+    router.push("/admin-panel");
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 20000);
+  };
+
   return (
     <section id="page">
       <NavBar username={context.user?.name} role={context.user?.role} />
       <div className="container" style={{ paddingBottom: "1em" }}>
-        <Link href="/admin-panel">
+        {!submitting ? (
           <Button
             disableElevation
             fullWidth
             color="primary"
             variant="contained"
+            onClick={progress}
           >
             अभियोजन निदेशालय के प्रारूप
           </Button>
-        </Link>
+        ) : (
+          <CircularProgress />
+        )}
       </div>
       <div className="container" style={{ paddingBottom: "1em" }}>
         <Button

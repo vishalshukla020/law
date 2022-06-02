@@ -2,6 +2,8 @@ import MaterialTable from "material-table";
 import { forwardRef } from "react";
 import moment from "moment";
 
+import { useState, useEffect } from "react";
+
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Check from "@material-ui/icons/Check";
@@ -17,6 +19,7 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+import DateRange from "../../DateRange";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -43,8 +46,27 @@ const tableIcons = {
 };
 
 export default function BatchTableOne({ posts }) {
+  const [filteredData, setFilteredData] = useState(posts);
+  const [to, setTo] = useState("");
+  const [from, setFrom] = useState("");
+
+  useEffect(() => {
+    if (to) {
+      console.log("triggered");
+      console.log("from: ", from, "to: ", to);
+      setFilteredData(() => {
+        return posts.filter((post) => {
+          const postDate = new Date(post.date);
+
+          return postDate > from && postDate < to;
+        });
+      });
+    }
+  }, [to]);
   return (
     <div style={{ maxWidth: "100%" }}>
+      <DateRange setFrom={setFrom} setTo={setTo} />
+
       <MaterialTable
         icons={tableIcons}
         title="सत्र न्यायालयो में गिरोहबन्द अधिनियम के अन्तर्गत डी०जी०सी
@@ -149,7 +171,8 @@ export default function BatchTableOne({ posts }) {
         })}
         options={{
           filtering: true,
-
+          exportFileName: `सत्र न्यायालयो में गिरोहबन्द अधिनियम के अन्तर्गत डी०जी०सी
+                  संवर्ग द्वारा अभियोजित वादो का विवरण`,
           headerStyle: { backgroundColor: "#f1f1f1" },
           exportButton: true,
           pageSize: 10,

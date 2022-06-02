@@ -2,6 +2,8 @@ import MaterialTable from "material-table";
 import { forwardRef } from "react";
 import moment from "moment";
 
+import { useState, useEffect } from "react";
+
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Check from "@material-ui/icons/Check";
@@ -17,6 +19,8 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+
+import DateRange from "../../DateRange";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -47,9 +51,27 @@ const percentage = (num1, num2) => {
 };
 
 export default function BatchTwoTableTwo({ posts }) {
-  console.log(posts);
+  const [filteredData, setFilteredData] = useState(posts);
+  const [to, setTo] = useState("");
+  const [from, setFrom] = useState("");
+
+  useEffect(() => {
+    if (to) {
+      console.log("triggered");
+      console.log("from: ", from, "to: ", to);
+      setFilteredData(() => {
+        return posts.filter((post) => {
+          const postDate = new Date(post.date);
+
+          return postDate > from && postDate < to;
+        });
+      });
+    }
+  }, [to]);
   return (
     <div style={{ maxWidth: "100%" }}>
+      <DateRange setFrom={setFrom} setTo={setTo} />
+
       <MaterialTable
         icons={tableIcons}
         title="विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम व
@@ -122,7 +144,7 @@ export default function BatchTwoTableTwo({ posts }) {
             field: "date",
           },
         ]}
-        data={posts.map((post, index) => {
+        data={filteredData.map((post, index) => {
           return {
             serial: index + 1,
             courtName: post.courtName,
@@ -153,6 +175,9 @@ export default function BatchTwoTableTwo({ posts }) {
           exportButton: true,
           pageSize: 10,
           exportButton: { csv: true },
+          exportFileName: `विशेष व स्थानीय विधि (एस.एल.एल.) के अन्तर्गत आयुध अधिनियम व
+                    आबकारी अधिनियम के नवीन वादों के विचारण प्रारम्भ होने तथा
+                    निर्णीत वादों सम्बन्धी मासिक विवरण पत्र`,
         }}
       />
     </div>

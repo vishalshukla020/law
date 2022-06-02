@@ -7,12 +7,21 @@ import { AuthContext } from "../context/auth";
 import Register from "../components/Register";
 import { useRouter } from "next/router";
 
+import { CircularProgress } from "@material-ui/core";
+
 export default function NavBar({ username, role }) {
   const context = useContext(AuthContext);
+
+  const [submitting, setSubmitting] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
   const logout = () => {
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 10000);
+
     axios
       .post("/api/users/logout")
       .then((res) => {
@@ -54,17 +63,21 @@ export default function NavBar({ username, role }) {
             </div>
 
             <div>
-              <Button
-                variant="contained"
-                className="button"
-                style={{
-                  backgroundColor: "#232323",
-                  color: "#ffffff",
-                }}
-                onClick={logout}
-              >
-                Logout
-              </Button>
+              {!submitting ? (
+                <Button
+                  variant="contained"
+                  className="button"
+                  style={{
+                    backgroundColor: "#232323",
+                    color: "#ffffff",
+                  }}
+                  onClick={logout}
+                >
+                  Logout
+                </Button>
+              ) : (
+                <CircularProgress />
+              )}
               {role && role === "admin" && (
                 <Button
                   variant="contained"

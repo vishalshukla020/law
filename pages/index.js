@@ -11,6 +11,8 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
+import { CircularProgress } from "@material-ui/core";
+
 import Link from "next/link";
 import PensionForm from "../components/forms/pension";
 import EmployementForm from "../components/forms/employment";
@@ -36,6 +38,8 @@ import BatchTwoFormSix from "../components/forms/batchtwo/form-6";
 export default function Home({ token }) {
   const context = useContext(AuthContext);
   const router = useRouter();
+
+  const [submitting, setSubmitting] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [state, setState] = useState({
@@ -77,20 +81,31 @@ export default function Home({ token }) {
     }
   });
 
+  const progress = () => {
+    setSubmitting(true);
+    router.push("/new-forms");
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 10000);
+  };
+
   return (
     <section id="page">
       <NavBar username={context.user?.name} role={context.user?.role} />
       <div className="container" style={{ paddingBottom: "1em" }}>
-        <Link href="/new-forms">
+        {!submitting ? (
           <Button
             disableElevation
             fullWidth
             color="secondary"
             variant="contained"
+            onClick={progress}
           >
             शासन के प्रारूप
           </Button>
-        </Link>
+        ) : (
+          <CircularProgress />
+        )}
       </div>
       <div className="container" style={{ paddingBottom: "1em" }}>
         <Button
